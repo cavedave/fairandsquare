@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<!--
+
+  Liquid Slider 1.1
+  Kevin Batdorf
+
+  http://liquidslider.kevinbatdorf.com
+
+  GPL license 
+
+-->
+<html lang="en-us">
+
+  
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+    
+<meta name="description" content="Liquid Slider : A JQuery Slider Plugin" />
+
+    
+<!-- 
+      Here is the style sheet for the Liquid Slider
+      You may want to "minify" this after making edits
+      http://www.refresh-sf.com/yui/ 
+    -->
+    
+<link rel="stylesheet" type="text/css" media="screen" href="./stylesheets/liquid-slider-1.1.css">
+
+    
+<!-- This is just styling for the demo to make it a little less crowded at the top -->
+    
+<style>h1{margin:100px;}</style>
+
+
+    
+<!-- Definitely use these for development -->
+    
+<script src="./js/jquery-1.8.2.min.js"></script>
+    <script src="./js/jquery-ui-1.8.20.custom.min.js"></script>
+    
+    
+<!--<script src="mathprog.js"></script>-->
+    <script src='glpk.js'></script>
+    
+<!-- This of course is required. The full version (not .min) is also included in the js directory -->
+    <script src="./js/jquery.liquid-slider-1.1.min.js"></script>
+
+ 
+
+
+<title>Fair and Square</title>
+
+    
+<script>
+    
+/*we want to put each persons valuations in an array*/
+   
+var pername = new Array();
+var indivitemName = new Array();
+var itemName = new Array();
+    
+var indiv1 = new Array();
+    
+var divis1 = new Array();
+    
+var indiv2 = new Array();
+    
+var divis2 = new Array();
+    
+var indiv3 = new Array();
+    
+var divis3 = new Array();
+var checkitem = new Array();
+var indivcheckitem = new Array;
+    
+    
+/*i want an array of 
+    person
+    1 item1 item2 
+    Person 2 item1 item2
+    */
+    
+$(function(){
+
+      
+/* Here is the slider using default settings */
+      
+$('#slider-id').liquidSlider();
+      
+/* If you want to adjust the settings, you set an option
+         as follows:
+
+          $('#slider-id').liquidSlider({
+            autoSlide:false,
+            autoHeight:false
+          });
+
+         Find more options at http://liquidslider.kevinbatdorf.com/
+      */
+
+      
+/* If you need to access the internal property or methods, use this method.
+
+      var sliderObject = $.data( $('#slider-id')[0], 'liquidSlider');
+      console.log(sliderObject);
+
+      */
+
+  	
+
+    });
+   
+
+
+function formdata(data) 
+{
+	    var tran = glp_mpl_alloc_wksp();
+
+	    try {
+	    model = document.getElementById("fair2.mod").innerText;
+
+		console.log("glpk testing 2", model);
+		console.log("data 2"+data);
+
+		model=model+data;
+		
+		glp_mpl_read_model_from_string(tran,'MathProg Model',model);
+
+		} catch (err) {
+		console.log("err in glpkTest ");
+		     return null;
+
+    	}
+    	try {
+        	glp_mpl_generate(tran,null,model);
+//may not be model
+        	
+var lp = glp_create_prob();
+        	glp_mpl_build_prob(tran,lp);
+        	
+//console.log(lp);
+    	} catch (err) {
+        	console.log('Error building ');
+        	return null;
+
+    	}
+    	var smcp = new SMCP({presolve: GLP_ON});
+    	glp_simplex(lp, smcp);
+    	 glp_intopt(lp);
+		//console.log(smcp," smcp");
+
+		 if(lp) {
+        glp_mpl_postsolve(tran,lp,GLP_MIP);
+        //console.log(lp,"lp");
+        //$('#outputPanel').show();
+    //    writeSolution (lp,isMIP());
+
+       // console.log(lp,"lp ismip");		
+        console.log( glp_get_obj_val(lp));
+       var txt1=$("<p></p>").text("Maximin satisfaction is ");
+
+       //txt1.append("Total utility is. Equality would be, Utilitarian would be");
+       txt1.append(glp_mip_obj_val(lp).toPrecision(4)).toString();
+
+        //var txt2=$("<p></p>").text("Number of variables is");  
+// Create text with jQuery
+         var txt3=$("<p></p>").text("Who gets what is");
+
+         txt3.append("<p></p>");
+         //txt3.append(glp_get_col_name(lp,1).toString());
+
+           
+           for (var i = 2; i <= glp_get_num_cols(lp); i++) 
+			{
+           		if(glp_mip_col_val(lp,i)>0){
+
+           		var colname= glp_get_col_name(lp,i);
+
+           		
+           		
+           			if(colname.charAt(0)=='x'){
+
+           				txt3.append("Divisible item ");
+
+           			//,"Divisible", colname.charAt(4), "goes to person ", colname.charAt(2));
+
+           			}
+
+           			if(colname.charAt(0)=='y'){
+ 	          			txt3.append("Indivisible item ");
+  					
+//txt3.append(glp_get_col_name(lp,i),"indivisible", colname.charAt(4), "goes to person ", colname.charAt(2));
+  					}
+  					
+           				txt3.append(colname.charAt(4).toString());
+
+           				if(glp_mip_col_val(lp,i)<1){
+
+  						txt3.append(" ");
+  						txt3.append(glp_mip_col_val(lp,i));
+ 
+  						txt3.append(" part of it ");
+
+  					}
+           				txt3.append(" goes to person ");
+
+           				txt3.append(colname.charAt.tostring());
+
+           				txt3.append("<p></p>");
+
+           				//txt3.append(colname.toString());
+
+  				}	
+  			}
+         
+$("body").append(txt1,txt3); 
+//$("body").append(glp_get_num_cols(lp)); 
+     } else {
+        displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
+
+     }
+	}	
+	
+/*need to reset form todo*/
+	function resetForm($form) {
+    $form.find('input:text, input:password, input:file, select, textarea').val('');
+
+    $form.find('input:radio, input:checkbox')
+         .removeAttr('checked').removeAttr('selected');
+
+	}	
+
+    
+
+function addNames(){
+pername.push(document.myform2.inputname1.value);
+pername.push(document.myform2.inputname2.value);
+$('#InputDis').text("Names entered: "+pername.toString());
+}
+
+
+function testResults(){
+    console.log($('#check1').is(":checked"));	
+$('#InputDis').text("Item"+"  "+"Name"+"  "+"Value"+"  "+"Name"+"  "+"Value"+"  "+"Indivisible?");
+//console.log($('#check1').val());
+//console.log(document.getElementById("check1").checked);  
+/*console.log("radio button is");
+
+    console.log($('#myform2.value').val());
+
+    console.log($('#myform2.inputbox2.value').val());
+
+    console.log($('document.myform2.inputbox2.value').val());
+
+    console.log($('input[NAME="divi"]')+' is the radio');
+    
+    console.log($("input:checked"));
+
+  	console.log($("input:checked").val() + " is checked!");
+
+console.log($('form#myform2 > input:radio').prop('id')+ " new prop!");
+*/
+    
+/*push value onto the array
+    document.myform2.divi.value=="d"){*/
+    
+var e = document.getElementById("select2");
+var strUser = e.options[e.selectedIndex].value;
+if(strUser=='No'){
+	    
+		itemName.push(document.myform2.inputItem.value);
+		divis1.push(document.myform2.inputbox1.value);
+
+   		divis2.push(document.myform2.inputbox2.value);   
+                checkitem.push(document.myform2.select2.value);
+//console.log(document.myform2.inputbox1.value);
+   		
+/*console.log(document.myform2.divi);*/
+   		
+//console.log('divi');
+
+    }
+    else
+    {
+	indivitemName.push(document.myform2.inputItem.value);    
+		indiv1.push(document.myform2.inputbox1.value);
+    
+	    indiv2.push(document.myform2.inputbox2.value);
+	
+                indivcheckitem.push(document.myform2.select2.value);  
+//console.log(document.myform2.inputbox2.value);
+	    
+/*console.log(document.myform2.divi.value);*/
+	    
+//console.log('indiv');
+    }
+   
+if(divis1.length>0){
+for (var i=0;i<divis1.length;i++)
+{
+$('#InputDis').append("<br>"+itemName[i]+"  "+pername[0]+"  "+divis1[i]+"  "+pername[1]+"  "+divis2[i]+"  "+checkitem[i]);
+}
+}
+if(indiv1.length>0){
+for (var j=0;j<indiv1.length;j++)
+{
+$('#InputDis').append("<br>"+indivitemName[j]+"  "+pername[0]+"  "+indiv1[j]+"  "+pername[1]+"  "+indiv2[j]+"  "+indivcheckitem[j]);
+}
+}
+resetForm($('#myform2')); 
+		
+		
+//console.log(divis1.join('\n'));
+		
+		
+		}
+		
+		
+/*
+Function to turn 4 arrays of valuations (or more) into something like below
+
+data;
+param people := 3;
+
+param divi := 6;
+
+param indiv := 8;
+
+
+param divItems : 1 2 3 4 5 6 :=
+1 5 5 2 5 11 5
+2 10 0 3 5 6 5
+3 5 0 7 10 1 5
+;
+
+param indivItems : 1 2 3 4 5 6 7 8 :=
+1 5 9 15 10 4 15 2 5
+2 2 4 7 5 16 9 20 2
+3 5 2 6 6 10 5 7 25
+;
+end
+;*/
+	
+	
+
+
+function createData2($form) {
+
+	var data = "data;\nparam people := 2;\nparam divi := "+ divis1.length +";\nparam indiv := "+indiv1.length+";\n";
+	data = data + "param divItems :";
+		for(var i=1;i<=divis1.length;i++){
+			data = data +i + ' ';
+		}
+	data = data +":=";
+	data = data +"\n1 "+ divis1.join(' ');
+	data = data +"\n2 "+ divis2.join(' ');
+	data = data +";\nparam indivItems :";
+		for(var i=1;i<=indiv1.length;i++){
+			data = data +i + ' ';
+		}
+	data = data +":=";
+	data = data +"\n1 "+ indiv1.join(' ');
+	data = data +"\n2 "+ indiv2.join(' ');
+	data = data +";\nend\n;";
+	
+//console.log(data);
+	return data;
+	}
+	
+	function createData3($form) {
+
+	var data = "data;\nparam people := 3;\nparam divi := "+ divis1.length +";\nparam indiv := "+indiv1.length+";\n";
+	data = data + "param divItems :";
+		for(var i=1;i<=divis1.length;i++){
+			data = data +i + ' ';
+		}
+	data = data +":=";
+	data = data +"\n1 "+ divis1.join(' ');
+	data = data +"\n2 "+ divis2.join(' ');
+	data = data +"\n3 "+ divis3.join(' ');	
+	data = data +";\nparam indivItems :";
+		for(var i=1;i<=indiv1.length;i++){
+			data = data +i + ' ';
+		}
+	data = data +":=";
+	data = data +"\n1 "+ indiv1.join(' ');
+	data = data +"\n2 "+ indiv2.join(' ');
+	data = data +"\n3 "+ indiv3.join(' ');	
+	data = data +";\nend\n;";
+	console.log(data);
+	return data;
+	}
+	
+        
+
+function glpkTest(data){
+	    var tran = glp_mpl_alloc_wksp();
+
+	    try {
+	    model = document.getElementById("fair2.mod").innerText;
+
+		console.log("glpk testing 1", model);
+
+		console.log("data 1"+data);
+
+		model=model+data;
+
+		
+		glp_mpl_read_model_from_string(tran,'MathProg Model',model);
+
+		} catch (err) {
+		console.log("err in glpkTest ");
+
+		     return null;
+
+    	}
+    	try {
+        	glp_mpl_generate(tran,null,model);
+//may not be model
+        	
+var lp = glp_create_prob();
+
+        	glp_mpl_build_prob(tran,lp);
+        	
+//console.log(lp);
+
+    	} catch (err) {
+        	console.log('Error building ');
+
+        	return null;
+
+    	}
+    	var smcp = new SMCP({presolve: GLP_ON});
+
+    	glp_simplex(lp, smcp);
+
+    	 glp_intopt(lp);
+		//console.log(smcp," smcp");
+
+		 if(lp) {
+        glp_mpl_postsolve(tran,lp,GLP_MIP);
+
+        console.log(lp,"lp");
+
+        //$('#outputPanel').show();
+
+    //    writeSolution (lp,isMIP());
+
+       // console.log(lp,"lp ismip");
+		
+        console.log( glp_get_obj_val(lp)," is the minimax value");
+
+       var txt1=$("<p></p>").text("Maximin satisfaction is ");
+
+       //txt1.append("Total utility is. Equality would be, Utilitarian would be");
+
+       txt1.append(glp_mip_obj_val(lp).toPrecision(4)).toString();
+
+        //var txt2=$("<p></p>").text("Number of variables is");
+  // Create text with jQuery
+         var txt3=$("<p></p>").text("Who gets what is");
+
+         txt3.append("<p></p>");
+
+         //txt3.append(glp_get_col_name(lp,1).toString());
+
+           
+           for (var i = 2; i <= glp_get_num_cols(lp); i++) {
+           		if(glp_mip_col_val(lp,i)>0){
+           		var colname= glp_get_col_name(lp,i);
+           		
+           		
+           			if(colname.charAt(0)=='x'){
+           				txt3.append("Divisible item ");
+                  txt3.append(itemName[colname.charAt(4).toString()-1]);
+           			//,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
+           			}
+           			if(colname.charAt(0)=='y'){
+ 	          			txt3.append("Indivisible item ");
+                  txt3.append(indivitemName[colname.charAt(4).toString()-1]);
+  					
+//txt3.append(glp_get_col_name(lp,i),"indivisible ", txt3.append(indivitemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
+
+  					}
+  					
+           				//txt3.append(indivitemName[colname.charAt(4).toString()-1]);
+
+ //txt3.append(itemName[colname.charAt(4).toString()-1]);
+           				if(glp_mip_col_val(lp,i)<1){
+  						txt3.append(" ");
+
+  						txt3.append(glp_mip_col_val(lp,i).toPrecision(2)).toString();
+ 
+  						txt3.append(" part of it");
+
+  					}
+           				txt3.append(" goes to ");
+
+           				txt3.append(pername[colname.charAt(2).toString()-1]);
+
+           				txt3.append("<p></p>");
+
+           				//txt3.append(colname.toString());
+
+  				}	
+  			}
+         
+$("body").append(txt1,txt3);
+ 
+//$("body").append(glp_get_num_cols(lp));
+ 
+     } else {
+        displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
+
+     }
+	}	
+	
+/*need to reset form todo*/
+	function resetForm($form) {
+    $form.find('input:text, input:password, input:file, select, textarea').val('');
+
+    $form.find('input:radio, input:checkbox')
+         .removeAttr('checked').removeAttr('selected');
+
+	}
+
+// to call, use:
+	resetForm($('#myform2'));
+ // by id, recommended
+//resetForm($('form[name=myName]')); 
+// by name	
+
+
+
+ 
+
+
+function gotoPeople(form){
+//console.log("num people is " numPeople);
+    
+var n = parseInt(form.numPeople.value, 10);
+
+	switch(n)
+	{
+	case 2:
+  	$('#NumofPeople').text(n);	console.log("2");
+
+  		break;
+	case 3:
+  		$('#NumofPeople').text(n); console.log("3");
+
+  		break;
+	case 4:
+  		$('#NumofPeople').text(n); console.log("4");
+
+  		break;
+	case 5:
+  		$('#NumofPeople').text(n); console.log("5");
+
+  		break;  		
+	$('#NumofPeople').text(n); default:
+  		$('#NumofPeople').text(" Not a valid number"); console.log("not a valid number");
+	}
+}
+
+
+function appendText()
+{
+var txt2=$("<p></p>").text("Number of variables is");
+// Create text with jQuery
+$("body").append(txt2);        
+// Append new elements
+}
+
+$(document).ready(function(){
+$('div.mathprog').hide();
+
+//	$('people').bind('click', function(){
+
+//	console.log($('#numPeople'));
+
+//	});
+});
+    </script> 
+  </head>
+  
+
+
+
+<body class='no-js' style="margin:0">
+    
+<h1>Fair and Square</h1>
+    <div class="liquid-slider"  id="slider-id">
+        
+
+<div>
+          
+<h2 class="title">Home</h2>
+        
+<p>Fair and Square is a system for the fair division of goods between people.
+        Each person enters their valuation for each item to be divided.</p>
+       
+<p>
+        Fair and Square then calculates the best way to allocate the items.
+        For more information see the demo, the blog and the about sections
+    </p>
+
+<form NAME="people" id="people" ACTION="" METHOD="GET">
+	<fieldset>
+		
+<legend>Division Console</legend>
+			
+<label> Number of people:</label>
+			
+<input name="numPeople" type="number" min="2" max="5" step="1" value="2"/><P>
+			
+<INPUT TYPE="button" NAME="button" Value="Submit" onClick="gotoPeople(this.form)"><P>
+	</fieldset>
+<div>
+
+<p>Value Entered:<label  id="NumofPeople" Text=""> </label></p>
+</div>
+</form>
+        </div>
+                    }
+
+<div>
+          
+<h2 class="title">People 2</h2>
+        
+<FORM NAME="myform2" id="myform2" ACTION="" METHOD="GET">
+
+Name Person 1: <INPUT TYPE="text" NAME="inputname1" VALUE="Barry">
+
+Name Person 2: <INPUT TYPE="text" NAME="inputname2" VALUE="Ann">
+
+<INPUT TYPE="button" NAME="button" Value="Enter Names" onClick="addNames(this.form);"><P>
+Item Name: <INPUT TYPE="text" NAME="inputItem" VALUE="">
+
+Value Person 1: <INPUT TYPE="text" NAME="inputbox1" VALUE="">
+
+Value Person 2: <INPUT TYPE="text" NAME="inputbox2" VALUE="">
+
+Indivisible?<select id="select2">
+  <option value="No">No</option>
+  <option value="yes">Yes</option>
+</select>
+<INPUT TYPE="button" NAME="button" Value="Next Item" onClick="testResults(this.form);"><P>
+
+<INPUT TYPE="button" NAME="button" Value="Finished" onClick="testResults(this.form);var myVar=createData2();glpkTest(myVar);">
+
+
+<div>
+
+<p>Values Entered:<br><label  id="InputDis" Text=""> </label></p> <br>
+</div>
+</FORM>
+        </div>
+        
+
+<div>
+          
+<h2 class="title">3 people</h2>
+                  
+<FORM NAME="myform3" id="myform2" ACTION="" METHOD="GET">
+Value Person 1: 
+
+<INPUT TYPE="text" NAME="inputbox1" VALUE="">
+Value Person 2: 
+<INPUT TYPE="text" NAME="inputbox2" VALUE="">
+Value Person 3: 
+
+<INPUT TYPE="text" NAME="inputbox3" VALUE="">
+<INPUT TYPE="checkbox" id="check1">indivisible?
+
+<INPUT TYPE="button" NAME="button" Value="Next Item" onClick="testResults(this.form)"><P>
+
+<INPUT TYPE="button" NAME="button" Value="Finished" onClick="testResults(this.form);formdata($form);">
+       </div>          
+
+        </div>
+      
+   
+ 
+
+
+
+<div id='fair2.mod' class='mathprog'>
+
+/* Fair Division Program
+ This is a program for dividing up items between people people.
+So the minimum satisfaction of any of them is maximised. */
+
+
+param people, integer,> 0;
+
+/* number of people dividing stuff */
+
+
+param divi, integer, >= 0;
+param indiv, integer, >= 0;
+
+/* number of items to be divided. divi divisible. indiv non divisible */
+
+
+set I:= 1..people;
+
+/* set of people */
+
+
+set J := 1..indiv;
+
+/* set of nondivisible items */
+
+set K := 1..divi;
+
+/* set of divisible items */
+
+
+param indivItems{i in I, j in J}, >= 0;
+
+/*indivisible  amount recieved if item j is given to agent i */
+
+param divItems{i in I, k in K}, >= 0;
+
+/*divisible amount recieved if item k is given to agent i */
+
+
+var worst;
+
+/*how is the worst person doing?*/
+
+
+var x{i in I, k in K},>=0;
+var y{i in I, j in J}, binary;
+
+/*
+here ,>=0; means that the items are divisible.
+here , binary; means that items are not divisable.
+x[i,j] = 1 means item j is assigned to agent i */
+
+
+s.t. one{k in K}: sum{i in I} x[i,k] = 1;
+s.t. two{j in J}: sum{i in I} y[i,j] = 1;
+
+/* job j must be assigned exactly to one agent */
+
+
+/*s.t. lim{i in I}: ((sum{j in J} c[i,j] * x[i,j])+(sum{k in K} d[i,k] * y[i,k]) )<= b[i];*/
+
+/*add check person does not get more then 100%. Want to make sure they do not ask for more then 100% */
+
+
+s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
+s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
+maximize obj: worst;
+</div> 
+
+ <div id='fair3.mod' class='mathprog'>
+
+/* Fair Division Program
+This is a program for dividing up items between people people.
+So the minimum satisfaction of any of them is maximised. */
+
+
+param people, integer,> 0;
+
+/* number of people dividing stuff */
+
+
+param divi, integer, >= 0;
+param indiv, integer, >= 0;
+
+/* number of items to be divided. N divisible. o non divisible */
+
+set I:= 1..people;
+/* set of people */
+
+set J := 1..indiv;
+/* set of nondivisible items */
+set K := 1..divi;
+/* set of divisible items */
+
+param c{i in I, j in J}, >= 0;
+/*indivisible  amount recieved if item j is given to agent i */
+param d{i in I, k in K}, >= 0;
+/*divisible amount recieved if item k is given to agent i */
+
+var worst;
+/*how is the worst person doing?*/
+
+var x{i in I, k in K},>=0;
+var y{i in I, j in J}, binary;
+
+/*
+here ,>=0; means that the items are divisible.
+here , binary; means that items are not divisable.
+x[i,j] = 1 means item j is assigned to agent i */
+
+
+s.t. one{k in K}: sum{i in I} x[i,k] = 1;
+s.t. two{j in J}: sum{i in I} y[i,j] = 1;
+
+/* job j must be assigned exactly to one agent */
+
+
+/*s.t. lim{i in I}: ((sum{j in J} c[i,j] * x[i,j])+(sum{k in K} d[i,k] * y[i,k]) )<= b[i];*/
+
+/*add check person does not get more then 100%. Want to make sure they do not ask for more then 100% */
+
+
+s.t. wor{i in I}: ((sum{k in K} d[1,k] * x[1,k])+(sum{j in J} c[1,j] * y[1,j])) >= worst;
+s.t. wor2{i in I}: ((sum{k in K} d[2,k] * x[2,k])+(sum{j in J} c[2,j] * y[2,j])) >= worst;
+
+/*s.t. wor3{i in I}: ((sum{k in K} d[3,k] * x[3,k])+(sum{j in J} c[3,j] * y[3,j])) >= worst;
+constraint on who gets worst deal*/
+
+maximize obj: worst;
+end;
+</div> 
+  </body>
+</html>
