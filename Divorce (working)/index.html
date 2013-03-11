@@ -1,0 +1,660 @@
+<!doctype html>
+  <html> 
+    <head> 
+      <title>Rent Calculator</title>
+      <link rel="stylesheet" href="css/stylesheet.css" />
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+      <link rel="icon" href="/favicon.ico" type="image/x-icon">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <meta name="Author" content="Fair & Square">
+        
+          <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+          <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+          <script src="js/sylvester-0-1-3/sylvester.js"></script>
+          <script src='glpk.js'></script>
+          <link rel="stylesheet" href="css/tabs.css" />
+          <script>
+          
+
+          
+            $(function() {
+              $( "#tabs" ).tabs()
+            });
+            var rentAmount;
+            var personStage = 0;
+            var people = new Array();
+            var rooms = new Array();
+            var preferences = new Array();
+            var correctValues = new Array();
+            var sortnames= new Array();
+            var suminitpay;
+            var sumdiscounts;
+            var remainder;
+            //hardcoded matrix of preferences
+            var adjustPerson= new Array();
+            var movePerson= new Array();
+
+          </script>
+
+                  
+    </head>
+
+    <body>
+
+
+
+      <div id="tabs">
+      <ul>
+            <li><a href="#tab-start">H</a></li>
+            <li><a href="#tab-poeple">1</a></li>
+            <li><a href="#tab-rooms">2</a></li>
+            <li><a href="#tab-preferences">3</a></li>
+            <li><a href="#tab-results">4</a></li>
+            <li><a href="#tab-help">?</a></li>
+      </ul>
+
+    <div id="tab-start" class="wrapper">
+
+      <section>
+ 
+          <h1>Fair & <span class="grey">Square</span></h1>
+          <h2>Rent Divider</h2>
+
+
+            <img class="logo" src="images/logo_opaque.png">
+
+      </section>
+
+                <a class="next-page-button">Begin</a>
+
+      </div> <!--end wrapper-->
+      
+     
+      
+          <div id="tab-poeple" class="wrapper">
+            
+      <section>
+ 
+
+          <h3>Input the name of each Party</h3>
+          <input type="text" id="input_tennant" name="firstname">
+          <input type="submit" class="click"  id="btn_addTennant" value="Add Tennant">
+
+          <div class="output">
+            <ul>
+            </ul>
+          </div> <!-- displays input text -->
+
+      </section>
+
+                <a class="next-page-button">Enter Party Names</a>
+
+
+          </div> <!-- end poeple -->
+          <div id="tab-rooms" class="wrapper">
+            
+      <section>
+ 
+
+          <h3>Enter Items</h3>
+          <input type="text" id="input_roomname" name="roomname"> 
+          <select id="select1">
+            <option value="divisible">divisible</option>
+            <option value="non_divisible">non-divisible</option>
+          </select>
+          <input type="submit"class="click"  id="btn_addRoom" value="Add Item">
+
+  
+
+          <div class="output">
+
+            <ul>
+            </ul>
+
+          </div> <!-- displays input text -->
+
+      </section>
+
+                <a class="next-page-button">Enter room descriptions</a>
+
+          </div>
+
+      <div id="tab-preferences">
+        <section>
+ 
+          <div class="output">
+          Room 1<input type="number" name="firstname"></br>
+          Room 2<input type="number" name="firstname"></br>
+          Room 3<input type="number" name="firstname"></br>
+          Room 4<input type="number" name="firstname"></br>
+          </div>
+          
+      </section>
+
+                <a id="btn_nextPerson" class="next-page-button">Next</a>
+
+</div>
+
+<div id="tab-help" class="wrapper">
+
+
+  <section>
+  <h2>How it works</h2>
+  <p class="left"> The fair and square rent calculator is a computer aided
+  negotiation tool that allows housemates to find who should get which room
+  and at what cost. It calculates allocations that prevent envy
+  between housemates </p>
+
+  </br>
+
+  <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
+
+  </section>
+
+
+</div>
+
+
+<div id="tab-results" class="wrapper">
+
+
+<div id ="outputresults">
+
+
+</div>
+
+
+<div style='display:none' id='fair2.mod' class='mathprog'>
+/* Fair Division Program
+ This is a program for dividing up items between people people.
+So the minimum satisfaction of any of them is maximised. */
+param people, integer,> 0;
+/* number of people dividing stuff */
+param divi, integer, >= 0;
+param indiv, integer, >= 0;
+/* number of items to be divided. divi divisible. indiv non divisible */
+set I:= 1..people;
+/* set of people */
+set J := 1..indiv;
+/* set of nondivisible items */
+set K := 1..divi;
+/* set of divisible items */
+param indivItems{i in I, j in J}, >= 0;
+/*indivisible  amount recieved if item j is given to agent i */
+param divItems{i in I, k in K}, >= 0;
+/*divisible amount recieved if item k is given to agent i */
+var worst;
+/*how is the worst person doing?*/
+var x{i in I, k in K},>=0;
+var y{i in I, j in J}, binary;
+/*
+here ,>=0; means that the items are divisible.
+here , binary; means that items are not divisable.
+x[i,j] = 1 means item j is assigned to agent i */
+s.t. one{k in K}: sum{i in I} x[i,k] = 1;
+s.t. two{j in J}: sum{i in I} y[i,j] = 1;
+/* job j must be assigned exactly to one agent */
+/*s.t. lim{i in I}: ((sum{j in J} c[i,j] * x[i,j])+(sum{k in K} d[i,k] * y[i,k]) )<= b[i];*/
+/*add check person does not get more then 100%. Want to make sure they do not ask for more then 100% */
+s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
+s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
+maximize obj: worst;
+</div> 
+
+
+<div style='display:none' id='rent.mod' class='mathprog'>
+param m, integer, > 0;
+/* number of people */
+
+param n, integer, > 0;
+/* number of rooms */
+
+set I := 1..m;
+/* set of people */
+
+set J := 1..n;
+/* set of rooms */
+
+param c{i in I, j in J}, >= 0;
+/* cost of allocating room j to person i */
+
+var x{i in I, j in J}, >= 0;
+/* x[i,j] = 1 means room j is assigned to person i */
+
+s.t. phi{i in I}: sum{j in J} x[i,j] = 1;
+/* each person must be assigned exactly one room */
+
+s.t. psi{j in J}: sum{i in I} x[i,j] = 1;
+/* each room must be assigned exactly to one person */
+
+maximize obj: sum{i in I, j in J} c[i,j] * x[i,j];
+/* the objective is to find cheapest assignment (note that gap can also
+   be formulated as maximization problem) */
+</div> 
+</div>
+
+
+      </div>
+      <script>
+              function People(stage) {
+              if (people.length == 0 || rooms.length == 0) {
+                //should probably do something here.
+              }
+              else{
+                console.log(stage);
+                if (stage > people.length) {
+                  console.log('out of people');
+                }
+                else {
+                  if ($('#tab-preferences .output input').size() == rooms.length) {
+                    console.log('filled out!');
+                    var arr = new Array();
+                    $('#tab-preferences .output input').each(function() {
+                      //arr.push( $(this).val() 
+                      arr.push( Number( $(this).val() ) );
+                  });
+                    console.log(arr); 
+                    preferences.push(arr);
+                  }
+                    
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter the maximum amount of rent you are willing to pay for each room</h3>");
+                  for (var i = 0; i<rooms.length; i++ ) {
+                    $('#tab-preferences .output').append(rooms[i]+"</br><input type='number' name='roomname'></br>");
+                  }
+                  if (++personStage > people.length) {
+                    console.log('hiding');
+                    main();
+                    $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                    //$('#btn_nextPerson').hide();
+                  }
+                }
+              }
+            }
+            
+            $('#tabs').on("tabsbeforeactivate", function( event, ui) {
+              if (ui.newTab.text() == 4) {
+              if (people.length == 0 || rooms.length == 0) {
+                //should probably do something here.
+              }
+              else{
+                console.log(personStage);
+                if (personStage >= people.length) {
+                  console.log('out of people');
+                }
+                else {
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter the maximum amount of rent you are willing to pay for each room</h3>");
+                  for (var i = 0; i<rooms.length; i++ ) {
+                    $('#tab-preferences .output').append(rooms[i]+"</br><input type='number' name='roomname'></br>");
+                  }
+                  if (++personStage >= people.length) {
+                    console.log('Done, changing to continue.');
+                    //$('#btn_nextPerson').unbind();
+                    //$('#btn_nextPerson').click();
+                  }
+                }
+              }
+
+              }
+              } );
+      
+           
+            $('.next-page-button').click(function(){
+              $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+            });
+            
+            $('#btn_nextPerson').unbind();
+            $('#btn_nextPerson').click(function(){
+              People(personStage);
+            });
+            
+            $('#btn_addTennant').click(function(){
+              $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+"</li>");
+              people.push($('#input_tennant').val());
+              $('#input_tennant').val("");
+            });
+            
+            $('#btn_addRoom').click(function(){
+              $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"</li>");
+              rooms.push($('#input_roomname').val());
+              $('#input_roomname').val("");
+            });
+              
+            $('#btn_rentAmount').click(function(){
+              rentAmount = $('#input_rentAmount').val();
+              $('#tab-rent .output').text("Rent: "+rentAmount);
+              $('#input_rentAmount').val("");
+            });
+
+            function sortArray(T,values){
+//$('#Sort').text("Sort: "+people.toString());
+console.log("T inspect"+T.inspect());
+var L=Matrix.create(T.row(values[0]));
+    console.log("L inspect 1111"+L.inspect());
+  for(i=0;i<values.length;i++){
+    correctValues[values[i]-1]=i+1;
+}
+  for(i=0;i<values.length;i++){
+      sortnames[i]=people[correctValues[i]-1];
+      L=L.augment(T.row(correctValues[i]));
+      //L=L.augment(T.row(values[i]));
+      console.log("L inspect 22222222"+L.inspect()); 
+ }
+  L = L.minor(1,2,T.rows(),T.cols());
+      console.log("L inspect 333333"+L.inspect());
+  L=L.transpose(L);
+//  $('#Sort').append("<BR>"+sortnames.toString());
+//    $('#Sort').append("<BR>"+L.inspect());
+    console.log("L inspect aortarray"+L.inspect());
+return L;
+}
+
+function assessmentMatrix(M){
+var inittotal=0;
+var discounts= new Array();
+var initpay=  new Array();
+var finpay= new Array();
+var matass = new Matrix();
+//matass=M;
+var K = new Array ();
+//creates matrix of columns using the diagonal values
+console.log("M inspect"+M.inspect());
+L=Matrix.create(M.col(1));
+console.log("L inspect"+L.inspect());
+for(i=1;i<=M.rows();i++){
+  for(j=1;j<=M.cols();j++){
+    K.push(M.e(i,i));
+    console.log("K inspect"+K.toString());
+  }   
+L=L.augment(K);
+K=[];
+}
+L.transpose(L);
+//remove after figuring out creation of empty matrix
+L = L.minor(1,2,M.rows(),M.cols());
+//put initial payment in an array
+for(i=1;i<=L.rows();i++){
+initpay.push(L.e(1,i));
+console.log("initpay L push"+initpay);
+inittotal=inittotal+L.e(1,i);
+discounts.push(0);
+}
+//exit if there is not enough to meet the rent
+suminitpay=sumArray(initpay);
+if (rentAmount>suminitpay){
+  $('#outputresults').text("The preferential bids on rooms are not high enough to cover the total rent.");
+  return null;
+}
+//subtract the diagonal values from the assessment matrix
+L=M.subtract(L);
+finpay=initpay.slice(0);
+//check for envy
+do{
+var K = new Array ();
+var R = new Array ();
+N=Matrix.create(M.col(1));
+//creates arrays from the rows of the matrix and get the largest values
+//L=Matrix.create(M.col(1));
+for(i=1;i<=L.rows();i++){
+  for(j=1;j<=L.cols();j++){
+    K.push(L.e(i,j));
+  }   
+var largest = Math.max.apply(Math, K); 
+//if largest value is greater than the diagonal then envy exists
+  if(largest>L.e(i,i)){
+    var difference=largest-L.e(i,i);
+    //add difference to all values in ith column
+    for(a=1;a<=L.rows();a++){
+      R.push(difference);
+    }
+    N=N.augment(R);
+    R=[];
+    discounts[i-1]=discounts[i-1]+difference;
+    finpay[i-1]=finpay[i-1]-difference;
+  }
+  else{
+    for(a=1;a<=L.rows();a++){
+      R.push(0);
+    }
+    N=N.augment(R);
+    R=[];
+  }
+  K=[];
+}
+N = N.minor(1,2,M.rows(),M.cols());   
+L=L.add(N);
+} while(envy(L)==true);
+//divide any remaining surplus
+suminitpay=sumArray(initpay);
+console.log("sumit"+suminitpay);
+sumdiscounts=sumArray(discounts);
+console.log("sumdis"+sumdiscounts);
+if(rentAmount!=suminitpay-sumdiscounts){
+  suminitpay=suminitpay-sumdiscounts;
+  console.log("sumit"+suminitpay);
+  remainder=suminitpay-rentAmount;
+  console.log("remainder2"+remainder);
+  remainder=remainder/finpay.length;
+  console.log("remainder"+remainder);
+  for (i=0;i<finpay.length;i++){
+    finpay[i]=finpay[i]-remainder;
+  }
+}
+$('#outputresults').text("Results:");
+$('#outputresults').append("<BR>");
+$('#outputresults').append("<BR>");
+for (i=0;i<rooms.length;i++){
+$('#outputresults').append(" Name: "+sortnames[i]);
+$('#outputresults').append("<BR>");
+$('#outputresults').append(" Room: "+rooms[i]);
+$('#outputresults').append("<BR>");
+$('#outputresults').append(" rent due: "+finpay[i]);
+$('#outputresults').append("<BR>");
+$('#outputresults').append("<BR>");
+
+}
+return finpay;
+}
+
+function sumArray(arr){
+  var total=0;
+  for(i=0;i<arr.length;i++){
+    total=total+arr[i];
+  }
+  return total;
+}
+
+
+function envy(L){
+  var K = new Array ();
+  var R = new Array ();
+  //creates arrays from the rows of the matrix and get the largest values
+  for(i=1;i<=L.rows();i++){
+    for(j=1;j<=L.cols();j++){
+      K.push(L.e(i,j));
+    }   
+    var largest = Math.max.apply(Math, K); 
+    //if largest value is greater than the diagonal then envy exists
+    if(largest>L.e(i,i)){
+      return true;    
+    }
+    K=[];
+  }
+  return false;
+}
+
+function createData2(M) {
+  var data = "data;\nparam people := 2;\nparam divi := "+ divis1.length +";\nparam indiv := "+indiv1.length+";\n";
+  data = data + "param divItems :";
+    for(var i=1;i<=divis1.length;i++){
+      data = data +i + ' ';
+    }
+  data = data +":=";
+  data = data +"\n1 "+ divis1.join(' ');
+  data = data +"\n2 "+ divis2.join(' ');
+  data = data +";\nparam indivItems :";
+    for(var i=1;i<=indiv1.length;i++){
+      data = data +i + ' ';
+    }
+  data = data +":=";
+  data = data +"\n1 "+ indiv1.join(' ');
+  data = data +"\n2 "+ indiv2.join(' ');
+  data = data +";\nend\n;";
+console.log("data here is the data"+data);
+  return data;
+  }
+
+
+  function createData(M) {
+var vec = Vector.create([]);
+var data = "data;\nparam people := 2;\nparam divi := "+rooms.length+";\nparam indiv := 0"+";\n";
+  data = data + "param divItems :";
+//  var data = "data;\nparam m := "+ people.length +";\nparam n := "+ rooms.length+";";
+//Make the first line param c :  1 2 3 4 :=
+ // data = data + "\nparam c :";
+    for(var i=1;i<=rooms.length;i++){
+      data = data +i + ' ';
+    }
+  data = data +":=\n";
+  for(var i=1;i<=people.length;i++){
+      data = "\n"+data +i+ " ";
+      vec = M.row(i);
+      console.log("vec"+vec.inspect());
+          vec.each(function(x, i) {
+            data = data + x + ' ';
+          });
+      data = data+"\n";   
+      }
+data = data +";\nparam indivItems :";
+  data = data +":=";
+  data = data +"\n1 ";
+  data = data +"\n2 ";
+
+  data = data +";\nend\n;";
+  console.log("data here is the data"+data);
+  return data;
+  }
+
+
+function bestRoom(data){
+        var movePerson = new Array(); 
+      var tran = glp_mpl_alloc_wksp();
+      try {
+      model = document.getElementById("rent.mod").innerText;
+      model=model+data;
+              console.log("data"+ data);
+    glp_mpl_read_model_from_string(tran,'MathProg Model',model);
+    } catch (err) {
+         return null;
+      }
+      try {
+          glp_mpl_generate(tran,null,model);//may not be model
+          var lp = glp_create_prob();
+          glp_mpl_build_prob(tran,lp);
+      } catch (err) {
+          return null;
+      }
+      var smcp = new SMCP({presolve: GLP_ON});
+      glp_simplex(lp, smcp);
+       glp_intopt(lp);
+     if(lp) {
+        glp_mpl_postsolve(tran,lp,GLP_MIP);
+           for (var i = 1; i <= glp_get_num_cols(lp); i++) {//was 2
+              if(glp_mip_col_val(lp,i)>0){
+              var colname= glp_get_col_name(lp,i);
+                if(colname.charAt(0)=='x'){
+                }
+                if(colname.charAt(0)=='y'){
+            }
+            movePerson[colname.charAt(2)]=colname.charAt(4);
+          } 
+        }
+     } else {
+        displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
+     }
+       for(i=0;i<movePerson.length-1;i++){
+         adjustPerson[i]=movePerson[i+1]; 
+        console.log("adjustperson"+ adjustPerson.toString()); 
+       }
+       return adjustPerson;
+  }
+
+function glpkTest(data){
+      var tran = glp_mpl_alloc_wksp();
+      try {
+      model = document.getElementById("fair2.mod").innerText;
+    console.log("glpk testing 1", model);
+    console.log("data 1"+data);
+    model=model+data;
+    glp_mpl_read_model_from_string(tran,'MathProg Model',model);
+    } catch (err) {
+    console.log("err in glpkTest ");
+         return null;
+      }
+      try {
+          glp_mpl_generate(tran,null,model);
+//may not be model
+var lp = glp_create_prob();
+          glp_mpl_build_prob(tran,lp);
+//console.log(lp);
+      } catch (err) {
+          console.log('Error building ');
+          return null;
+      }
+      var smcp = new SMCP({presolve: GLP_ON});
+      glp_simplex(lp, smcp);
+       glp_intopt(lp);
+    //console.log(smcp," smcp");
+     if(lp) {
+        glp_mpl_postsolve(tran,lp,GLP_MIP);
+        console.log(lp,"lp");
+        console.log( glp_get_obj_val(lp)," is the minimax value");
+       var txt1=$("<p></p>").text("Maximin satisfaction is ");
+       //txt1.append("Total utility is. Equality would be, Utilitarian would be");
+       txt1.append(glp_mip_obj_val(lp).toPrecision(4)).toString();
+ // Create text with jQuery
+         var txt3=$("<p></p>").text("Who gets what is");
+         txt3.append("<p></p>");
+           for (var i = 2; i <= glp_get_num_cols(lp); i++) {
+              if(glp_mip_col_val(lp,i)>0){
+              var colname= glp_get_col_name(lp,i);          
+                if(colname.charAt(0)=='x'){
+                  txt3.append("Divisible item ");
+                  txt3.append(rooms[colname.charAt(4).toString()-1]);
+//                  txt3.append(itemName[colname.charAt(4).toString()-1]);
+                //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
+                }
+                if(colname.charAt(0)=='y'){
+                  txt3.append("Indivisible item ");
+//                  txt3.append(indivitemName[colname.charAt(4).toString()-1]);
+            }
+
+                  if(glp_mip_col_val(lp,i)<1){
+              txt3.append(" ");
+              txt3.append(glp_mip_col_val(lp,i).toPrecision(2)).toString();
+              txt3.append(" part of it");
+            }
+                  txt3.append(" goes to ");
+                  txt3.append(people[colname.charAt(2).toString()-1]);
+                  txt3.append("<p></p>");
+          } 
+        }
+$("body").append(txt1,txt3);
+     } else {
+        displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
+     }
+  } 
+
+
+function main(){
+  var Matrix= $M(preferences);
+  var values=glpkTest(createData(Matrix)); 
+//  console.log("data here is the values"+values);
+//var mymat=sortArray(Matrix,values);
+//console.log("mymat "+mymat.inspect());
+//var myarr=assessmentMatrix(mymat);
+}
+      </script>
+    </body>
+
+  </html>
