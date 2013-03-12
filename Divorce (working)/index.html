@@ -24,8 +24,13 @@
             var rentAmount;
             var personStage = 0;
             var people = new Array();
-            var rooms = new Array();
-            var preferences = new Array();
+            //var rooms = new Array();
+            var indivItem = new Array();
+            var divisItem = new Array();
+            var interPreferences = new Array();
+            var divisPreferences = new Array();
+            var indivPreferences = new Array();
+            //var preferences = new Array();
             var correctValues = new Array();
             var sortnames= new Array();
             var suminitpay;
@@ -203,42 +208,13 @@ maximize obj: worst;
 </div> 
 
 
-<div style='display:none' id='rent.mod' class='mathprog'>
-param m, integer, > 0;
-/* number of people */
-
-param n, integer, > 0;
-/* number of rooms */
-
-set I := 1..m;
-/* set of people */
-
-set J := 1..n;
-/* set of rooms */
-
-param c{i in I, j in J}, >= 0;
-/* cost of allocating room j to person i */
-
-var x{i in I, j in J}, >= 0;
-/* x[i,j] = 1 means room j is assigned to person i */
-
-s.t. phi{i in I}: sum{j in J} x[i,j] = 1;
-/* each person must be assigned exactly one room */
-
-s.t. psi{j in J}: sum{i in I} x[i,j] = 1;
-/* each room must be assigned exactly to one person */
-
-maximize obj: sum{i in I, j in J} c[i,j] * x[i,j];
-/* the objective is to find cheapest assignment (note that gap can also
-   be formulated as maximization problem) */
-</div> 
 </div>
 
 
       </div>
       <script>
               function People(stage) {
-              if (people.length == 0 || rooms.length == 0) {
+              if (people.length == 0 || indivItem.length+divisItem.length == 0) {
                 //should probably do something here.
               }
               else{
@@ -247,20 +223,23 @@ maximize obj: sum{i in I, j in J} c[i,j] * x[i,j];
                   console.log('out of people');
                 }
                 else {
-                  if ($('#tab-preferences .output input').size() == rooms.length) {
+                  if ($('#tab-preferences .output input').size() == indivItem.length+divisItem.length) {
                     console.log('filled out!');
                     var arr = new Array();
                     $('#tab-preferences .output input').each(function() {
-                      //arr.push( $(this).val() 
                       arr.push( Number( $(this).val() ) );
                   });
                     console.log(arr); 
-                    preferences.push(arr);
+                      interPreferences.push(arr);
                   }
                     
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter the maximum amount of rent you are willing to pay for each room</h3>");
-                  for (var i = 0; i<rooms.length; i++ ) {
-                    $('#tab-preferences .output').append(rooms[i]+"</br><input type='number' name='roomname'></br>");
+                 //change here to include divis and indiv
+                  for (var i = 0; i<divisItem.length; i++ ) {
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='roomname'></br>");
+                    }
+                  for (var i = 0; i<indivItem.length; i++ ) {
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv'></br>");
                   }
                   if (++personStage > people.length) {
                     console.log('hiding');
@@ -274,7 +253,7 @@ maximize obj: sum{i in I, j in J} c[i,j] * x[i,j];
             
             $('#tabs').on("tabsbeforeactivate", function( event, ui) {
               if (ui.newTab.text() == 4) {
-              if (people.length == 0 || rooms.length == 0) {
+              if (people.length == 0 || divisItem.length+indivItem.length == 0) {
                 //should probably do something here.
               }
               else{
@@ -284,8 +263,12 @@ maximize obj: sum{i in I, j in J} c[i,j] * x[i,j];
                 }
                 else {
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter the maximum amount of rent you are willing to pay for each room</h3>");
-                  for (var i = 0; i<rooms.length; i++ ) {
-                    $('#tab-preferences .output').append(rooms[i]+"</br><input type='number' name='roomname'></br>");
+                  //div and indiv to go here
+                  for (var i = 0; i<divisItem.length; i++ ) {
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv'></br>");
+                  }
+                  for (var i = 0; i<indivItem.length; i++ ) {
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv'></br>");
                   }
                   if (++personStage >= people.length) {
                     console.log('Done, changing to continue.');
@@ -316,7 +299,20 @@ maximize obj: sum{i in I, j in J} c[i,j] * x[i,j];
             
             $('#btn_addRoom').click(function(){
               $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"</li>");
-              rooms.push($('#input_roomname').val());
+              //rooms.push($('#input_roomname').val());
+              //Adds item name to divisble or indivisible array
+              var e = document.getElementById("select1");
+              var strUser = e.options[e.selectedIndex].value;
+              if (strUser=='divisible'){
+              divisItem.push($('#input_roomname').val());
+              console.log("divisitem 1"+ divisItem);
+              }
+              else {
+              indivItem.push($('#input_roomname').val());
+              console.log("indivisitem 1"+ indivItem);
+              }
+              console.log("divisitem 2"+ divisItem);
+              console.log("indivisitem 2"+ indivItem);
               $('#input_roomname').val("");
             });
               
@@ -456,32 +452,7 @@ $('#outputresults').append("<BR>");
 return finpay;
 }
 
-function sumArray(arr){
-  var total=0;
-  for(i=0;i<arr.length;i++){
-    total=total+arr[i];
-  }
-  return total;
-}
 
-
-function envy(L){
-  var K = new Array ();
-  var R = new Array ();
-  //creates arrays from the rows of the matrix and get the largest values
-  for(i=1;i<=L.rows();i++){
-    for(j=1;j<=L.cols();j++){
-      K.push(L.e(i,j));
-    }   
-    var largest = Math.max.apply(Math, K); 
-    //if largest value is greater than the diagonal then envy exists
-    if(largest>L.e(i,i)){
-      return true;    
-    }
-    K=[];
-  }
-  return false;
-}
 
 function createData2(M) {
   var data = "data;\nparam people := 2;\nparam divi := "+ divis1.length +";\nparam indiv := "+indiv1.length+";\n";
@@ -505,31 +476,40 @@ console.log("data here is the data"+data);
   }
 
 
-  function createData(M) {
+  function createData(M,N) {
 var vec = Vector.create([]);
-var data = "data;\nparam people := 2;\nparam divi := "+rooms.length+";\nparam indiv := 0"+";\n";
+var data = "data;\nparam people := 2;\nparam divi := "+divisItem.length+";\nparam indiv := "+indivItem.length+";\n";
   data = data + "param divItems :";
 //  var data = "data;\nparam m := "+ people.length +";\nparam n := "+ rooms.length+";";
 //Make the first line param c :  1 2 3 4 :=
  // data = data + "\nparam c :";
-    for(var i=1;i<=rooms.length;i++){
+    for(var i=1;i<=divisItem.length;i++){
       data = data +i + ' ';
     }
   data = data +":=\n";
   for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
-      vec = M.row(i);
-      console.log("vec"+vec.inspect());
+      vec = M.col(i);
+      console.log("here is vecdivis"+vec.inspect());
           vec.each(function(x, i) {
             data = data + x + ' ';
           });
       data = data+"\n";   
       }
 data = data +";\nparam indivItems :";
-  data = data +":=";
-  data = data +"\n1 ";
-  data = data +"\n2 ";
-
+    for(var i=1;i<=indivItem.length;i++){
+      data = data +i + ' ';
+    }
+  data = data +":=\n";
+  for(var i=1;i<=people.length;i++){
+      data = "\n"+data +i+ " ";
+      vec = N.col(i);
+      console.log("here is vecindiv"+vec.inspect());
+          vec.each(function(x, i) {
+            data = data + x + ' ';
+          });
+            data = data+"\n";  
+    }
   data = data +";\nend\n;";
   console.log("data here is the data"+data);
   return data;
@@ -620,13 +600,13 @@ var lp = glp_create_prob();
               var colname= glp_get_col_name(lp,i);          
                 if(colname.charAt(0)=='x'){
                   txt3.append("Divisible item ");
-                  txt3.append(rooms[colname.charAt(4).toString()-1]);
-//                  txt3.append(itemName[colname.charAt(4).toString()-1]);
+                  //txt3.append(rooms[colname.charAt(4).toString()-1]);
+                  txt3.append(divisItem[colname.charAt(4).toString()-1]);
                 //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
                 }
                 if(colname.charAt(0)=='y'){
                   txt3.append("Indivisible item ");
-//                  txt3.append(indivitemName[colname.charAt(4).toString()-1]);
+                  txt3.append(indivItem[colname.charAt(4).toString()-1]);
             }
 
                   if(glp_mip_col_val(lp,i)<1){
@@ -647,8 +627,22 @@ $("body").append(txt1,txt3);
 
 
 function main(){
-  var Matrix= $M(preferences);
-  var values=glpkTest(createData(Matrix)); 
+console.log("interPreferences.length"+interPreferences.length);
+for (i=0;i<interPreferences.length;i++){
+  if (divisItem.length>i){
+    divisPreferences.push(interPreferences[i]);
+    console.log("divisPreferences "+divisPreferences.toString());
+  }
+  else{
+    indivPreferences.push(interPreferences[i]);
+    console.log("indivisPreferences "+indivPreferences.toString());
+  }
+}
+  var indivMatrix= $M(indivPreferences);
+  console.log("indivMatrix "+indivMatrix.inspect());
+  var divisMatrix= $M(divisPreferences);
+  console.log("divisMatrix "+divisMatrix.inspect());
+  var values=glpkTest(createData(divisMatrix,indivMatrix)); 
 //  console.log("data here is the values"+values);
 //var mymat=sortArray(Matrix,values);
 //console.log("mymat "+mymat.inspect());
