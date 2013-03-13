@@ -252,7 +252,7 @@ maximize obj: worst;
             }
             
             $('#tabs').on("tabsbeforeactivate", function( event, ui) {
-              if (ui.newTab.text() == 4) {
+              if (ui.newTab.text() == 3) {
               if (people.length == 0 || divisItem.length+indivItem.length == 0) {
                 //should probably do something here.
               }
@@ -489,7 +489,7 @@ var data = "data;\nparam people := 2;\nparam divi := "+divisItem.length+";\npara
   data = data +":=\n";
   for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
-      vec = M.col(i);
+      vec = M.row(i);
       console.log("here is vecdivis"+vec.inspect());
           vec.each(function(x, i) {
             data = data + x + ' ';
@@ -503,7 +503,7 @@ data = data +";\nparam indivItems :";
   data = data +":=\n";
   for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
-      vec = N.col(i);
+      vec = N.row(i);
       console.log("here is vecindiv"+vec.inspect());
           vec.each(function(x, i) {
             data = data + x + ' ';
@@ -588,10 +588,10 @@ var lp = glp_create_prob();
      if(lp) {
         glp_mpl_postsolve(tran,lp,GLP_MIP);
         console.log(lp,"lp");
-        console.log( glp_get_obj_val(lp)," is the minimax value");
+        console.log( glp_mip_obj_val(lp)," is the maximin value");
        var txt1=$("<p></p>").text("Maximin satisfaction is ");
-       //txt1.append("Total utility is. Equality would be, Utilitarian would be");
-       txt1.append(glp_mip_obj_val(lp).toPrecision(4)).toString();
+      // txt1.append(glp_get_obj_val(lp).toPrecision(4).toString());
+         txt1.append(glp_mip_obj_val(lp).toPrecision(4)).toString();
  // Create text with jQuery
          var txt3=$("<p></p>").text("Who gets what is");
          txt3.append("<p></p>");
@@ -611,7 +611,7 @@ var lp = glp_create_prob();
 
                   if(glp_mip_col_val(lp,i)<1){
               txt3.append(" ");
-              txt3.append(glp_mip_col_val(lp,i).toPrecision(2)).toString();
+              txt3.append(glp_mip_col_val(lp,i).toPrecision(4)).toString();
               txt3.append(" part of it");
             }
                   txt3.append(" goes to ");
@@ -628,20 +628,30 @@ $("body").append(txt1,txt3);
 
 function main(){
 console.log("interPreferences.length"+interPreferences.length);
-for (i=0;i<interPreferences.length;i++){
+var interMatrix= $M(interPreferences);
+//L = L.minor(1,2,T.rows(),T.cols());
+var divisMatrix= interMatrix.minor(1,1,people.length,divisItem.length);
+var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.length);
+console.log("interMatrix "+interMatrix.inspect());
+console.log("interMatrix rows "+interMatrix.rows());
+/*for (i=0;i<interMatrix.cols();i++){
+console.log("divisItem.length "+divisItem.length);
   if (divisItem.length>i){
-    divisPreferences.push(interPreferences[i]);
+    var k=$V(interMatrix.col(i+1));
+    console.log("interMatrix.col(i+1) "+ k.inspect());
+    divisPreferences.push(k);
     console.log("divisPreferences "+divisPreferences.toString());
   }
   else{
-    indivPreferences.push(interPreferences[i]);
+    indivPreferences.push(interMatrix.row(i+1));
+//    indivPreferences.push(interPreferences[i]);
     console.log("indivisPreferences "+indivPreferences.toString());
   }
-}
-  var indivMatrix= $M(indivPreferences);
-  console.log("indivMatrix "+indivMatrix.inspect());
-  var divisMatrix= $M(divisPreferences);
+}*/
+ // var divisMatrix= $M(divisPreferences);
   console.log("divisMatrix "+divisMatrix.inspect());
+ // var indivMatrix= $M(indivPreferences);
+  console.log("indivMatrix "+indivMatrix.inspect());
   var values=glpkTest(createData(divisMatrix,indivMatrix)); 
 //  console.log("data here is the values"+values);
 //var mymat=sortArray(Matrix,values);
