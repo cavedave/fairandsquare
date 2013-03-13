@@ -453,63 +453,45 @@ return finpay;
 }
 
 
-
-function createData2(M) {
-  var data = "data;\nparam people := 2;\nparam divi := "+ divis1.length +";\nparam indiv := "+indiv1.length+";\n";
-  data = data + "param divItems :";
-    for(var i=1;i<=divis1.length;i++){
-      data = data +i + ' ';
-    }
-  data = data +":=";
-  data = data +"\n1 "+ divis1.join(' ');
-  data = data +"\n2 "+ divis2.join(' ');
-  data = data +";\nparam indivItems :";
-    for(var i=1;i<=indiv1.length;i++){
-      data = data +i + ' ';
-    }
-  data = data +":=";
-  data = data +"\n1 "+ indiv1.join(' ');
-  data = data +"\n2 "+ indiv2.join(' ');
-  data = data +";\nend\n;";
-console.log("data here is the data"+data);
-  return data;
-  }
-
-
-  function createData(M,N) {
+function createData(M,N) {
 var vec = Vector.create([]);
-var data = "data;\nparam people := 2;\nparam divi := "+divisItem.length+";\nparam indiv := "+indivItem.length+";\n";
-  data = data + "param divItems :";
+var data = "data;\nparam people := "+people.length+";\nparam divi := "+divisItem.length+";\nparam indiv := "+indivItem.length+";\n";
+data = data + "param divItems :";
 //  var data = "data;\nparam m := "+ people.length +";\nparam n := "+ rooms.length+";";
 //Make the first line param c :  1 2 3 4 :=
  // data = data + "\nparam c :";
-    for(var i=1;i<=divisItem.length;i++){
-      data = data +i + ' ';
-    }
+  for(var i=1;i<=divisItem.length;i++){
+    data = data +i + ' ';
+  }
   data = data +":=\n";
-  for(var i=1;i<=people.length;i++){
+  if(divisItem.length>0){
+    for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
       vec = M.row(i);
       console.log("here is vecdivis"+vec.inspect());
-          vec.each(function(x, i) {
-            data = data + x + ' ';
-          });
-      data = data+"\n";   
-      }
-data = data +";\nparam indivItems :";
-    for(var i=1;i<=indivItem.length;i++){
-      data = data +i + ' ';
-    }
+      vec.each(function(x, i) {
+        data = data + x + ' ';
+      });
+      data = data+"\n";  
+  }
+  data = data+"\n";   
+  }
+  data = data +";\nparam indivItems :";
+  for(var i=1;i<=indivItem.length;i++){
+    data = data +i + ' ';
+  }
   data = data +":=\n";
-  for(var i=1;i<=people.length;i++){
+  if(indivItem.length>0){
+    for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
       vec = N.row(i);
       console.log("here is vecindiv"+vec.inspect());
-          vec.each(function(x, i) {
-            data = data + x + ' ';
-          });
-            data = data+"\n";  
+      vec.each(function(x, i) {
+        data = data + x + ' ';
+      });
+      data = data+"\n";  
     }
+  }
   data = data +";\nend\n;";
   console.log("data here is the data"+data);
   return data;
@@ -629,34 +611,17 @@ $("body").append(txt1,txt3);
 function main(){
 console.log("interPreferences.length"+interPreferences.length);
 var interMatrix= $M(interPreferences);
-//L = L.minor(1,2,T.rows(),T.cols());
-var divisMatrix= interMatrix.minor(1,1,people.length,divisItem.length);
-var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.length);
 console.log("interMatrix "+interMatrix.inspect());
-console.log("interMatrix rows "+interMatrix.rows());
-/*for (i=0;i<interMatrix.cols();i++){
-console.log("divisItem.length "+divisItem.length);
-  if (divisItem.length>i){
-    var k=$V(interMatrix.col(i+1));
-    console.log("interMatrix.col(i+1) "+ k.inspect());
-    divisPreferences.push(k);
-    console.log("divisPreferences "+divisPreferences.toString());
-  }
-  else{
-    indivPreferences.push(interMatrix.row(i+1));
-//    indivPreferences.push(interPreferences[i]);
-    console.log("indivisPreferences "+indivPreferences.toString());
-  }
-}*/
- // var divisMatrix= $M(divisPreferences);
-  console.log("divisMatrix "+divisMatrix.inspect());
- // var indivMatrix= $M(indivPreferences);
-  console.log("indivMatrix "+indivMatrix.inspect());
-  var values=glpkTest(createData(divisMatrix,indivMatrix)); 
-//  console.log("data here is the values"+values);
-//var mymat=sortArray(Matrix,values);
-//console.log("mymat "+mymat.inspect());
-//var myarr=assessmentMatrix(mymat);
+//L = L.minor(1,2,T.rows(),T.cols());
+if(divisItem.length>0){
+var divisMatrix= interMatrix.minor(1,1,people.length,divisItem.length);
+console.log("divisMatrix "+divisMatrix.inspect());
+}
+if(indivItem.length>0){
+var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.length);
+console.log("indivMatrix "+indivMatrix.inspect());
+}
+var values=glpkTest(createData(divisMatrix,indivMatrix)); 
 }
       </script>
     </body>
