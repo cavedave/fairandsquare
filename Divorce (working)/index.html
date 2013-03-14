@@ -75,6 +75,7 @@
           <h3>Input the name of each Party</h3>
           <input type="text" id="input_tennant" name="firstname">
           <input type="submit" class="click"  id="btn_addTennant" value="Add Tennant">
+          
 
           <div class="output">
             <ul>
@@ -95,8 +96,8 @@
           <h3>Enter Items</h3>
           <input type="text" id="input_roomname" name="roomname"> 
           <select id="select1">
-            <option value="divisible">divisible</option>
             <option value="non_divisible">non-divisible</option>
+            <option value="divisible">divisible</option>
           </select>
           <input type="submit"class="click"  id="btn_addRoom" value="Add Item">
 
@@ -255,10 +256,10 @@ maximize obj: worst;
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter the maximum amount of rent you are willing to pay for each room</h3>");
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0'></br>");
                   }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0'></br>");
                   }
                   if (++personStage >= people.length) {
                     console.log('Done, changing to continue.');
@@ -273,34 +274,18 @@ maximize obj: worst;
       
            
             $('.next-page-button').click(function(){
-              switch (tabsStage) {
-                    case (tabsStage==1):
-                      if (people.length<2){
-                        $( "#tabs" ).tabs( "option", "disabled" ); 
-                      }
-                      else{
-                        $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
-                        tabsStage++;
-                      }
-                      break;
-                    case (tabsStage==2):
-                      if ( divisItem.length+indivItem.length<1){
-                        $( "#tabs" ).tabs( "option", "disabled" );
-                      else{
-                        $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
-                        tabsStage++;  
-                      } 
-                      }
-                      break;
-                    default:
-                      $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
-                      tabsStage++;
+              console.log();
+              if ( tabsStage==1 && people.length<2){
+                $( "#tabs" ).tabs( "option", "disabled" ); 
+              }
+              else if ( tabsStage==2 && divisItem.length+indivItem.length<1){
+                $( "#tabs" ).tabs( "option", "disabled" ); 
+              }
+              else{
+                $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                tabsStage++;
               }
             });
-
-            //$('.begin-page-button').click(function(){
-            //    $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
-            //});
             
 
             $('#btn_nextPerson').unbind();
@@ -308,13 +293,23 @@ maximize obj: worst;
               People(personStage);
             });
             
+
             $('#btn_addTennant').click(function(){
-              $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+"</li>");
-              people.push($('#input_tennant').val());
-              $('#input_tennant').val("");
+              if ($('#input_tennant').val()=='' || people.length==2){ //add here that only 2 names can be entered
+                              console.log("$('#input_roomname').val() "+$('#input_roomname').val());
+              }
+              else{
+                $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+"</li>");
+                people.push($('#input_tennant').val());
+                $('#input_tennant').val("");
+              }
             });
             
             $('#btn_addRoom').click(function(){
+              if ($('#input_roomname').val()==''){
+                              console.log("$('#input_roomname').val() "+$('#input_roomname').val());
+              }
+              else{
               $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"</li>");
               //rooms.push($('#input_roomname').val());
               //Adds item name to divisble or indivisible array
@@ -331,6 +326,7 @@ maximize obj: worst;
               console.log("divisitem 2"+ divisItem);
               console.log("indivisitem 2"+ indivItem);
               $('#input_roomname').val("");
+              }
             });
               
 
