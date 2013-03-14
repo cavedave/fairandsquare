@@ -267,6 +267,10 @@ textarea{
     height: 60px;
 }
 
+table tr, td{
+    border: 1px solid #333333;
+    text-align: left !important;
+}
 
 
 
@@ -322,8 +326,8 @@ er: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c7c7c', endColo
     border: 1px solid #333333;
  }
 
- img .image-margin{
-    margin-bottom: 15px;
+ .example img{
+    margin-bottom: 35px;
  }
 
 
