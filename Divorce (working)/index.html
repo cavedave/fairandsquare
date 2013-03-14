@@ -1,4 +1,8 @@
 <!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <html> 
     <head> 
       <title>Rent Calculator</title>
@@ -8,22 +12,22 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <meta name="Author" content="Fair & Square">
-        
-          <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-          <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-          <script src="js/sylvester-0-1-3/sylvester.js"></script>
-          <script src='glpk.js'></script>
-          <link rel="stylesheet" href="css/tabs.css" />
-          <script>
-          
-
-          
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="description" content="">
+      <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+      <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+      <script src="js/sylvester-0-1-3/sylvester.js"></script>
+      <script src='glpk.js'></script>
+      <link rel="stylesheet" href="css/tabs.css" />
+      <script>
             $(function() {
               $( "#tabs" ).tabs()
             });
             var personStage = 0;
             var tabsStage=0;
             var people = new Array();
+<<<<<<< HEAD
             var indivItem = new Array();
             var divisItem = new Array();
             var interPreferences = new Array();
@@ -33,10 +37,24 @@
           </script>
 
                   
+=======
+            var rooms = new Array();
+            var preferences = new Array();
+            var correctValues = new Array();
+            var sortnames= new Array();
+            var suminitpay;
+            var sumdiscounts;
+            var remainder;
+            //hardcoded matrix of preferences
+            var adjustPerson= new Array();
+            var movePerson= new Array();
+      </script>         
+>>>>>>> HTML changes
     </head>
 
     <body>
 
+<<<<<<< HEAD
 
 
       <div id="tabs">
@@ -104,61 +122,96 @@
   
 
           <div class="output">
+=======
+        <div id="tabs">
+>>>>>>> HTML changes
 
             <ul>
+                  <li><a href="#tab-start">H</a></li>
+                  <li><a href="#tab-poeple">1</a></li>
+                  <li><a href="#tab-rooms">2</a></li>
+                  <li><a href="#tab-preferences">3</a></li>
+                  <li><a href="#tab-results">4</a></li>
+                  <li><a href="#tab-help">?</a></li>
             </ul>
 
-          </div> <!-- displays input text -->
+            <!--INTRO SCREEN-->
+            <div id="tab-start" class="wrapper">
+                <section>      
+                    <h1>Fair & <span class="grey">Square</span></h1>
+                    <h2>Break-up app</h2>
+                    <img class="logo" src="images/logo_opaque.png">
+                </section>
+                    <a class="next-page-button">Begin</a>
+            </div> 
+            <!--END INTRO SCREEN-->
 
-      </section>
+            <!--PEOPLE SCREEN-->
+            <div id="tab-poeple" class="wrapper">
+                <section>
+                    <h3>Input the name of each Party</h3>
+                    <input type="text" id="input_tennant" name="firstname">
+                    <input type="submit" class="click"  id="btn_addTennant" value="Add Party">
+                        <div class="output">
+                          <ul>
+                          </ul>
+                        </div> <!-- displays input text -->
+                </section>
+                    <a class="next-page-button">Enter Party Names</a>
+            </div> 
+            <!--END PEOPLE SCREEN-->
 
-                <a class="next-page-button">Enter room descriptions</a>
+            <!--ASSET SCREEN-->
+            <div id="tab-rooms" class="wrapper">    
+                <section>
+                    <h3>Enter Items</h3>
+                    <input type="text" id="input_roomname" name="roomname"> 
+                    <select id="select1">
+                        <option value="divisible">divisible</option>
+                        <option value="non_divisible">non-divisible</option>
+                </select>
+                    <input type="submit"class="click"  id="btn_addRoom" value="Add Item">
+                    <div class="output">
+                        <ul>
+                        </ul>
+                    </div> <!-- displays input text -->
+                </section>
+                    <a class="next-page-button">Proceed</a>
+            </div>
+            <!--END ASSET SCREEN-->
 
-          </div>
+            <!--PREFERENCES SCREEN-->
+            <div id="tab-preferences">
+              <section>
+                <div class="output">
+                    <p>Nothing to see here. Click the button.</p>
+                </div>
+              </section>
+                  <a id="btn_nextPerson" class="next-page-button">Next</a>
+            </div>
+            <!--END PREFERENCES SCREEN-->
 
-      <div id="tab-preferences">
-        <section>
- 
-          <div class="output">
-          Room 1<input type="number" name="firstname"></br>
-          Room 2<input type="number" name="firstname"></br>
-          Room 3<input type="number" name="firstname"></br>
-          Room 4<input type="number" name="firstname"></br>
-          </div>
-          
-      </section>
+            <!--HELP SCREEN-->
+            <div id="tab-help" class="wrapper">
+                <section>
+                    <h2>How it works</h2>
+                    <p class="left"> The fair and square break-up tool is a computer aided
+                    negotiation tool that allows couples to find who should get what in the
+                    event of a break-up. It calculates allocations that prevent envy
+                    between both parties </p>
+                    </br>
+                    <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
+                </section>
+            </div>
+            <!--END HELP SCREEN-->
 
-                <a id="btn_nextPerson" class="next-page-button">Next</a>
-
-</div>
-
-<div id="tab-help" class="wrapper">
-
-
-  <section>
-  <h2>How it works</h2>
-  <p class="left"> The fair and square rent calculator is a computer aided
-  negotiation tool that allows housemates to find who should get which room
-  and at what cost. It calculates allocations that prevent envy
-  between housemates </p>
-
-  </br>
-
-  <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
-
-  </section>
-
-
-</div>
-
-
-<div id="tab-results" class="wrapper">
-
-
-<div id ="outputresults">
-
-
-</div>
+            <!--RESULTS SCREEN-->
+            <div id="tab-results" class="wrapper">
+                <div id ="outputresults">
+                </div>
+            </div>
+            </div>
+            <!--END RESULTS SCREEN-->
 
 
 <div style='display:none' id='fair2.mod' class='mathprog'>
@@ -224,6 +277,7 @@ maximize obj: worst;
                       interPreferences.push(arr);
                   }
                     
+<<<<<<< HEAD
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter the maximum amount of rent you are willing to pay for each room</h3>");
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
@@ -231,6 +285,11 @@ maximize obj: worst;
                     }
                   for (var i = 0; i<indivItem.length; i++ ) {
                     $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv'></br>");
+=======
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3>");
+                  for (var i = 0; i<rooms.length; i++ ) {
+                    $('#tab-preferences .output').append(rooms[i]+"</br><input type='number' name='roomname'></br>");
+>>>>>>> HTML changes
                   }
                   if (++personStage > people.length) {
                     console.log('hiding');
