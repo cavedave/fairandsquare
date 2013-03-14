@@ -21,24 +21,14 @@
             $(function() {
               $( "#tabs" ).tabs()
             });
-            var rentAmount;
             var personStage = 0;
+            var tabsStage=0;
             var people = new Array();
-            //var rooms = new Array();
             var indivItem = new Array();
             var divisItem = new Array();
             var interPreferences = new Array();
             var divisPreferences = new Array();
             var indivPreferences = new Array();
-            //var preferences = new Array();
-            var correctValues = new Array();
-            var sortnames= new Array();
-            var suminitpay;
-            var sumdiscounts;
-            var remainder;
-            //hardcoded matrix of preferences
-            var adjustPerson= new Array();
-            var movePerson= new Array();
 
           </script>
 
@@ -52,7 +42,7 @@
       <div id="tabs">
       <ul>
             <li><a href="#tab-start">H</a></li>
-            <li><a href="#tab-poeple">1</a></li>
+            <li><a href="#tab-poeple" value="people">1</a></li>
             <li><a href="#tab-rooms">2</a></li>
             <li><a href="#tab-preferences">3</a></li>
             <li><a href="#tab-results">4</a></li>
@@ -93,7 +83,7 @@
 
       </section>
 
-                <a class="next-page-button">Enter Party Names</a>
+                <a class="next-page-button" >Enter Party Names</a>
 
 
           </div> <!-- end poeple -->
@@ -283,9 +273,36 @@ maximize obj: worst;
       
            
             $('.next-page-button').click(function(){
-              $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+              switch (tabsStage) {
+                    case (tabsStage==1):
+                      if (people.length<2){
+                        $( "#tabs" ).tabs( "option", "disabled" ); 
+                      }
+                      else{
+                        $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                        tabsStage++;
+                      }
+                      break;
+                    case (tabsStage==2):
+                      if ( divisItem.length+indivItem.length<1){
+                        $( "#tabs" ).tabs( "option", "disabled" );
+                      else{
+                        $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                        tabsStage++;  
+                      } 
+                      }
+                      break;
+                    default:
+                      $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                      tabsStage++;
+              }
             });
+
+            //$('.begin-page-button').click(function(){
+            //    $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+            //});
             
+
             $('#btn_nextPerson').unbind();
             $('#btn_nextPerson').click(function(){
               People(personStage);
@@ -316,141 +333,6 @@ maximize obj: worst;
               $('#input_roomname').val("");
             });
               
-            $('#btn_rentAmount').click(function(){
-              rentAmount = $('#input_rentAmount').val();
-              $('#tab-rent .output').text("Rent: "+rentAmount);
-              $('#input_rentAmount').val("");
-            });
-
-            function sortArray(T,values){
-//$('#Sort').text("Sort: "+people.toString());
-console.log("T inspect"+T.inspect());
-var L=Matrix.create(T.row(values[0]));
-    console.log("L inspect 1111"+L.inspect());
-  for(i=0;i<values.length;i++){
-    correctValues[values[i]-1]=i+1;
-}
-  for(i=0;i<values.length;i++){
-      sortnames[i]=people[correctValues[i]-1];
-      L=L.augment(T.row(correctValues[i]));
-      //L=L.augment(T.row(values[i]));
-      console.log("L inspect 22222222"+L.inspect()); 
- }
-  L = L.minor(1,2,T.rows(),T.cols());
-      console.log("L inspect 333333"+L.inspect());
-  L=L.transpose(L);
-//  $('#Sort').append("<BR>"+sortnames.toString());
-//    $('#Sort').append("<BR>"+L.inspect());
-    console.log("L inspect aortarray"+L.inspect());
-return L;
-}
-
-function assessmentMatrix(M){
-var inittotal=0;
-var discounts= new Array();
-var initpay=  new Array();
-var finpay= new Array();
-var matass = new Matrix();
-//matass=M;
-var K = new Array ();
-//creates matrix of columns using the diagonal values
-console.log("M inspect"+M.inspect());
-L=Matrix.create(M.col(1));
-console.log("L inspect"+L.inspect());
-for(i=1;i<=M.rows();i++){
-  for(j=1;j<=M.cols();j++){
-    K.push(M.e(i,i));
-    console.log("K inspect"+K.toString());
-  }   
-L=L.augment(K);
-K=[];
-}
-L.transpose(L);
-//remove after figuring out creation of empty matrix
-L = L.minor(1,2,M.rows(),M.cols());
-//put initial payment in an array
-for(i=1;i<=L.rows();i++){
-initpay.push(L.e(1,i));
-console.log("initpay L push"+initpay);
-inittotal=inittotal+L.e(1,i);
-discounts.push(0);
-}
-//exit if there is not enough to meet the rent
-suminitpay=sumArray(initpay);
-if (rentAmount>suminitpay){
-  $('#outputresults').text("The preferential bids on rooms are not high enough to cover the total rent.");
-  return null;
-}
-//subtract the diagonal values from the assessment matrix
-L=M.subtract(L);
-finpay=initpay.slice(0);
-//check for envy
-do{
-var K = new Array ();
-var R = new Array ();
-N=Matrix.create(M.col(1));
-//creates arrays from the rows of the matrix and get the largest values
-//L=Matrix.create(M.col(1));
-for(i=1;i<=L.rows();i++){
-  for(j=1;j<=L.cols();j++){
-    K.push(L.e(i,j));
-  }   
-var largest = Math.max.apply(Math, K); 
-//if largest value is greater than the diagonal then envy exists
-  if(largest>L.e(i,i)){
-    var difference=largest-L.e(i,i);
-    //add difference to all values in ith column
-    for(a=1;a<=L.rows();a++){
-      R.push(difference);
-    }
-    N=N.augment(R);
-    R=[];
-    discounts[i-1]=discounts[i-1]+difference;
-    finpay[i-1]=finpay[i-1]-difference;
-  }
-  else{
-    for(a=1;a<=L.rows();a++){
-      R.push(0);
-    }
-    N=N.augment(R);
-    R=[];
-  }
-  K=[];
-}
-N = N.minor(1,2,M.rows(),M.cols());   
-L=L.add(N);
-} while(envy(L)==true);
-//divide any remaining surplus
-suminitpay=sumArray(initpay);
-console.log("sumit"+suminitpay);
-sumdiscounts=sumArray(discounts);
-console.log("sumdis"+sumdiscounts);
-if(rentAmount!=suminitpay-sumdiscounts){
-  suminitpay=suminitpay-sumdiscounts;
-  console.log("sumit"+suminitpay);
-  remainder=suminitpay-rentAmount;
-  console.log("remainder2"+remainder);
-  remainder=remainder/finpay.length;
-  console.log("remainder"+remainder);
-  for (i=0;i<finpay.length;i++){
-    finpay[i]=finpay[i]-remainder;
-  }
-}
-$('#outputresults').text("Results:");
-$('#outputresults').append("<BR>");
-$('#outputresults').append("<BR>");
-for (i=0;i<rooms.length;i++){
-$('#outputresults').append(" Name: "+sortnames[i]);
-$('#outputresults').append("<BR>");
-$('#outputresults').append(" Room: "+rooms[i]);
-$('#outputresults').append("<BR>");
-$('#outputresults').append(" rent due: "+finpay[i]);
-$('#outputresults').append("<BR>");
-$('#outputresults').append("<BR>");
-
-}
-return finpay;
-}
 
 
 function createData(M,N) {
@@ -498,48 +380,6 @@ data = data + "param divItems :";
   }
 
 
-function bestRoom(data){
-        var movePerson = new Array(); 
-      var tran = glp_mpl_alloc_wksp();
-      try {
-      model = document.getElementById("rent.mod").innerText;
-      model=model+data;
-              console.log("data"+ data);
-    glp_mpl_read_model_from_string(tran,'MathProg Model',model);
-    } catch (err) {
-         return null;
-      }
-      try {
-          glp_mpl_generate(tran,null,model);//may not be model
-          var lp = glp_create_prob();
-          glp_mpl_build_prob(tran,lp);
-      } catch (err) {
-          return null;
-      }
-      var smcp = new SMCP({presolve: GLP_ON});
-      glp_simplex(lp, smcp);
-       glp_intopt(lp);
-     if(lp) {
-        glp_mpl_postsolve(tran,lp,GLP_MIP);
-           for (var i = 1; i <= glp_get_num_cols(lp); i++) {//was 2
-              if(glp_mip_col_val(lp,i)>0){
-              var colname= glp_get_col_name(lp,i);
-                if(colname.charAt(0)=='x'){
-                }
-                if(colname.charAt(0)=='y'){
-            }
-            movePerson[colname.charAt(2)]=colname.charAt(4);
-          } 
-        }
-     } else {
-        displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
-     }
-       for(i=0;i<movePerson.length-1;i++){
-         adjustPerson[i]=movePerson[i+1]; 
-        console.log("adjustperson"+ adjustPerson.toString()); 
-       }
-       return adjustPerson;
-  }
 
 function glpkTest(data){
       var tran = glp_mpl_alloc_wksp();
@@ -571,37 +411,38 @@ var lp = glp_create_prob();
         glp_mpl_postsolve(tran,lp,GLP_MIP);
         console.log(lp,"lp");
         console.log( glp_mip_obj_val(lp)," is the maximin value");
-       var txt1=$("<p></p>").text("Maximin satisfaction is ");
-      // txt1.append(glp_get_obj_val(lp).toPrecision(4).toString());
-         txt1.append(glp_mip_obj_val(lp).toPrecision(4)).toString();
+        $('#outputresults').text("Maximin satisfaction is ");
+        $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
  // Create text with jQuery
-         var txt3=$("<p></p>").text("Who gets what is");
-         txt3.append("<p></p>");
+        $('#outputresults').append("<p></p>")
+        $('#outputresults').append("Who gets what is");
+        $('#outputresults').append("<p></p>");
            for (var i = 2; i <= glp_get_num_cols(lp); i++) {
               if(glp_mip_col_val(lp,i)>0){
               var colname= glp_get_col_name(lp,i);          
                 if(colname.charAt(0)=='x'){
-                  txt3.append("Divisible item ");
+                  $('#outputresults').append("Divisible item ");
                   //txt3.append(rooms[colname.charAt(4).toString()-1]);
-                  txt3.append(divisItem[colname.charAt(4).toString()-1]);
+                  $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
                 //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
                 }
                 if(colname.charAt(0)=='y'){
-                  txt3.append("Indivisible item ");
-                  txt3.append(indivItem[colname.charAt(4).toString()-1]);
+                  $('#outputresults').append("Indivisible item ");
+                  $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
             }
 
                   if(glp_mip_col_val(lp,i)<1){
-              txt3.append(" ");
-              txt3.append(glp_mip_col_val(lp,i).toPrecision(4)).toString();
-              txt3.append(" part of it");
+              $('#outputresults').append(" ");
+              $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)).toString();
+              $('#outputresults').append(" part of it");
             }
-                  txt3.append(" goes to ");
-                  txt3.append(people[colname.charAt(2).toString()-1]);
-                  txt3.append("<p></p>");
+                  $('#outputresults').append(" goes to ");
+                  $('#outputresults').append(people[colname.charAt(2).toString()-1]);
+                  $('#outputresults').append("<p></p>");
           } 
         }
-$("body").append(txt1,txt3);
+//$('#outputresults').text(txt1.toString()+txt3.toString());
+//$("body").append(txt1,txt3);
      } else {
         displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
      }
@@ -609,17 +450,12 @@ $("body").append(txt1,txt3);
 
 
 function main(){
-console.log("interPreferences.length"+interPreferences.length);
 var interMatrix= $M(interPreferences);
-console.log("interMatrix "+interMatrix.inspect());
-//L = L.minor(1,2,T.rows(),T.cols());
 if(divisItem.length>0){
 var divisMatrix= interMatrix.minor(1,1,people.length,divisItem.length);
-console.log("divisMatrix "+divisMatrix.inspect());
 }
 if(indivItem.length>0){
 var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.length);
-console.log("indivMatrix "+indivMatrix.inspect());
 }
 var values=glpkTest(createData(divisMatrix,indivMatrix)); 
 }
