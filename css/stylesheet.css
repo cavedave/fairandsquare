@@ -1,0 +1,200 @@
+/*
+* Author: Ciaran Canavan, Red Meadow Web Design
+*Copyright Red Meadow Web Design 2013
+*/
+
+
+/**
+ *------------------CSS RESET---------------------------------------------
+ */
+
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, ul, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	text-decoration: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, ul, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/**
+ *------------------END CSS RESET---------------------------------------------
+ */
+
+ html, body{
+ 	text-align: center;
+ 	width: 100%;
+ 	min-height: 100%;
+	}
+
+.app-wrapper{
+	padding-bottom: 85px;
+	min-height: 500px
+}
+
+p{
+	margin: 50px;
+	color: #354442;
+}
+
+ h1{
+
+ 	font-size: 2em;
+ 	text-align: center;
+ 	margin: 5px;
+ 	color: #67A07E;
+ }
+
+ .grey{
+ 	color: #AEAEAE;
+ }
+
+ h2{
+
+ 	font-size: 1.5em;
+ 	text-align: center;
+ 	margin: 15px;
+ 	color: #354442;
+
+ }
+
+  h3{
+
+ 	font-size: 1em;
+ 	text-align: center;
+ 	margin: 15px;
+ 	color: #1B1D26;
+
+ }
+
+
+
+
+
+ section{
+ 	text-align: center;
+
+ }
+
+ ul li{
+ 	text-align: center;
+ 	line-height: 30px;
+ }
+
+ .active{
+ 	background-color: white;
+ 	border-bottom: hidden;
+ }
+
+
+
+ .logo2{
+display: block;
+margin: auto;
+padding-top: 5px;
+padding-bottom: 15px;
+
+}
+
+.output{
+	font-size: 1em;
+	min-height: 120px;
+	padding: 15px;
+}
+
+a{
+	color: #1B1D26;
+}
+
+ .next-page-button, .click{
+ 	display: block;
+ 	margin: auto;
+ 	width: 170px;
+ 	text-align: center;
+ 	font-size: 1em;
+ 	border:1px solid #303231;
+ 	border-radius: 2px;
+ 	padding:5px;
+ 	background: rgb(186,201,216); /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2JhYzlkOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MWFhYTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(186,201,216,1) 0%, rgba(145,170,169,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(186,201,216,1)), color-stop(100%,rgba(145,170,169,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bac9d8', endColorstr='#91aaa9',GradientType=0 ); /* IE6-8 */
+
+ 	color: #354442;
+ 	margin-bottom: 20px;
+ }
+
+
+
+
+ .click{
+ 	margin-top: 25px;
+ 	font-size: 1em;
+ 	display: block;
+ 	font-style: italic;
+ 	line-height: 16px;
+ }
+
+ input{
+ 	margin-bottom: 15px;
+ 	display: inline-block;
+ 	margin: auto;
+ }
+
+.link{
+	font-weight: bold;
+	color: #67A07E !important;
+	font-size: 1.5em;
+}
+
+.outputname{
+	display: block;
+}
+
