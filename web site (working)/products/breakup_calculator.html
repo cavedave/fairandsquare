@@ -100,6 +100,7 @@
 
           <h2>Enter Names</h2>
           <p>Press "add person" after each name, then proceed to the next step</p>
+        </br>
           <input type="text" id="input_tennant" name="firstname">
           <input type="submit" class="click"  id="btn_addTennant" value="Add Person">
           
@@ -257,17 +258,17 @@ maximize obj: worst;
                       interPreferences.push(arr);
                   }
                     
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3>");
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br></br>");
                     }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br></br>");
                   }
                   if (++personStage > people.length) {
                     console.log('hiding');
@@ -290,16 +291,16 @@ maximize obj: worst;
                   console.log('out of people');
                 }
                 else {
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br></br>");
                   }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0' onFocus=this.value='' class='alloc'></br></br>");
                   }
                   if (++personStage >= people.length) {
                     console.log('Done, changing to continue.');

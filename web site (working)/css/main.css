@@ -80,6 +80,7 @@ body > .wrapper { height: auto; min-height: 100%; }
 
 .center{
     text-align: center;
+
 }
 
 body{
@@ -288,9 +289,13 @@ footer{
     width: 60%;
     margin: auto;
     padding: 50px;
+         padding-bottom: 120px;
+
  }
 
- 
+ ol li{
+    list-style-type: circle;
+ }
 
 /*-------Blog css---------------*/
 table{
