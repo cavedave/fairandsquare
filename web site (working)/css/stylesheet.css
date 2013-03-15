@@ -138,5 +138,8 @@ input{
 	text-align: center;
 }
 
-
+.smalltext{
+	font-size: .7em;
+	font-style: italic;
+}
 
