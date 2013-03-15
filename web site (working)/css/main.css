@@ -1,9 +1,6 @@
 /*
- * HTML5 Boilerplate
- *
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
+ * fairandsquare.ie
+ * created by redmeadow web design http://www.redmeadow.ie;
  */
 
 /* ==========================================================================
@@ -23,7 +20,6 @@ body {
     line-height: 1.4;
 }
 
-
 .label{
     display: block;
 }
@@ -33,12 +29,6 @@ textarea[readonly]{
     background-color: #ddd;
     border-color: transparent;
 }
-
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection declarations have to be separate.
- * Customize the background color to match your design.
- */
 
 ::-moz-selection {
     background: #b3d4fc;
@@ -50,40 +40,15 @@ textarea[readonly]{
     text-shadow: none;
 }
 
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-/*
- * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
- */
-
 img {
     vertical-align: middle;
 }
-
-/*
- * Remove default fieldset styles.
- */
 
 fieldset {
     border: 0;
     margin: 0;
     padding: 0;
 }
-
-/*
- * Allow only vertical resizing of textareas.
- */
 
 textarea {
     resize: vertical;
@@ -101,7 +66,7 @@ textarea {
 }
 
 /* ==========================================================================
-   Author's custom styles
+   Main styles
    ========================================================================== */
 html, body, .wrapper { height: 100%; }
 body > .wrapper { height: auto; min-height: 100%; }
@@ -123,15 +88,12 @@ font-family:'verdana';
 color: #333333;
 }
 
-
-
 h1,h2,h3,h4,p{
     padding: 5px;
 }
 
 h1{
     font-size: 2em;
-
 }
 
 h2{
@@ -175,10 +137,6 @@ header{
     float: left;
     }
 
-nav{
-
-}
-
 nav li{
     float: right;
     width: 12%;
@@ -189,39 +147,37 @@ nav li{
 }
 
 nav ul a{
-        display: block;
-        color: #7f7f7f;
-            background: #ffffff; /* Old browsers */
-background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    display: block;
+    color: #7f7f7f;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
      -o-transition:.50s;
-  -ms-transition:.50s;
-  -moz-transition:.50s;
-  -webkit-transition:.50s;
-  transition:.50s;
+    -ms-transition:.50s;
+    -moz-transition:.50s;
+    -webkit-transition:.50s;
+    transition:.50s;
 }
 
 nav a:hover{
-background: #ffffff; /* Old browsers */
-background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #c7cacc 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#c7cacc)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c7cacc',GradientType=0 ); /* IE6-9 */
-color: #009247;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #c7cacc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#c7cacc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#c7cacc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c7cacc',GradientType=0 ); /* IE6-9 */
+    color: #009247;
 }
-
 
 .active{
     color: #009247;
-
 }
 
 .border-left{
@@ -242,7 +198,6 @@ color: #009247;
     margin-left: auto;
     margin-bottom: 15px;
     width: 65%;
-
 }
 
 .side-form{
@@ -277,23 +232,17 @@ table tr, td{
     text-align: left !important;
 }
 
-
-
-
-
-
-
 footer{
-height:85px;
-background: #a0a0a0; /* Old browsers */
-background: -moz-linear-gradient(top,  #a0a0a0 0%, #7f7f7f 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a0a0a0), color-stop(100%,#7f7f7f)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #a0a0a0 0%,#7f7f7f 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #a0a0a0 0%,#7f7f7f 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #a0a0a0 0%,#7f7f7f 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #a0a0a0 0%,#7f7f7f 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0a0a0', endColorstr='#7f7f7f',GradientType=0 ); /* IE6-9 */
-er: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c7c7c', endColorstr='#7f7f7f',GradientType=0 ); /* IE6-9 */
+    height:85px;
+    background: #a0a0a0; /* Old browsers */
+    background: -moz-linear-gradient(top,  #a0a0a0 0%, #7f7f7f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a0a0a0), color-stop(100%,#7f7f7f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #a0a0a0 0%,#7f7f7f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #a0a0a0 0%,#7f7f7f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #a0a0a0 0%,#7f7f7f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #a0a0a0 0%,#7f7f7f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0a0a0', endColorstr='#7f7f7f',GradientType=0 ); /* IE6-9 */
+    er: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c7c7c', endColorstr='#7f7f7f',GradientType=0 ); /* IE6-9 */
     clear: both;
     position: relative;
     margin-top: -85px;
@@ -306,45 +255,40 @@ er: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c7c7c', endColo
     margin: 15px 15px 0px 15px;
 }
 
- .copyright{
+.copyright{
     display: inline-block;
     margin: 15px;
     font-size: .8em;
     text-align: left;
  }
 
- .copyright a{
+.copyright a{
     color: #333333;
     font-weight: bold;
          -o-transition:.50s;
-  -ms-transition:.50s;
-  -moz-transition:.50s;
-  -webkit-transition:.50s;
-  transition:.50s;
+    -ms-transition:.50s;
+    -moz-transition:.50s;
+    -webkit-transition:.50s;
+    transition:.50s;
  }
 
-  .copyright a:hover{
+.copyright a:hover{
     color: #009247;
  }
 
- .border{
+.border{
     border: 1px solid #333333;
  }
 
- .example img{
+.example img{
     margin-bottom: 35px;
  }
 
- .single{
+.single{
     width: 60%;
     margin: auto;
     padding: 50px;
  }
-
-
-
-
-
 
 /*-------Blog css---------------*/
 table{
@@ -355,9 +299,7 @@ table{
     color: #595151;
     margin-top: 15px;
     margin-bottom: 15px;
-
 }
-
 
 tr, td{
     margin: auto;
@@ -370,7 +312,6 @@ th{
     color: #168C49;
 }
 
-
 address a{
     padding: 5px;
     color: #009247;
@@ -380,146 +321,14 @@ address a:hover{
     color: #7f7f7f;
 }
 
-
-
-
 /* ==========================================================================
-   Jquery modal window
+ MEDIA QUERIES
    ========================================================================== */
-
-/* Z-index of #mask must lower than #boxes .window */
-#mask {
-  position:absolute;
-  z-index:9000;
-  background-color:#000;
-  display:none;
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
 }
-   
-#boxes .window {
-  position:fixed;
-  width:440px;
-  height:200px;
-  display:none;
-  z-index:9999;
-  padding:20px;
-}
- 
- 
-/* Customize your modal window here, you can add background image too */
-#boxes #dialog {
-  width:375px; 
-  height:203px;
-}
-
-
-
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Image replacement
- */
-
-.ir {
-    background-color: transparent;
-    border: 0;
-    overflow: hidden;
-    /* IE 6/7 fallback */
-    *text-indent: -9999px;
-}
-
-.ir:before {
-    content: "";
-    display: block;
-    width: 0;
-    height: 150%;
-}
-
-/*
- * Hide from both screenreaders and browsers: h5bp.com/u
- */
-
-.hidden {
-    display: none !important;
-    visibility: hidden;
-}
-
-/*
- * Hide only visually, but have it available for screenreaders: h5bp.com/v
- */
-
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-/*
- * Extends the .visuallyhidden class to allow the element to be focusable
- * when navigated to via the keyboard: h5bp.com/p
- */
-
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-}
-
-/*
- * Hide visually and from screenreaders, but maintain layout
- */
-
-.invisible {
-    visibility: hidden;
-}
-
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
- */
-
-.clearfix:before,
-.clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-/*
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
-
-.clearfix {
-    *zoom: 1;
-}
-
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   Theses examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
 
 @media only screen and (max-width: 912px) {
 
@@ -529,7 +338,7 @@ address a:hover{
     text-align: center;
     border-bottom: 1px solid #cccccc;
     width: 90px;
-}
+    }
 
     header{
     height:100px;}
@@ -548,11 +357,7 @@ address a:hover{
         text-align: center;
         padding: 2px;
     }
-
-
-
-
-    }
+}
 
     @media only screen and (max-width: 710px) {
 
@@ -562,7 +367,7 @@ address a:hover{
     text-align: center;
     border-bottom: 1px solid #cccccc;
     width: 75px;
-}
+    }
 
     header{
     height:80px;}
@@ -570,19 +375,6 @@ address a:hover{
     .logo{
         height: 100%;
     }
-
-
-
-
-    }
-
-
-
-@media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
 }
 
 @media only screen and (max-width: 575px) {
@@ -594,35 +386,33 @@ nav li{
     text-align: center;
     border-top:1px solid #e5e5e5;
     border-bottom: none;
-}
-nav ul a{
-        display: block;
-        color: #7f7f7f;
-        background: #ffffff;
-}
-
-
-.border-left{
-    border-bottom: 1px solid #cccccc;
-}
-
-nav a:hover{
-background: #cccccc; 
-color: #009247;
-
-}
-header{
-    height:140px;
-
-}
-
-
-.logo{
-    float: left;
-    width: 100%;
+    }
+    nav ul a{
+            display: block;
+            color: #7f7f7f;
+            background: #ffffff;
     }
 
-    /* Style adjustments for viewports that meet the condition */
+
+    .border-left{
+        border-bottom: 1px solid #cccccc;
+    }
+
+    nav a:hover{
+    background: #cccccc; 
+    color: #009247;
+
+    }
+    header{
+        height:140px;
+
+    }
+
+
+    .logo{
+        float: left;
+        width: 100%;
+        }
 }
 
     @media only screen and (max-width: 375px) {
@@ -632,11 +422,10 @@ header{
             text-align: center;
         }
 
-        }
+}
 
 /* ==========================================================================
    Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
    ========================================================================== */
 
 @media print {
