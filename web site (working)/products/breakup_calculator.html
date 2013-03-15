@@ -454,31 +454,32 @@ var lp = glp_create_prob();
         glp_mpl_postsolve(tran,lp,GLP_MIP);
         console.log(lp,"lp");
         console.log( glp_mip_obj_val(lp)," is the maximin value");
-        $('#outputresults').text("Maximin satisfaction is ");
+        $('#outputresults').text("Minimum satisfaction is: ");
         $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
  // Create text with jQuery
         $('#outputresults').append("<p></p>")
-        $('#outputresults').append("Who gets what is");
+        $('#outputresults').append("The FairAndSquare allocation is: ");
         $('#outputresults').append("<p></p>");
            for (var i = 2; i <= glp_get_num_cols(lp); i++) {
               if(glp_mip_col_val(lp,i)>0){
-              var colname= glp_get_col_name(lp,i);          
+              var colname= glp_get_col_name(lp,i);  
+            if(glp_mip_col_val(lp,i)<1){
+              $('#outputresults').append(" ");
+              $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
+//              $('#outputresults').append(" part of it");
+            }
+        
                 if(colname.charAt(0)=='x'){
-                  $('#outputresults').append("Divisible item ");
+//                  $('#outputresults').append("Divisible item ");
                   //txt3.append(rooms[colname.charAt(4).toString()-1]);
                   $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
                 //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
                 }
                 if(colname.charAt(0)=='y'){
-                  $('#outputresults').append("Indivisible item ");
+ //                 $('#outputresults').append("Indivisible item ");
                   $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
             }
 
-                  if(glp_mip_col_val(lp,i)<1){
-              $('#outputresults').append(" ");
-              $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)).toString();
-              $('#outputresults').append(" part of it");
-            }
                   $('#outputresults').append(" goes to ");
                   $('#outputresults').append(people[colname.charAt(2).toString()-1]);
                   $('#outputresults').append("<p></p>");
