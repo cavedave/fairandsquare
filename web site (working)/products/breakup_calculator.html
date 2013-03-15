@@ -50,7 +50,6 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
     <header>
         <a href="index.html"><img src="../images/fair_and_square_logo.png" alt="fair and square logo" class="logo"></a>
 
@@ -122,9 +121,9 @@
  
 
           <h3>Enter Each Item</h3>
-          <p>1)Enter item name</br>
-            2)Select whether item is divisable or not</br>
-            3)Press "add item"</br>
+          <p><span class="left">1)Enter item name</span></br>
+            <span class="left">2)Select whether item is divisable or not</span></br>
+            <span class="left">3)Press "add item"</span></br>
             Repeat these steps for each item and then proceed to the next step</p>
 
 
@@ -192,7 +191,7 @@
 
 
 </div>
-
+</div>
 
 <div style='display:none' id='fair2.mod' class='mathprog'>
 /* Fair Division Program
@@ -257,21 +256,11 @@ maximize obj: worst;
                       interPreferences.push(arr);
                   }
                     
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> updated text and google analytics
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
-<<<<<<< HEAD
-=======
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <p>please enter your valuations privately. All values must sum to 100%</p>");
->>>>>>> updated css for calculator
-=======
->>>>>>> updated text and google analytics
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
@@ -300,20 +289,10 @@ maximize obj: worst;
                   console.log('out of people');
                 }
                 else {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> updated text and google analytics
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
-<<<<<<< HEAD
-=======
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>please enter your valuations privately. All values must sum to 100%</p>");
->>>>>>> updated css for calculator
-=======
->>>>>>> updated text and google analytics
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
@@ -543,19 +522,21 @@ var values=glpkTest(createData(divisMatrix,indivMatrix));
         <a href="https://twitter.com/fairandsquareie"><img class ="icon" src="../images/twitter.png"></a>
 
         </footer>
-<<<<<<< HEAD
-
-        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
-=======
->>>>>>> updated text and google analytics
         <script src="../js/plugins.js"></script>
         <script src="../js/main.js"></script>
-        <script>
-            var _gaq=[['_setAccount','UA-38593415-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
+            <script type="text/javascript">
+
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', 'UA-38593415-1']);
+              _gaq.push(['_trackPageview']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+
+            </script>
   
     </body>
 </html>
