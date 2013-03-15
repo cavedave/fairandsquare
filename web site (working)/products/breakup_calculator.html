@@ -16,7 +16,7 @@
       <script src="../js/jquery-1.9.1.min.js"></script>
       <script src="../js/jquery-ui.js"></script>
       <script src="../js/sylvester-0-1-3/sylvester.js"></script>
-      <script src='../glpk.min.js'></script>
+      <script src='../glpk.js'></script>
       <link rel="stylesheet" href="../css/tabs.css" />
 
             <script>
@@ -291,7 +291,7 @@ maximize obj: worst;
                   console.log('out of people');
                 }
                 else {
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p><  /br>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
