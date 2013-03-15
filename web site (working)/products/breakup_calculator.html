@@ -13,7 +13,7 @@
       <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
       <link rel="icon" href="/favicon.ico" type="image/x-icon">
       <meta name="Author" content="Fair & Square Breakup Calculator">
-      <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+      <script src="../js/jquery-1.9.1.min.js"></script>
       <script src="../js/jquery-ui.js"></script>
       <script src="../js/sylvester-0-1-3/sylvester.js"></script>
       <script src='../glpk.js'></script>
@@ -26,6 +26,7 @@
             $(function() {
               $( "#tabs" ).tabs()
             });
+            var allocation = 100;
             var personStage = 0;
             var tabsStage=0;
             var people = new Array();
@@ -49,6 +50,7 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
+        <!-- Add your site or application content here -->
     <header>
         <a href="index.html"><img src="../images/fair_and_square_logo.png" alt="fair and square logo" class="logo"></a>
 
@@ -64,7 +66,6 @@
 
     </header>
 <div class="app-wrapper">
-  
          <div id="tabs">
       <ul>
             <li><a href="#tab-start">H</a></li>
@@ -251,12 +252,16 @@ maximize obj: worst;
                   }
                     
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3>");
+                  allocation=100;
+                  $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
+                  $('#allocationLabel').text("Remaining allocation: ");
+                  $('#allocationLabel').append(allocation+"<br></br>");
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='roomname'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                     }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage > people.length) {
                     console.log('hiding');
@@ -280,12 +285,15 @@ maximize obj: worst;
                 }
                 else {
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
+                  $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
+                  $('#allocationLabel').text("Remaining allocation: ");
+                  $('#allocationLabel').append(allocation+"<br></br>");
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage >= people.length) {
                     console.log('Done, changing to continue.');
@@ -354,7 +362,20 @@ maximize obj: worst;
               $('#input_roomname').val("");
               }
             });
-              
+             
+            $("#tab-preferences").on("focusout", ".alloc", function () {
+                var sum = 0;
+                var allocation = 100;
+                $('.alloc').each(function() {
+                sum += Number($(this).val());
+                });
+              console.log("here is sum "+sum);
+                            console.log("here is allocation bs "+allocation);
+              var allocation = allocation-sum;
+              console.log("here is allocation "+allocation);
+                $('#allocationLabel').text("Remaining allocation is: ");
+                $('#allocationLabel').append(allocation+"<br></br>");
+            });
 
 
 function createData(M,N) {
@@ -482,8 +503,9 @@ var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.
 var values=glpkTest(createData(divisMatrix,indivMatrix)); 
 }
       </script>
+
   </div><!--end wrapper-->
-</div>
+
     <footer>
        <div class="copyright">
                                     <a href="../privacy_policy.html">Privacy Policy</a></br>
@@ -495,22 +517,15 @@ var values=glpkTest(createData(divisMatrix,indivMatrix));
 
         </footer>
 
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="../js/plugins.js"></script>
         <script src="../js/main.js"></script>
-            <script type="text/javascript">
-
-              var _gaq = _gaq || [];
-              _gaq.push(['_setAccount', 'UA-38593415-1']);
-              _gaq.push(['_trackPageview']);
-
-              (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-              })();
-
-            </script>
+        <script>
+            var _gaq=[['_setAccount','UA-38593415-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
   
     </body>
 </html>
