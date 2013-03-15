@@ -143,6 +143,11 @@ h3{
     font-weight: bold;
 }
 
+h3 a{
+     color:#009247;
+     text-decoration: underline;
+}
+
 p a{
     color: #009247;
 }
@@ -328,6 +333,12 @@ er: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c7c7c', endColo
 
  .example img{
     margin-bottom: 35px;
+ }
+
+ .single{
+    width: 60%;
+    margin: auto;
+    padding: 50px;
  }
 
 
@@ -590,6 +601,7 @@ nav ul a{
         background: #ffffff;
 }
 
+
 .border-left{
     border-bottom: 1px solid #cccccc;
 }
@@ -603,6 +615,7 @@ header{
     height:140px;
 
 }
+
 
 .logo{
     float: left;
