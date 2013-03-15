@@ -81,7 +81,7 @@
       <section>
  
           <h1>Fair & <span class="grey">Square</span></h1>
-          <h2>Breakup Calculator</h2>
+          <h2>Fair Division Tool</h2>
 
 
             <img class="logo2" src="../images/logo_opaque.png">
@@ -99,9 +99,9 @@
       <section>
  
 
-          <h2>Input the name of each Party</h2>
+          <h2>Input the name of each person</h2>
           <input type="text" id="input_tennant" name="firstname">
-          <input type="submit" class="click"  id="btn_addTennant" value="Add Party">
+          <input type="submit" class="click"  id="btn_addTennant" value="Add This Person">
           
 
           <div class="output">
@@ -111,7 +111,7 @@
 
       </section>
 
-                <a class="next-page-button" >Enter Party Names</a>
+                <a class="next-page-button" >Proceed to Add Items</a>
 
 
           </div> <!-- end poeple -->
@@ -120,13 +120,13 @@
       <section>
  
 
-          <h3>Enter Items</h3>
+          <h3>Enter Each Item</h3>
           <input type="text" id="input_roomname" name="roomname"> 
           <select id="select1">
             <option value="non_divisible">non-divisible</option>
             <option value="divisible">divisible</option>
           </select>
-          <input type="submit"class="click"  id="btn_addRoom" value="Add Item">
+          <input type="submit"class="click"  id="btn_addRoom" value="Add This Item">
 
   
 
@@ -139,7 +139,7 @@
 
       </section>
 
-                <a class="next-page-button">Enter all Items</a>
+                <a class="next-page-button">Proceed to Enter Valuations</a>
 
           </div>
 
@@ -155,7 +155,7 @@
           
       </section>
 
-                <a id="btn_nextPerson" class="next-page-button">Next</a>
+                <a id="btn_nextPerson" class="next-page-button">Proceed</a>
 
 </div>
 
@@ -183,6 +183,7 @@
 
 
 <div id ="outputresults">
+
 
 
 </div>
@@ -251,11 +252,15 @@ maximize obj: worst;
                       interPreferences.push(arr);
                   }
                     
+<<<<<<< HEAD
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
+=======
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <p>please enter your valuations privately. All values must sum to 100%</p>");
+>>>>>>> updated css for calculator
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
@@ -284,10 +289,14 @@ maximize obj: worst;
                   console.log('out of people');
                 }
                 else {
+<<<<<<< HEAD
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
+=======
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>please enter your valuations privately. All values must sum to 100%</p>");
+>>>>>>> updated css for calculator
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");

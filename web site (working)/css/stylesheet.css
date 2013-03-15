@@ -6,7 +6,9 @@
 
 .app-wrapper{
 	padding-bottom: 85px;
-	min-height: 500px
+	min-height: 500px;
+	margin: auto;
+
 }
 
 p{
@@ -64,6 +66,19 @@ ul li{
 	font-size: 1em;
 	min-height: 120px;
 	padding: 15px;
+	text-align: center;
+	margin: auto;
+}
+
+.output li{
+	background-color: #d0d0d0;
+	padding: 2px;
+	max-width: 240px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 a{
@@ -73,7 +88,7 @@ a{
 .next-page-button, .click{
  	display: block;
  	margin: auto;
- 	width: 170px;
+ 	width: 240px;
  	text-align: center;
  	font-size: 1em;
  	border:1px solid #303231;
@@ -116,4 +131,11 @@ input{
 .outputname{
 	display: block;
 }
+
+#outputresults{
+	margin: auto;
+	width: 80%;
+	text-align: center;
+}
+
 
