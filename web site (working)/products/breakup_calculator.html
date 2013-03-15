@@ -476,8 +476,10 @@ var lp = glp_create_prob();
             }
         
                 if(colname.charAt(0)=='x'){
-//                  $('#outputresults').append("Divisible item ");
-                  //txt3.append(rooms[colname.charAt(4).toString()-1]);
+                    if(glp_mip_col_val(lp,i)<1){
+                        $('#outputresults').append(" ");
+                        $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
+                    }
                   $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
                 //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
                 }
