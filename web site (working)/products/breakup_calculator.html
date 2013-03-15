@@ -99,9 +99,10 @@
       <section>
  
 
-          <h2>Input the name of each person</h2>
+          <h2>Enter Names</h2>
+          <p>Press "add person" after each name, then proceed to the next step</p>
           <input type="text" id="input_tennant" name="firstname">
-          <input type="submit" class="click"  id="btn_addTennant" value="Add This Person">
+          <input type="submit" class="click"  id="btn_addTennant" value="Add Person">
           
 
           <div class="output">
@@ -121,12 +122,18 @@
  
 
           <h3>Enter Each Item</h3>
+          <p>1)Enter item name</br>
+            2)Select whether item is divisable or not</br>
+            3)Press "add item"</br>
+            Repeat these steps for each item and then proceed to the next step</p>
+
+
           <input type="text" id="input_roomname" name="roomname"> 
-          <select id="select1">
+          <select id="select1"><small>Items like cash & gold are divisable, a dog or table is not</small>
             <option value="non_divisible">non-divisible</option>
             <option value="divisible">divisible</option>
           </select>
-          <input type="submit"class="click"  id="btn_addRoom" value="Add This Item">
+          <input type="submit"class="click"  id="btn_addRoom" value="Add Item">
 
   
 
@@ -147,10 +154,7 @@
         <section>
  
           <div class="output">
-          Room 1<input type="number" name="firstname"></br>
-          Room 2<input type="number" name="firstname"></br>
-          Room 3<input type="number" name="firstname"></br>
-          Room 4<input type="number" name="firstname"></br>
+          <p>Please refresh and begin again</p>
           </div>
           
       </section>
@@ -164,10 +168,12 @@
 
   <section>
   <h2>How it works</h2>
-  <p class="left"> The fair and square breakup calculator is a computer aided
-  negotiation tool that allows couples to find who should get what in the event that they breakup
-  . It calculates allocations that prevent envy
-  between either party </p>
+  <p class="left">        
+        <p>The Fair and Square division tool is allows couples to discover who should get what in the event that they breakup.</br>
+        First it takes in the peoples names</br>
+        Second it takes in the items to be divided up.</br>
+        Then it takes in how much they want each item from each person. Each person has 100 total points they can use to rate each item.</br>
+        Finally it calculates an allocation of items that mean each person gets as much as possible</p>
 
   </br>
 
@@ -183,7 +189,6 @@
 
 
 <div id ="outputresults">
-
 
 
 </div>
@@ -253,14 +258,20 @@ maximize obj: worst;
                   }
                     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> updated text and google analytics
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
+<<<<<<< HEAD
 =======
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <p>please enter your valuations privately. All values must sum to 100%</p>");
 >>>>>>> updated css for calculator
+=======
+>>>>>>> updated text and google analytics
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
@@ -290,13 +301,19 @@ maximize obj: worst;
                 }
                 else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> updated text and google analytics
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
+<<<<<<< HEAD
 =======
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>please enter your valuations privately. All values must sum to 100%</p>");
 >>>>>>> updated css for calculator
+=======
+>>>>>>> updated text and google analytics
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
@@ -526,8 +543,11 @@ var values=glpkTest(createData(divisMatrix,indivMatrix));
         <a href="https://twitter.com/fairandsquareie"><img class ="icon" src="../images/twitter.png"></a>
 
         </footer>
+<<<<<<< HEAD
 
         <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+=======
+>>>>>>> updated text and google analytics
         <script src="../js/plugins.js"></script>
         <script src="../js/main.js"></script>
         <script>
