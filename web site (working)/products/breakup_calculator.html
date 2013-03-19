@@ -213,6 +213,8 @@ maximize obj: worst;
                     var arr = new Array();
                     $('#tab-preferences .output input').each(function() {
                       arr.push( Number( $(this).val() ) );
+                    $('html,body').scrollTop(0);
+
                   });
                     console.log(arr); 
                       interPreferences.push(arr);
@@ -251,6 +253,7 @@ maximize obj: worst;
                   console.log('out of people');
                 }
                 else {
+                  $('html,body').scrollTop(0);
                   $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
@@ -285,6 +288,7 @@ maximize obj: worst;
               else{
                 $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
                 tabsStage++;
+
               }
             });
             
@@ -329,7 +333,6 @@ maximize obj: worst;
               $('#input_roomname').val("");
               }
             });
-             
             $("#tab-preferences").on("focusout", ".alloc", function () {
                 var sum = 0;
                 var allocation = 100;
