@@ -22,18 +22,19 @@
         <script src='../glpk.js'></script>
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
-        $(function() {
-          $( "#tabs" ).tabs()
-        });
-        var allocation = 100;
-        var personStage = 0;
-        var tabsStage=0;
-        var people = new Array();
-        var indivItem = new Array();
-        var divisItem = new Array();
-        var interPreferences = new Array();
-        var divisPreferences = new Array();
-        var indivPreferences = new Array();
+            $(function() {
+              $( "#tabs" ).tabs()
+            });
+            var sum=0;
+            var allocation = 100;
+            var personStage = 0;
+            var tabsStage=0;
+            var people = new Array();
+            var indivItem = new Array();
+            var divisItem = new Array();
+            var interPreferences = new Array();
+            var divisPreferences = new Array();
+            var indivPreferences = new Array();
         </script> 
     </head>
 
@@ -213,24 +214,23 @@ maximize obj: worst;
                     var arr = new Array();
                     $('#tab-preferences .output input').each(function() {
                       arr.push( Number( $(this).val() ) );
-                    $('html,body').scrollTop(0);
-
                   });
                     console.log(arr); 
                       interPreferences.push(arr);
                   }
                     
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter values for each item</h3>");
+                  sum=0;
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                     }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage > people.length) {
                     console.log('hiding');
@@ -253,19 +253,20 @@ maximize obj: worst;
                   console.log('out of people');
                 }
                 else {
-                  $('html,body').scrollTop(0);
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
+                  sum=0;
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage >= people.length) {
+                    console.log('length'+people.length);
                     console.log('Done, changing to continue.');
                     //$('#btn_nextPerson').unbind();
                     //$('#btn_nextPerson').click();
@@ -278,74 +279,138 @@ maximize obj: worst;
       
            
             $('.next-page-button').click(function(){
-              console.log();
+              console.log("tabsStage "+tabsStage);
               if ( tabsStage==1 && people.length<2){
                 $( "#tabs" ).tabs( "option", "disabled" ); 
+              console.log("tabsStage 1 "+tabsStage);
               }
               else if ( tabsStage==2 && divisItem.length+indivItem.length<1){
+                console.log("tabsStage 2"+tabsStage);
                 $( "#tabs" ).tabs( "option", "disabled" ); 
               }
               else{
+                console.log("tabsStage vvv"+tabsStage);
                 $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
                 tabsStage++;
-
+                console.log("tabsStage "+tabsStage);
               }
             });
-            
+
+            $('#preference').keyup(function(event){
+              if(event.keyCode == 13){
+                $('#btn_nextPerson').click();
+              }
+            });                
 
             $('#btn_nextPerson').unbind();
             $('#btn_nextPerson').click(function(){
-              People(personStage);
+                var sum = 0;
+                $('.alloc').each(function() {
+                sum += Number($(this).val());
+                });
+               if ( sum==100){
+               People(personStage);
+              }
+              else{
+                $('#allocationLabel').text("Allocation must total 100: ");
+              }
             });
-            
+
+            $('#input_tennant').keyup(function(event){
+              if(event.keyCode == 13){
+                $('#btn_addTennant').click();
+              }
+            });            
 
             $('#btn_addTennant').click(function(){
               if ($('#input_tennant').val()=='' || people.length==2){ //add here that only 2 names can be entered
                               console.log("$('#input_roomname').val() "+$('#input_roomname').val());
               }
               else{
-                $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+"</li>");
-                people.push($('#input_tennant').val());
-                $('#input_tennant').val("");
+                  people.push($('#input_tennant').val());
+                  var a=people.length-1;
+                  $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='submit'  value='Delete Name' onclick='removeA("+a+",people)'>"+"</li>");
+                  console.log("peopleeee "+people.toString());
+                  $('#input_tennant').val(""); 
               }
             });
+
+            $('#input_roomname').keyup(function(event){
+              if(event.keyCode == 13){
+                $('#btn_addRoom').click();
+              }
+            });    
             
+
             $('#btn_addRoom').click(function(){
               if ($('#input_roomname').val()==''){
                               console.log("$('#input_roomname').val() "+$('#input_roomname').val());
               }
               else{
-              $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"</li>");
-              //rooms.push($('#input_roomname').val());
-              //Adds item name to divisble or indivisible array
-              var e = document.getElementById("select1");
-              var strUser = e.options[e.selectedIndex].value;
-              if (strUser=='divisible'){
-              divisItem.push($('#input_roomname').val());
-              console.log("divisitem 1"+ divisItem);
-              }
-              else {
-              indivItem.push($('#input_roomname').val());
-              console.log("indivisitem 1"+ indivItem);
-              }
-              console.log("divisitem 2"+ divisItem);
-              console.log("indivisitem 2"+ indivItem);
-              $('#input_roomname').val("");
+                //rooms.push($('#input_roomname').val());
+                //Adds item name to divisble or indivisible array
+                var e = document.getElementById("select1");
+                var strUser = e.options[e.selectedIndex].value;
+                if (strUser=='divisible'){
+                  divisItem.push($('#input_roomname').val());
+                  var a=divisItem.length-1;
+                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+ "<input type='submit'  value='Delete Item' onclick='removeA("+a+",divisItem)'>"+"</li>");
+                }
+                else {
+                  indivItem.push($('#input_roomname').val());
+                  var a=indivItem.length-1;
+                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+ "<input type='submit'  value='Delete Item' onclick='removeA("+a+",indivItem)'>"+"</li>");
+                }
+                $('#input_roomname').val("");
               }
             });
+             
             $("#tab-preferences").on("focusout", ".alloc", function () {
+              console.log("we got here");
                 var sum = 0;
                 var allocation = 100;
                 $('.alloc').each(function() {
                 sum += Number($(this).val());
                 });
-              console.log("here is sum "+sum);
-                            console.log("here is allocation bs "+allocation);
               var allocation = allocation-sum;
-              console.log("here is allocation "+allocation);
+              if (sum==100){}
+              else{
                 $('#allocationLabel').text("Remaining allocation is: ");
                 $('#allocationLabel').append(allocation+"<br></br>");
+                $('#allocationLabel').append("<br>Value of allocation must total 100</br>");
+                checkTotal(sum);
+              }
             });
+
+function removeA(pos,arr) {
+arr.splice(pos, 1)    
+    console.log("pos "+pos);
+    console.log("peoipe "+arr.toString());
+      if(arr==people){
+        $('#tab-poeple .output ul').text("");  
+        for(i=0;i<arr.length;i++){
+          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",people)'>"+"</li>");  
+        }                
+      }
+      else if(arr==indivItem){
+        $('#tab-rooms .output ul').text("");  
+        for(i=0;i<divisItem.length;i++){
+          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+        }
+        for(i=0;i<arr.length;i++){
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+        }
+      }
+      else if(arr==divisItem){
+        $('#tab-rooms .output ul').text("");
+        for(i=0;i<arr.length;i++){
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+        }
+        for(i=0;i<indivItem.length;i++){
+          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+        }
+      }
+}
 
 
 function createData(M,N) {
@@ -433,17 +498,14 @@ var lp = glp_create_prob();
            for (var i = 2; i <= glp_get_num_cols(lp); i++) {
               if(glp_mip_col_val(lp,i)>0){
               var colname= glp_get_col_name(lp,i);  
-            if(glp_mip_col_val(lp,i)<1){
-              $('#outputresults').append(" ");
-              $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
-//              $('#outputresults').append(" part of it");
-            }
-        
                 if(colname.charAt(0)=='x'){
-                    if(glp_mip_col_val(lp,i)<1){
-                        $('#outputresults').append(" ");
-                        $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
-                    }
+                  if(glp_mip_col_val(lp,i)<1){
+                    $('#outputresults').append(" ");
+                    $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
+//                  $('#outputresults').append(" part of it");
+                  }
+//                  $('#outputresults').append("Divisible item ");
+                  //txt3.append(rooms[colname.charAt(4).toString()-1]);
                   $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
                 //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
                 }
