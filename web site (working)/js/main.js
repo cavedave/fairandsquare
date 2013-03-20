@@ -27,6 +27,8 @@
                     $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage > people.length) {
+                    $( "#tabs" ).tabs('enable', 4);
+                    $( "#tabs" ).tabs('disable', 3);
                     main();
                     $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
                     //$('#btn_nextPerson').hide();
@@ -73,8 +75,18 @@
                 $( "#tabs" ).tabs( "option", "disabled" ); 
               }
               else{
-                $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
-                tabsStage++;
+                var selected = $( "#tabs" ).tabs('option', 'active');
+                if (selected == 3){
+                  $( "#tabs" ).tabs('enable', selected+1);
+                  $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                  tabsStage++;                  
+                }
+                else{
+                  $( "#tabs" ).tabs('enable', selected+1);
+                  $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                  tabsStage++;
+                  $( "#tabs" ).tabs('disable', selected);
+                }
               }
             });
 
@@ -95,6 +107,7 @@
               }
               else{
                 $('#allocationLabel').text("Allocation must total 100: ");
+                $('#allocationLabel').append("<br>");
               }
             });
 
@@ -156,7 +169,7 @@
                 $('#allocationLabel').text("Remaining allocation is: ");
                 $('#allocationLabel').append(allocation+"<br></br>");
                 $('#allocationLabel').append("<br>Value of allocation must total 100</br>");
-                checkTotal(sum);
+//                checkTotal(sum);
               }
             });
 
