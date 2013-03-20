@@ -193,9 +193,7 @@ s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems
 maximize obj: worst;
 </div> 
 
-
 </div>
-
 
       </div>
       <script>
@@ -204,21 +202,16 @@ maximize obj: worst;
                 //should probably do something here.
               }
               else{
-                console.log(stage);
                 if (stage > people.length) {
-                  console.log('out of people');
                 }
                 else {
                   if ($('#tab-preferences .output input').size() == indivItem.length+divisItem.length) {
-                    console.log('filled out!');
                     var arr = new Array();
                     $('#tab-preferences .output input').each(function() {
                       arr.push( Number( $(this).val() ) );
                   });
-                    console.log(arr); 
                       interPreferences.push(arr);
-                  }
-                    
+                  }                    
                   $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter values for each item</h3>");
                   sum=0;
                   allocation=100;
@@ -233,7 +226,6 @@ maximize obj: worst;
                     $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage > people.length) {
-                    console.log('hiding');
                     main();
                     $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
                     //$('#btn_nextPerson').hide();
@@ -248,9 +240,7 @@ maximize obj: worst;
                 //should probably do something here.
               }
               else{
-                console.log(personStage);
                 if (personStage >= people.length) {
-                  console.log('out of people');
                 }
                 else {
                   sum=0;
@@ -266,10 +256,6 @@ maximize obj: worst;
                     $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
                   if (++personStage >= people.length) {
-                    console.log('length'+people.length);
-                    console.log('Done, changing to continue.');
-                    //$('#btn_nextPerson').unbind();
-                    //$('#btn_nextPerson').click();
                   }
                 }
               }
@@ -279,20 +265,15 @@ maximize obj: worst;
       
            
             $('.next-page-button').click(function(){
-              console.log("tabsStage "+tabsStage);
               if ( tabsStage==1 && people.length<2){
                 $( "#tabs" ).tabs( "option", "disabled" ); 
-              console.log("tabsStage 1 "+tabsStage);
               }
               else if ( tabsStage==2 && divisItem.length+indivItem.length<1){
-                console.log("tabsStage 2"+tabsStage);
                 $( "#tabs" ).tabs( "option", "disabled" ); 
               }
               else{
-                console.log("tabsStage vvv"+tabsStage);
                 $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
                 tabsStage++;
-                console.log("tabsStage "+tabsStage);
               }
             });
 
@@ -324,13 +305,11 @@ maximize obj: worst;
 
             $('#btn_addTennant').click(function(){
               if ($('#input_tennant').val()=='' || people.length==2){ //add here that only 2 names can be entered
-                              console.log("$('#input_roomname').val() "+$('#input_roomname').val());
               }
               else{
                   people.push($('#input_tennant').val());
                   var a=people.length-1;
                   $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='submit'  value='Delete Name' onclick='removeA("+a+",people)'>"+"</li>");
-                  console.log("peopleeee "+people.toString());
                   $('#input_tennant').val(""); 
               }
             });
@@ -344,7 +323,6 @@ maximize obj: worst;
 
             $('#btn_addRoom').click(function(){
               if ($('#input_roomname').val()==''){
-                              console.log("$('#input_roomname').val() "+$('#input_roomname').val());
               }
               else{
                 //rooms.push($('#input_roomname').val());
@@ -366,7 +344,6 @@ maximize obj: worst;
             });
              
             $("#tab-preferences").on("focusout", ".alloc", function () {
-              console.log("we got here");
                 var sum = 0;
                 var allocation = 100;
                 $('.alloc').each(function() {
@@ -384,8 +361,6 @@ maximize obj: worst;
 
 function removeA(pos,arr) {
 arr.splice(pos, 1)    
-    console.log("pos "+pos);
-    console.log("peoipe "+arr.toString());
       if(arr==people){
         $('#tab-poeple .output ul').text("");  
         for(i=0;i<arr.length;i++){
@@ -412,7 +387,6 @@ arr.splice(pos, 1)
       }
 }
 
-
 function createData(M,N) {
 var vec = Vector.create([]);
 var data = "data;\nparam people := "+people.length+";\nparam divi := "+divisItem.length+";\nparam indiv := "+indivItem.length+";\n";
@@ -428,7 +402,6 @@ data = data + "param divItems :";
     for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
       vec = M.row(i);
-      console.log("here is vecdivis"+vec.inspect());
       vec.each(function(x, i) {
         data = data + x + ' ';
       });
@@ -445,7 +418,6 @@ data = data + "param divItems :";
     for(var i=1;i<=people.length;i++){
       data = "\n"+data +i+ " ";
       vec = N.row(i);
-      console.log("here is vecindiv"+vec.inspect());
       vec.each(function(x, i) {
         data = data + x + ' ';
       });
@@ -453,22 +425,16 @@ data = data + "param divItems :";
     }
   }
   data = data +";\nend\n;";
-  console.log("data here is the data"+data);
   return data;
   }
-
-
 
 function glpkTest(data){
       var tran = glp_mpl_alloc_wksp();
       try {
       model = document.getElementById("fair2.mod").innerText;
-    console.log("glpk testing 1", model);
-    console.log("data 1"+data);
     model=model+data;
     glp_mpl_read_model_from_string(tran,'MathProg Model',model);
     } catch (err) {
-    console.log("err in glpkTest ");
          return null;
       }
       try {
@@ -476,19 +442,14 @@ function glpkTest(data){
 //may not be model
 var lp = glp_create_prob();
           glp_mpl_build_prob(tran,lp);
-//console.log(lp);
       } catch (err) {
-          console.log('Error building ');
           return null;
       }
       var smcp = new SMCP({presolve: GLP_ON});
       glp_simplex(lp, smcp);
        glp_intopt(lp);
-    //console.log(smcp," smcp");
      if(lp) {
         glp_mpl_postsolve(tran,lp,GLP_MIP);
-        console.log(lp,"lp");
-        console.log( glp_mip_obj_val(lp)," is the maximin value");
         $('#outputresults').text("Minimum satisfaction is: ");
         $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
  // Create text with jQuery
@@ -502,15 +463,10 @@ var lp = glp_create_prob();
                   if(glp_mip_col_val(lp,i)<1){
                     $('#outputresults').append(" ");
                     $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
-//                  $('#outputresults').append(" part of it");
                   }
-//                  $('#outputresults').append("Divisible item ");
-                  //txt3.append(rooms[colname.charAt(4).toString()-1]);
                   $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
-                //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
                 }
                 if(colname.charAt(0)=='y'){
- //                 $('#outputresults').append("Indivisible item ");
                   $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
             }
 
@@ -519,8 +475,6 @@ var lp = glp_create_prob();
                   $('#outputresults').append("<p></p>");
           } 
         }
-//$('#outputresults').text(txt1.toString()+txt3.toString());
-//$("body").append(txt1,txt3);
      } else {
         displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
      }
