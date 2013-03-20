@@ -44,8 +44,49 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
+<<<<<<< HEAD
             <header>
                 <a href="index.html"><img src="../images/fair_and_square_logo.png" alt="fair and square logo" class="logo"></a>
+=======
+    <header>
+        <a href="index.html"><img src="../images/fair_and_square_logo.png" alt="fair and square logo" class="logo"></a>
+
+        <nav>
+            <ul>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../products.html" class="active">Products</a></li>
+                <li><a href="../index.html" class="border-left">Home</a></li>
+            </ul>
+            
+        </nav>
+
+    </header>
+<div class="app-wrapper">
+         <div id="tabs">
+      <ul>
+            <li><a href="#tab-start">H</a></li>
+            <li><a href="#tab-poeple" value="people">1</a></li>
+            <li><a href="#tab-rooms">2</a></li>
+            <li><a href="#tab-preferences">3</a></li>
+            <li><a href="#tab-results">4</a></li>
+            <li><a href="#tab-help">?</a></li>
+      </ul>
+
+    <div id="tab-start" class="wrapper">
+
+      <section>
+ 
+          <h1>Fair & <span class="grey">Square</span></h1>
+          <h2>Fair Division Tool</h2>
+
+
+            <img class="logo2" src="../images/logo_opaque.png">
+
+      </section>
+
+                <a  href="#" class="next-page-button">Begin</a>
+>>>>>>> 20/03/13
 
                 <nav>
                     <ul>
@@ -81,6 +122,7 @@
               </div> <!--end wrapper-->
               <!--End intro screen-->
      
+<<<<<<< HEAD
               <!--Begin People Screen-->
               <div id="tab-poeple" class="wrapper">
                   <section>
@@ -155,6 +197,110 @@
                   </div>
               </div>
               <!-- End Results Screen -->
+=======
+      
+          <div id="tab-poeple" class="wrapper">
+            
+      <section>
+ 
+
+          <h2>Enter Names</h2>
+          <p>Press "add name" after each name, then proceed to the next step</p>
+        </br>
+          <input type="text" id="input_tennant" name="firstname">
+          <input type="submit" class="click"  id="btn_addTennant" value="Add Name">
+          
+
+          <div class="output">
+            <ul>
+            </ul>
+          </div> <!-- displays input text -->
+
+      </section>
+
+                <a href= "#" class="next-page-button" >Proceed to Add Items</a>
+
+
+          </div> <!-- end poeple -->
+          <div id="tab-rooms" class="wrapper">
+            
+      <section>
+ 
+
+          <h3>Enter Each Item</h3>
+          <p><span class="left">1) Enter item name</span></br>
+            <span class="left">2) Select whether item is divisable or not</span></br>
+            <span class="smalltext">Items like cash & gold are divisable, a dog or table is non-divisable</span></br>
+            <span class="left">3) Press "add item"</span></br>
+            Repeat these steps for each item and then proceed to the next step</p>
+
+
+          <input type="text" id="input_roomname" name="roomname"> 
+          <select id="select1">
+            <option value="non_divisible">non-divisible</option>
+            <option value="divisible">divisible</option>
+          </select>
+          <input type="submit"class="click"  id="btn_addRoom" value="Add Item">
+
+  
+
+          <div class="output">
+
+            <ul>
+            </ul>
+
+          </div> <!-- displays input text -->
+
+      </section>
+
+                <a href="#" class="next-page-button">Proceed to Enter Valuations</a>
+
+          </div>
+
+      <div id="tab-preferences">
+        <section>
+ 
+          <div class="output">
+          <p>Please refresh and begin again</p>
+          </div>
+          
+      </section>
+
+                <a href="#" id="btn_nextPerson" class="next-page-button">Proceed</a>
+
+</div>
+
+<div id="tab-help" class="wrapper">
+
+
+  <section>
+  <h2>How it works</h2>
+  <p class="left">        
+        <p>The Fair and Square division tool is allows couples to discover who should get what in the event that they breakup.</br>
+        First it takes in the peoples names</br>
+        Second it takes in the items to be divided up.</br>
+        Then it takes in how much they want each item from each person. Each person has 100 total points they can use to rate each item.</br>
+        Finally it calculates an allocation of items that mean each person gets as much as possible</p>
+
+  </br>
+
+  <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
+
+  </section>
+
+
+</div>
+
+
+<div id="tab-results" class="wrapper">
+
+
+<div id ="outputresults">
+
+
+</div>
+</div>
+>>>>>>> 20/03/13
 
 <div style='display:none' id='fair2.mod' class='mathprog'>
 /* Fair Division Program
@@ -197,6 +343,271 @@ maximize obj: worst;
 
       </div>
       <script>
+<<<<<<< HEAD
+=======
+              function People(stage) {
+              if (people.length == 0 || indivItem.length+divisItem.length == 0) {
+                //should probably do something here.
+              }
+              else{
+                console.log(stage);
+                if (stage > people.length) {
+                  console.log('out of people');
+                }
+                else {
+                  if ($('#tab-preferences .output input').size() == indivItem.length+divisItem.length) {
+                    console.log('filled out!');
+                    var arr = new Array();
+                    $('#tab-preferences .output input').each(function() {
+                      arr.push( Number( $(this).val() ) );
+                  });
+                    console.log(arr); 
+                      interPreferences.push(arr);
+                  }
+                    
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
+                  allocation=100;
+                  $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
+                  $('#allocationLabel').text("Remaining allocation: ");
+                  $('#allocationLabel').append(allocation+"<br></br>");
+                 //change here to include divis and indiv
+                  for (var i = 0; i<divisItem.length; i++ ) {
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                    }
+                  for (var i = 0; i<indivItem.length; i++ ) {
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                  }
+                  if (++personStage > people.length) {
+                    console.log('hiding');
+                    main();
+                    $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                    //$('#btn_nextPerson').hide();
+                  }
+                }
+              }
+            }
+            
+            $('#tabs').on("tabsbeforeactivate", function( event, ui) {
+              if (ui.newTab.text() == 3) {
+              if (people.length == 0 || divisItem.length+indivItem.length == 0) {
+                //should probably do something here.
+              }
+              else{
+                console.log(personStage);
+                if (personStage >= people.length) {
+                  console.log('out of people');
+                }
+                else {
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>You have an allocation of 100 points to distribute between all items</br>(Do this privately)</p></br>");
+                  $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
+                  $('#allocationLabel').text("Remaining allocation: ");
+                  $('#allocationLabel').append(allocation+"<br></br>");
+                  //div and indiv to go here
+                  for (var i = 0; i<divisItem.length; i++ ) {
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                  }
+                  for (var i = 0; i<indivItem.length; i++ ) {
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' name='itemnameindiv' value='0' onFocus=this.value='' class='alloc'></br></br>");
+                  }
+                  if (++personStage >= people.length) {
+                    console.log('Done, changing to continue.');
+                    //$('#btn_nextPerson').unbind();
+                    //$('#btn_nextPerson').click();
+                  }
+                }
+              }
+
+              }
+              } );
+      
+           
+            $('.next-page-button').click(function(){
+              console.log();
+              if ( tabsStage==1 && people.length<2){
+                $( "#tabs" ).tabs( "option", "disabled" ); 
+              }
+              else if ( tabsStage==2 && divisItem.length+indivItem.length<1){
+                $( "#tabs" ).tabs( "option", "disabled" ); 
+              }
+              else{
+                $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )+1 );
+                tabsStage++;
+              }
+            });
+            
+
+            $('#btn_nextPerson').unbind();
+            $('#btn_nextPerson').click(function(){
+              People(personStage);
+            });
+            
+
+            $('#btn_addTennant').click(function(){
+              if ($('#input_tennant').val()=='' || people.length==2){ //add here that only 2 names can be entered
+                              console.log("$('#input_roomname').val() "+$('#input_roomname').val());
+              }
+              else{
+                $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+"</li>");
+                people.push($('#input_tennant').val());
+                $('#input_tennant').val("");
+              }
+            });
+            
+            $('#btn_addRoom').click(function(){
+              if ($('#input_roomname').val()==''){
+                              console.log("$('#input_roomname').val() "+$('#input_roomname').val());
+              }
+              else{
+              $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"</li>");
+              //rooms.push($('#input_roomname').val());
+              //Adds item name to divisble or indivisible array
+              var e = document.getElementById("select1");
+              var strUser = e.options[e.selectedIndex].value;
+              if (strUser=='divisible'){
+              divisItem.push($('#input_roomname').val());
+              console.log("divisitem 1"+ divisItem);
+              }
+              else {
+              indivItem.push($('#input_roomname').val());
+              console.log("indivisitem 1"+ indivItem);
+              }
+              console.log("divisitem 2"+ divisItem);
+              console.log("indivisitem 2"+ indivItem);
+              $('#input_roomname').val("");
+              }
+            });
+             
+            $("#tab-preferences").on("focusout", ".alloc", function () {
+                var sum = 0;
+                var allocation = 100;
+                $('.alloc').each(function() {
+                sum += Number($(this).val());
+                });
+              console.log("here is sum "+sum);
+                            console.log("here is allocation bs "+allocation);
+              var allocation = allocation-sum;
+              console.log("here is allocation "+allocation);
+                $('#allocationLabel').text("Remaining allocation is: ");
+                $('#allocationLabel').append(allocation+"<br></br>");
+            });
+
+
+function createData(M,N) {
+var vec = Vector.create([]);
+var data = "data;\nparam people := "+people.length+";\nparam divi := "+divisItem.length+";\nparam indiv := "+indivItem.length+";\n";
+data = data + "param divItems :";
+//  var data = "data;\nparam m := "+ people.length +";\nparam n := "+ rooms.length+";";
+//Make the first line param c :  1 2 3 4 :=
+ // data = data + "\nparam c :";
+  for(var i=1;i<=divisItem.length;i++){
+    data = data +i + ' ';
+  }
+  data = data +":=\n";
+  if(divisItem.length>0){
+    for(var i=1;i<=people.length;i++){
+      data = "\n"+data +i+ " ";
+      vec = M.row(i);
+      console.log("here is vecdivis"+vec.inspect());
+      vec.each(function(x, i) {
+        data = data + x + ' ';
+      });
+      data = data+"\n";  
+  }
+  data = data+"\n";   
+  }
+  data = data +";\nparam indivItems :";
+  for(var i=1;i<=indivItem.length;i++){
+    data = data +i + ' ';
+  }
+  data = data +":=\n";
+  if(indivItem.length>0){
+    for(var i=1;i<=people.length;i++){
+      data = "\n"+data +i+ " ";
+      vec = N.row(i);
+      console.log("here is vecindiv"+vec.inspect());
+      vec.each(function(x, i) {
+        data = data + x + ' ';
+      });
+      data = data+"\n";  
+    }
+  }
+  data = data +";\nend\n;";
+  console.log("data here is the data"+data);
+  return data;
+  }
+
+
+
+function glpkTest(data){
+      var tran = glp_mpl_alloc_wksp();
+      try {
+      model = document.getElementById("fair2.mod").innerText;
+    console.log("glpk testing 1", model);
+    console.log("data 1"+data);
+    model=model+data;
+    glp_mpl_read_model_from_string(tran,'MathProg Model',model);
+    } catch (err) {
+    console.log("err in glpkTest ");
+         return null;
+      }
+      try {
+          glp_mpl_generate(tran,null,model);
+//may not be model
+var lp = glp_create_prob();
+          glp_mpl_build_prob(tran,lp);
+//console.log(lp);
+      } catch (err) {
+          console.log('Error building ');
+          return null;
+      }
+      var smcp = new SMCP({presolve: GLP_ON});
+      glp_simplex(lp, smcp);
+       glp_intopt(lp);
+    //console.log(smcp," smcp");
+     if(lp) {
+        glp_mpl_postsolve(tran,lp,GLP_MIP);
+        console.log(lp,"lp");
+        console.log( glp_mip_obj_val(lp)," is the maximin value");
+        $('#outputresults').text("Minimum satisfaction is: ");
+        $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
+ // Create text with jQuery
+        $('#outputresults').append("<p></p>")
+        $('#outputresults').append("The FairAndSquare allocation is: ");
+        $('#outputresults').append("<p></p>");
+           for (var i = 2; i <= glp_get_num_cols(lp); i++) {
+              if(glp_mip_col_val(lp,i)>0){
+              var colname= glp_get_col_name(lp,i);  
+            if(glp_mip_col_val(lp,i)<1){
+              $('#outputresults').append(" ");
+              $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
+//              $('#outputresults').append(" part of it");
+            }
+        
+                if(colname.charAt(0)=='x'){
+                    if(glp_mip_col_val(lp,i)<1){
+                        $('#outputresults').append(" ");
+                        $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
+                    }
+                  $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
+                //,"Divisible", txt3.append(itemName[colname.charAt(4).toString()-1]);, "goes to ", pername[colname.charAt(2).toString()-1]);
+                }
+                if(colname.charAt(0)=='y'){
+ //                 $('#outputresults').append("Indivisible item ");
+                  $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
+            }
+
+                  $('#outputresults').append(" goes to ");
+                  $('#outputresults').append(people[colname.charAt(2).toString()-1]);
+                  $('#outputresults').append("<p></p>");
+          } 
+        }
+//$('#outputresults').text(txt1.toString()+txt3.toString());
+//$("body").append(txt1,txt3);
+     } else {
+        displayError((isMIP()?'MILP':'LP') + " failed. Consult GLPK Log.");
+     }
+  } 
+>>>>>>> 20/03/13
 
 
 function main(){
