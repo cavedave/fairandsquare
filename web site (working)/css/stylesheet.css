@@ -136,6 +136,10 @@ a{
 
 }
 
+#btn_nextPerson{
+	margin-left: 15px;
+}
+
  input[type=text]{
  	height: 30px;
  	min-width: 240px;
