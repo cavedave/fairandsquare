@@ -47,9 +47,9 @@
                 }
                 else {
                   sum=0;
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3>");
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>Divide a total allocation of 100 points between all of the items listed below</p>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
-                  $('#allocationLabel').text("Remaining allocation: ");
+                  $('#allocationLabel').text ("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
@@ -92,8 +92,6 @@
 
             $('#preference').keyup(function(event){
               if(event.keyCode == 13){
-                //prevent deault submit on key press in IE9
-                event.preventDefault();
                 $('#btn_nextPerson').click();
               }
             });                
@@ -115,7 +113,6 @@
 
             $('#input_tennant').keyup(function(event){
               if(event.keyCode == 13){
-                event.preventDefault();
                 $('#btn_addTennant').click();
               }
             });            
@@ -126,14 +123,13 @@
               else{
                   people.push($('#input_tennant').val());
                   var a=people.length-1;
-                  $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='submit'  value='Delete Name' onclick='removeA("+a+",people)'>"+"</li>");
+                  $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='submit' id='x' value='x' onclick='removeA("+a+",people)'>"+"</li>");
                   $('#input_tennant').val(""); 
               }
             });
 
             $('#input_roomname').keyup(function(event){
               if(event.keyCode == 13){
-                event.preventDefault();
                 $('#btn_addRoom').click();
               }
             });    
@@ -150,12 +146,12 @@
                 if (strUser=='divisible'){
                   divisItem.push($('#input_roomname').val());
                   var a=divisItem.length-1;
-                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+ "<input type='submit'  value='Delete Item' onclick='removeA("+a+",divisItem)'>"+"</li>");
+                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+ "<input type='submit' id='x' value='x' onclick='removeA("+a+",divisItem)'>"+"</li>");
                 }
                 else {
                   indivItem.push($('#input_roomname').val());
                   var a=indivItem.length-1;
-                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+ "<input type='submit'  value='Delete Item' onclick='removeA("+a+",indivItem)'>"+"</li>");
+                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+ "<input type='submit' id='x' value='x' onclick='removeA("+a+",indivItem)'>"+"</li>");
                 }
                 $('#input_roomname').val("");
               }
@@ -182,25 +178,25 @@ arr.splice(pos, 1)
       if(arr==people){
         $('#tab-poeple .output ul').text("");  
         for(i=0;i<arr.length;i++){
-          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",people)'>"+"</li>");  
+          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",people)'>"+"</li>");  
         }                
       }
       else if(arr==indivItem){
         $('#tab-rooms .output ul').text("");  
         for(i=0;i<divisItem.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",divisItem)'>"+"</li>");                
         }
         for(i=0;i<arr.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
         }
       }
       else if(arr==divisItem){
         $('#tab-rooms .output ul').text("");
         for(i=0;i<arr.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",divisItem)'>"+"</li>");                
         }
         for(i=0;i<indivItem.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit'  value='Delete Name' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
         }
       }
 }

@@ -801,9 +801,7 @@ body .ui-tooltip {
 
 }
 
-.ui-widget-content a {
-	color: #222222/*{fcContent}*/;
-}
+
 .ui-widget-header {
 	border: 1px solid #aaaaaa/*{borderColorHeader}*/;
 	background: #cccccc/*{bgColorHeader}*//*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/;

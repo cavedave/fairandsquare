@@ -7,7 +7,9 @@
 .app-wrapper{
 	padding-bottom: 85px;
 	min-height: 500px;
-	margin: auto;
+	margin-left: 50px;
+	width: 500px;
+
 
 }
 
@@ -18,7 +20,6 @@ p{
 
 h1{
  	font-size: 2em;
- 	text-align: center;
  	margin: 5px;
  	color: #67A07E;
 }
@@ -29,24 +30,22 @@ h1{
 
 h2{
  	font-size: 1.5em;
- 	text-align: center;
  	margin: 15px;
  	color: #354442;
 }
 
 h3{
  	font-size: 1em;
- 	text-align: center;
  	margin: 15px;
  	color: #1B1D26;
 }
 
 section{
- 	text-align: center;
+	margin-left: 200px;
+	min-height: 410px;
 }
 
 ul li{
- 	text-align: center;
  	line-height: 30px;
 }
 
@@ -57,7 +56,6 @@ ul li{
 
 .logo2{
 	display: block;
-	margin: auto;
 	padding-top: 5px;
 	padding-bottom: 15px;
 }
@@ -66,33 +64,62 @@ ul li{
 	font-size: 1em;
 	min-height: 120px;
 	padding: 15px;
-	text-align: center;
 	margin: auto;
 }
 
 .output li{
 	background-color: #d0d0d0;
-	padding: 2px;
+	padding: 4px;
 	max-width: 240px;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-bottom-right-radius: 120px;
+	border-top-right-radius: 120px;
+	box-shadow: 1px 1px 4px #333333;
+	margin-left: -15px;
 }
 
 a{
 	color: #1B1D26;
 }
 
-.next-page-button, .click{
- 	display: block;
- 	margin: auto;
- 	width: 240px;
+.next-page-button {
+	margin-bottom: 20px;
+	display: inline-block;
  	text-align: center;
  	font-size: 1em;
- 	border:1px solid #303231;
- 	border-radius: 2px;
+ 	border:1px solid #7f7f7f;
+ 	border-radius: 5px;
+ 	padding:8px;
+ 	background: rgb(186,201,216); /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2JhYzlkOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MWFhYTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  rgba(186,201,216,1) 0%, rgba(145,170,169,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(186,201,216,1)), color-stop(100%,rgba(145,170,169,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bac9d8', endColorstr='#91aaa9',GradientType=0 ); /* IE6-8 */
+ 	color: #354442;
+	cursor: pointer;
+	letter-spacing:2px;
+	min-width: 232px;
+
+}
+
+
+
+.click{
+	text-align: center;
+ 	margin-top: 25px;
+ 	font-size: 1em;
+ 	font-weight: 600;
+ 	line-height: 16px;
+ 	height: 32px;
+ 	border:1px solid #7f7f7f;
+ 	border-radius: 5px;
  	padding:5px;
  	background: rgb(186,201,216); /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -105,21 +132,24 @@ a{
 	background: linear-gradient(to bottom,  rgba(186,201,216,1) 0%,rgba(145,170,169,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bac9d8', endColorstr='#91aaa9',GradientType=0 ); /* IE6-8 */
  	color: #354442;
- 	margin-bottom: 20px;
+	 	cursor: pointer;
+
 }
 
-.click{
- 	margin-top: 25px;
+ input[type=text]{
+ 	height: 30px;
+ 	min-width: 240px;
  	font-size: 1em;
- 	display: block;
- 	font-style: italic;
- 	line-height: 16px;
-}
+ }
 
-input{
- 	margin-bottom: 15px;
- 	display: inline-block;
- 	margin: auto;
+ input[type=submit]{
+
+ }
+
+ input[type=number]{
+ 	height: 30px;
+ 	min-width: 240px;
+ 	font-size: 1em;
  }
 
 .link{
@@ -135,12 +165,12 @@ input{
 #outputresults{
 	margin: auto;
 	width: 80%;
-	text-align: center;
 }
 
 .smalltext{
 	font-size: .7em;
 	font-style: italic;
+	margin-left: 20px;
 }
 
 .right{
@@ -149,4 +179,20 @@ input{
 
 i{
 	font-style: italic;
+}
+
+#x{
+	border: 1px #333333;
+	width: 30px;
+	height: 30px;
+	margin-right: 1px;
+	border-radius: 100%;
+	font-size: 1.1em;
+	line-height: 15px;
+	float: right;
+	box-shadow: 1px 1px 4px #333333;
+	color: #888888;
+	cursor: pointer;
+	text-align: center;
+
 }

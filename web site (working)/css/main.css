@@ -265,13 +265,6 @@ article img{
     float: left;
 }
 
-
-input{
-    height: 25px;
-    font-size: 1em;
-    width: 240px;
-}
-
 textarea{
     width: 240px;
     height: 60px;
