@@ -13,7 +13,7 @@
                   });
                       interPreferences.push(arr);
                   }                    
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter values for each item</h3>");
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Divide your allocation of 100 points between the items listed below</h3>");
                   sum=0;
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
@@ -47,11 +47,10 @@
                 }
                 else {
                   sum=0;
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>Divide a total allocation of 100 points between all of the items listed below</p>");
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Divide your allocation of 100 points between the items listed below</p>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text ("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
-                  //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
