@@ -13,7 +13,7 @@
                   });
                       interPreferences.push(arr);
                   }                    
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Divide your allocation of 100 points between the items listed below</h3>");
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3><p>Divide a total allocation of 100 points between all of the items listed below</p>");
                   sum=0;
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
@@ -47,10 +47,11 @@
                 }
                 else {
                   sum=0;
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Divide your allocation of 100 points between the items listed below</p>");
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>Divide a total allocation of 100 points between all of the items listed below</p>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text ("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
+                  //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
                     $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
                   }
@@ -91,7 +92,7 @@
 
             $('#preference').keyup(function(event){
               if(event.keyCode == 13){
-              $('#preference').preventDefault();
+                event.preventDefault();
                 $('#btn_nextPerson').click();
               }
             });                
@@ -106,14 +107,14 @@
                People(personStage);
               }
               else{
-                $('#allocationLabel').text("Allocation must total 100: ");
-                $('#allocationLabel').append("<br>");
+//                $('#allocationLabel').text("Allocation must total 100: ");
+//                $('#allocationLabel').append("<br>");
               }
             });
 
             $('#input_tennant').keyup(function(event){
               if(event.keyCode == 13){
-              $('#input_tennant').preventDefault();
+                event.preventDefault();
                 $('#btn_addTennant').click();
               }
             });            
@@ -131,7 +132,7 @@
 
             $('#input_roomname').keyup(function(event){
               if(event.keyCode == 13){
-              $('#input_roomname').preventDefault();
+                event.preventDefault();
                 $('#btn_addRoom').click();
               }
             });    
@@ -166,11 +167,14 @@
                 sum += Number($(this).val());
                 });
               var allocation = allocation-sum;
-              if (sum==100){}
+              if (sum==100){
+                $('#allocationLabel').text("Remaining allocation is: ");
+                $('#allocationLabel').append(allocation+"<br></br>");                
+              }
               else{
                 $('#allocationLabel').text("Remaining allocation is: ");
                 $('#allocationLabel').append(allocation+"<br></br>");
-                $('#allocationLabel').append("<br>Value of allocation must total 100</br>");
+//                $('#allocationLabel').append("<br>Value of allocation must total 100</br>");
 //                checkTotal(sum);
               }
             });
