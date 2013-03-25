@@ -185,18 +185,3 @@ i{
 	font-style: italic;
 }
 
-#x{
-	border: 1px #333333;
-	width: 30px;
-	height: 30px;
-	margin-right: 1px;
-	border-radius: 100%;
-	font-size: 1.1em;
-	line-height: 15px;
-	float: right;
-	box-shadow: 1px 1px 4px #333333;
-	color: #888888;
-	cursor: pointer;
-	text-align: center;
-
-}
