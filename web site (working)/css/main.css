@@ -62,10 +62,7 @@ textarea {
 html, body, .wrapper { height: 100%; }
 body > .wrapper { height: auto; min-height: 100%; }
 
-.wrapper{
-    margin-left: none;
-    margin-right: none;
-}
+
 
 .main-body{
     width: 95%;

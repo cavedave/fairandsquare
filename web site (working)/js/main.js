@@ -92,6 +92,7 @@
 
             $('#preference').keyup(function(event){
               if(event.keyCode == 13){
+                return false;
                 event.preventDefault();
                 $('#btn_nextPerson').click();
               }
@@ -114,6 +115,7 @@
 
             $('#input_tennant').keyup(function(event){
               if(event.keyCode == 13){
+               return false;
                 event.preventDefault();
                 $('#btn_addTennant').click();
               }
@@ -132,6 +134,7 @@
 
             $('#input_roomname').keyup(function(event){
               if(event.keyCode == 13){
+              return false;
                 event.preventDefault();
                 $('#btn_addRoom').click();
               }
