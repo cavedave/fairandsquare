@@ -55,16 +55,6 @@ textarea {
     resize: vertical;
 }
 
-/* ==========================================================================
-   Chrome Frame prompt
-   ========================================================================== */
-
-.chromeframe {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
 
 /* ==========================================================================
    Main styles
@@ -461,12 +451,6 @@ address a:hover{
         width: 90%;
 
     }
-
-    .app-wrapper{
-    padding-bottom: 85px;
-    min-height: 500px;
-    margin-left: 50px;
-
 
 }
 
