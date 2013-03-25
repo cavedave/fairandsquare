@@ -461,6 +461,16 @@ address a:hover{
         width: 90%;
 
     }
+
+    .app-wrapper{
+    padding-bottom: 85px;
+    min-height: 500px;
+    margin-left: 50px;
+
+
+}
+
+
 }
 
 @media only screen and (max-width: 575px) {
