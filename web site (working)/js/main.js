@@ -186,25 +186,25 @@ arr.splice(pos, 1)
       if(arr==people){
         $('#tab-poeple .output ul').text("");  
         for(i=0;i<arr.length;i++){
-          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",people)'>"+"</li>");  
+          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",people)'>"+"</li>");  
         }                
       }
       else if(arr==indivItem){
         $('#tab-rooms .output ul').text("");  
         for(i=0;i<divisItem.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",divisItem)'>"+"</li>");                
         }
         for(i=0;i<arr.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",indivItem)'>"+"</li>");                
         }
       }
       else if(arr==divisItem){
         $('#tab-rooms .output ul').text("");
         for(i=0;i<arr.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",divisItem)'>"+"</li>");                
         }
         for(i=0;i<indivItem.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit' id='' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
         }
       }
 }
@@ -253,8 +253,8 @@ data = data + "param divItems :";
 function glpkTest(data){
       var tran = glp_mpl_alloc_wksp();
       try {
-      model = document.getElementById("fair2.mod").innerText;
-    model=model+data;
+      model = document.getElementById("fair2.mod").textContent;
+    model=model+data; console.log("testing testing 12345" + model);
     glp_mpl_read_model_from_string(tran,'MathProg Model',model);
     } catch (err) {
          return null;
@@ -287,7 +287,7 @@ var lp = glp_create_prob();
 
                     $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
                   }
-                
+
                   $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
                 }
                 if(colname.charAt(0)=='y'){

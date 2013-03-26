@@ -18,6 +18,7 @@ textarea {
 body {
     font-size: 1.1em;
     line-height: 1.8;
+    min-width: 359px;
 }
 
 .label{
@@ -487,7 +488,6 @@ nav li{
     nav ul a{
             display: block;
             color: #7f7f7f;
-            background: #ffffff;
             
     }
 
@@ -538,8 +538,8 @@ nav li{
     @media only screen and (max-width: 375px) {
 
         .icon{
-            float: none;
             text-align: center;
+            width: 50px;
         }
 
 }

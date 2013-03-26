@@ -142,7 +142,7 @@ a{
 
  input[type=text]{
  	height: 30px;
- 	min-width: 240px;
+ 	max-width: 240px;
  	font-size: 1em;
  }
 
@@ -152,7 +152,7 @@ a{
 
  input[type=number]{
  	height: 30px;
- 	min-width: 240px;
+ 	max-width: 240px;
  	font-size: 1em;
  }
 
