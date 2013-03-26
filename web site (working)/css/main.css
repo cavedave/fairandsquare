@@ -366,8 +366,21 @@ footer{
     text-align: left;
 }
 
+.faq-img{
+    width: 100%;
+    height: auto;
+    clear: both;
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+}
 
-
+.faq-img img{
+    height: auto;
+    clear: both;
+    float: none;
+    width: 250px;
+}
 
 /*-------Blog css---------------*/
 table{
@@ -422,7 +435,7 @@ address a:hover{
 
     header{
     height:100px;
-    box-shadow: none;}
+   }
 
     .logo{
         height: 100%;
@@ -513,6 +526,7 @@ nav li{
     header{
 
         height:140px;
+        box-shadow: none;
 
     }
 
