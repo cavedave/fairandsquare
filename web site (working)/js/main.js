@@ -13,7 +13,7 @@
                   });
                       interPreferences.push(arr);
                   }                    
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <h3>Enter a value for each item</h3><p>Divide a total allocation of 100 points between all of the items listed below</p>");
+                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <p>divide your 100 points between the "+divisItem.length+indivItem.length+" items listed below</p>");
                   sum=0;
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
@@ -47,7 +47,7 @@
                 }
                 else {
                   sum=0;
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <h3>Enter a value for each item</h3><p>Divide a total allocation of 100 points between all of the items listed below</p>");
+                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>divide your 100 points between the "+divisItem.length+indivItem.length+" items listed below</p>");
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                   $('#allocationLabel').text ("Remaining allocation: ");
                   $('#allocationLabel').append(allocation+"<br></br>");
