@@ -186,25 +186,25 @@ arr.splice(pos, 1)
       if(arr==people){
         $('#tab-poeple .output ul').text("");  
         for(i=0;i<arr.length;i++){
-          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",people)'>"+"</li>");  
+          $('#tab-poeple .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",people)'>"+"</li>");  
         }                
       }
       else if(arr==indivItem){
         $('#tab-rooms .output ul').text("");  
         for(i=0;i<divisItem.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+divisItem[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",divisItem)'>"+"</li>");                
         }
         for(i=0;i<arr.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
         }
       }
       else if(arr==divisItem){
         $('#tab-rooms .output ul').text("");
         for(i=0;i<arr.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='' onclick='removeA("+i+",divisItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+arr[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",divisItem)'>"+"</li>");                
         }
         for(i=0;i<indivItem.length;i++){
-          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit' id='' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
+          $('#tab-rooms .output ul').append("<li>"+indivItem[i]+ "<input type='submit' id='x' value='x' onclick='removeA("+i+",indivItem)'>"+"</li>");                
         }
       }
 }

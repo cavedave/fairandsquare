@@ -42,9 +42,6 @@
 
     <body>
         <div class="wrapper">
-        <!--[if lt IE 10]>
-            <p class="chromeframe">Your browser is not compatible with our application. This application only supports Interne Explorer 10. Please <a href="http://browsehappy.com/">upgrade, use an alternative browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
 
             <header>
                 <a href="../index.html"><img src="../images/fair_and_square_logo.png" alt="fair and square logo" class="logo"></a>
@@ -70,6 +67,9 @@
                       <li><a href="#tab-results">4</a></li>
                       <li><a href="#tab-help">?</a></li>
                   </ul>
+                    <!--[if lt IE 10]>
+            <p class="chromeframe">Your browser is not compatible with our application. This application only supports Internet Explorer 10. Please <a href="http://browsehappy.com/">upgrade, use an alternative browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
 
             <div class="app-wrapper">
              <!--Begin Intro Screen-->
@@ -77,7 +77,7 @@
                   <section>
                       <h1>Fair & <span class="grey">Square</span></h1>
                       <h2>Fair Division Tool</h2>
-                      <img class="logo2" src="../images/logo_opaque.png">
+                      <img class="logo2" src="../images/logo_opaque.png" alt="fair and square logo">
                   </section>
                   <a class="next-page-button">Begin</a>
               </div> <!--end wrapper-->
@@ -88,7 +88,7 @@
                   <section>
                       <h2>Enter Names</h2>
                       <p>Enter a name for each person below</p>
-                      </br>
+                      <br>
                       <input type="text" id="input_tennant" name="firstname">
                       <input type="submit" class="click"  id="btn_addTennant" value="+"> 
                       <div class="output">
@@ -104,17 +104,17 @@
               <div id="tab-rooms" class="wrapper">
                   <section>
                   <h3>Enter Each Item</h3>
-                  <p><span class="left">1) Select whether item is divisable or not</span></br>
+                  <p><span class="left">1) Select whether item is divisable or not</span><br>
                   <span class="smalltext">Items like cash & gold are divisable, a dog or table is non-divisable
-</span></br>
-                  <span class="left">2) Enter item name</span></br>
+</span><br>
+                  <span class="left">2) Enter item name</span><br>
                   Repeat these steps for each item before proceeding</p>
                       <select id="select1">
                           <option value="non_divisible">non-divisible</option>
                           <option value="divisible">divisible</option>
                       </select>
                   <input type="text" id="input_roomname" name="roomname"> 
-                  <input type="submit"class="click"  id="btn_addRoom" value="+">
+                  <input type="submit" class="click"  id="btn_addRoom" value="+">
                   <div class="output">
                       <ul>
                       </ul>
@@ -140,12 +140,12 @@
                   <section>
                   <h2>How it works</h2>
                   <p class="left">        
-                        <p>The Fair and Square division tool is allows couples to discover who should get what in the event that they breakup.</br>
-                        First it takes in the peoples names</br>
-                        Second it takes in the items to be divided up.</br>
-                        Then it takes in how much they want each item from each person. Each person has 100 total points they can use to rate each item.</br>
+                        <p>The Fair and Square property division tool allows couples to discover who should get what in the event that they breakup.<br>
+                        First it takes in the peoples names<br>
+                        Second it takes in the items to be divided up.<br>
+                        Then it takes in how much they want each item from each person. Each person has 100 total points they can use to rate each item.<br>
                         Finally it calculates an allocation of items that mean each person gets as much as possible</p>
-                  </br>
+                  <br>
                   <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
                   </section>
               </div>
@@ -217,12 +217,12 @@ var values=glpkTest(createData(divisMatrix,indivMatrix));
 
     <footer>
        <div class="copyright">
-                                    <a href="../privacy_policy.html">Privacy Policy</a></br>
+                                    <a href="../privacy_policy.html">Privacy Policy</a><br>
                                     &copy;Fair and Square 2013</div>
 
 
-        <a href="http://www.facebook.com/pages/Fairandsquare/114887262026881"><img class ="icon" src="../images/facebook.png"></a>
-        <a href="https://twitter.com/fairandsquareie"><img class ="icon" src="../images/twitter.png"></a>
+        <a href="http://www.facebook.com/pages/Fairandsquare/114887262026881"><img class ="icon" src="../images/facebook.png" alt="facebook icon"></a>
+        <a href="https://twitter.com/fairandsquareie"><img class ="icon" src="../images/twitter.png" alt="twitter icon"></a>
 
         </footer>
         <script src="../js/plugins.js"></script>

@@ -56,6 +56,12 @@ textarea {
     resize: vertical;
 }
 
+.chromeframe {
+    margin: 0.2em 0;
+    background-color:#B2A1A1;
+    color: #333333;
+    padding: 0.2em 0;
+}
 
 /* ==========================================================================
    Main styles
@@ -88,14 +94,14 @@ h1{
     font-size: 2em;
     font-family: 'Questrial', sans-serif;
     font-weight: 600;
-    text-shadow: 2px 3px #cccccc;
+    text-shadow: 2px 2px #cccccc;
 }
 
 h2{
     font-size: 1.5em;
     font-family: 'Questrial', sans-serif;
     font-weight: 600;  
-    text-shadow: 2px 2px #cccccc;
+    text-shadow: 1px 1px #cccccc;
 
 
 }
@@ -224,12 +230,16 @@ margin-bottom: 2%;
 .side-content{
     border-bottom: 2px solid #7f7f7f;
     margin-bottom: 2%;
-    padding-bottom: 2%;
+    padding:2px 2px 15px 2px;
+}
+
+.no-border{
+    border: none;
 }
 
 article{
     background-color: #e5e5e5;
-    padding: 2%;
+    padding: 15px;
     overflow: hidden;
     border-bottom: 1px dotted #cccccc;
     padding-bottom: 5%;
@@ -421,7 +431,7 @@ address a:hover{
 
 }
 
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: 795px) {
 
 
 
