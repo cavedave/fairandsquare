@@ -112,7 +112,6 @@
 //                $('#allocationLabel').append("<br>");
               }
             });
-
             $('#input_tennant').keyup(function(event){
               if(event.keyCode == 13){
                return false;
@@ -273,7 +272,7 @@ var lp = glp_create_prob();
        glp_intopt(lp);
      if(lp) {
         glp_mpl_postsolve(tran,lp,GLP_MIP);
-        $('#outputresults').text("Minimum satisfaction is: ");
+        $('#outputresults').text("Minimum satisfaction is: "); console.log("testing 123");
         $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
  // Create text with jQuery
         $('#outputresults').append("<p></p>")
@@ -285,8 +284,10 @@ var lp = glp_create_prob();
                 if(colname.charAt(0)=='x'){
                   if(glp_mip_col_val(lp,i)<1){
                     $('#outputresults').append(" ");
+
                     $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
                   }
+                
                   $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
                 }
                 if(colname.charAt(0)=='y'){
