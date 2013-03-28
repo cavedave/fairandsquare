@@ -16,7 +16,7 @@ textarea {
 }
 
 body {
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1.8;
     min-width: 359px;
 }
@@ -372,7 +372,7 @@ footer{
     clear: both;
     margin: auto;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 20  px;
 }
 
 .faq-img img{
