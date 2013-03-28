@@ -93,6 +93,14 @@
               }
             });
 
+            $('.last-page-button').click(function(){
+                var selected = $( "#tabs" ).tabs('option', 'active');
+                  $( "#tabs" ).tabs('enable', selected-1);
+                  $( "#tabs" ).tabs( "option", "active", $( "#tabs" ).tabs( "option", "active" )-1 );
+                  tabsStage--;                  
+                  $( "#tabs" ).tabs('disable', selected);
+            });
+
             $('#preference').keyup(function(event){
               if(event.keyCode == 13){
                 return false;
@@ -164,6 +172,7 @@
                 $('#input_roomname').val("");
               }
             });
+
              
             $("#tab-preferences").on("focusout", ".alloc", function () {
                 var sum = 0;
