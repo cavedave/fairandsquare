@@ -22,10 +22,10 @@
                   $('#allocationLabel').append(allocation+"<br></br>");
                  //change here to include divis and indiv
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='itemnamediv' value='0' class='alloc'></br>");
                     }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='roomnameindiv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='roomnameindiv' value='0' class='alloc'></br>");
                   }
                   if (++personStage > people.length) {
                     $( "#tabs" ).tabs('enable', 4);
@@ -56,10 +56,10 @@
                   $('#allocationLabel').append(allocation+"<br></br>");
                   //div and indiv to go here
                   for (var i = 0; i<divisItem.length; i++ ) {
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='itemnamediv' value='0' class='alloc'></br>");
                   }
                   for (var i = 0; i<indivItem.length; i++ ) {
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='itemnamediv' value='0' onFocus=this.value='' class='alloc'></br>");
+                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='number' min='0' max='100' id='preference' onkeyup='check(this)' name='itemnamediv' value='0' class='alloc'></br>");
                   }
                   if (++personStage >= people.length) {
                   }
@@ -173,6 +173,11 @@
               }
             });
 
+            $("#tab-preferences").on("focus", ".alloc", function () {
+              if($(this).val()==0){
+                $(this).val('');
+              }
+            });
              
             $("#tab-preferences").on("focusout", ".alloc", function () {
                 var sum = 0;
