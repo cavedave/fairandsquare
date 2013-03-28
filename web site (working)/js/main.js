@@ -39,9 +39,11 @@
             }
             
             $('#tabs').on("tabsbeforeactivate", function( event, ui) {
+               var numItem = divisItem.length+indivItem.length;   
               if (ui.newTab.text() == 3) {
               if (people.length == 0 || divisItem.length+indivItem.length == 0) {
                 //should probably do something here.
+
               }
               else{
                 if (personStage >= people.length) {
