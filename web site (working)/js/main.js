@@ -129,7 +129,7 @@
               }
             });
 
-            $('#input_tennant').keyup(function(event){
+            $('#input_tennant').keypress(function(event){
               if(event.keyCode == 13){
               // return false;
                 event.preventDefault();
