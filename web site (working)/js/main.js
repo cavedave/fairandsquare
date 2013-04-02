@@ -148,10 +148,10 @@
               }
             });
 
-            $('#input_roomname').keyup(function(event){
+            $('#input_roomname').keypress(function(event){
               if(event.keyCode == 13){
              // return false;
-            //    event.preventDefault();
+                event.preventDefault();
                 $('#btn_addRoom').click();
               }
             });    
@@ -168,12 +168,12 @@
                 if (strUser=='divisible'){
                   divisItem.push($('#input_roomname').val());
                   var a=divisItem.length-1;
-                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"   (Divisible)"+ "<input type='submit' id='x' value='x' onclick='removeA("+a+",divisItem)'>"+"</li>");
+                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"   (Divisible)"+ "<input type='button' id='x' value='x' onclick='removeA("+a+",divisItem)'>"+"</li>");
                 }
                 else {
                   indivItem.push($('#input_roomname').val());
                   var a=indivItem.length-1;
-                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+""+ "<input type='submit' id='x' value='x' onclick='removeA("+a+",indivItem)'>"+"</li>");
+                $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+""+ "<input type='button' id='x' value='x' onclick='removeA("+a+",indivItem)'>"+"</li>");
                 }
                 $('#input_roomname').val("");
               }
