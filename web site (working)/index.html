@@ -32,6 +32,20 @@
         });
         </script>
 
+        <script>
+        function validateEmail(inputText){ 
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+            if(inputText.value.match(mailformat)){  
+                return true;  
+            }  
+            else{  
+                alert("Please enter a valid email address!");  
+                return false;  
+            }  
+        }          
+        </script>
+
+
     </head>
 
     <body>
@@ -95,7 +109,7 @@
                                     <h3>Help us with beta testing</h3>
                                     <p>Please submit your details below if you would like to assist us with beta testing</p>
 
-                                    <form class="form" name="contactform" method="post" action="http://54.228.192.228/mail.php">
+                                    <form class="form" name="contactform" onsubmit="return validateEmail(email)" action="http://54.228.192.228/mail.php" method="post">
                                           <input  type="text" name="name" maxlength="50" placeholder="Name" /><br>
                                           <input  type="text" name="email" maxlength="80" placeholder="Email" /><br>
                                           <input type="submit" value="submit">
