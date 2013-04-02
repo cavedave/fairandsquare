@@ -131,7 +131,9 @@
 
             $('#input_tennant').keypress(function(event){
               if(event.keyCode == 13){
-              // return false;
+                if( $("html").hasClass("lt-ie9") ) { 
+                  return false;
+                }
                 event.preventDefault();
                 $('#btn_addTennant').click();
               }
@@ -150,7 +152,9 @@
 
             $('#input_roomname').keypress(function(event){
               if(event.keyCode == 13){
-             // return false;
+                if( $("html").hasClass("lt-ie9") ) { 
+                  return false;
+                }
                 event.preventDefault();
                 $('#btn_addRoom').click();
               }
