@@ -101,9 +101,14 @@
                   $( "#tabs" ).tabs('disable', selected);
             });
 
+            $('#tab-poeple .output ul').keyup(function(event){
+//                return false;
+                event.preventDefault();
+            });             
+
             $('#preference').keyup(function(event){
               if(event.keyCode == 13){
-                return false;
+//                return false;
                 event.preventDefault();
                 $('#btn_nextPerson').click();
               }
@@ -123,9 +128,10 @@
 //                $('#allocationLabel').append("<br>");
               }
             });
+
             $('#input_tennant').keyup(function(event){
               if(event.keyCode == 13){
-               return false;
+              // return false;
                 event.preventDefault();
                 $('#btn_addTennant').click();
               }
@@ -137,15 +143,15 @@
               else{
                   people.push($('#input_tennant').val());
                   var a=people.length-1;
-                  $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='submit' id='x' value='x' onclick='removeA("+a+",people)'>"+"</li>");
+                  $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='button' id='x' value='x' onclick='removeA("+a+",people)'>"+"</li>");
                   $('#input_tennant').val(""); 
               }
             });
 
             $('#input_roomname').keyup(function(event){
               if(event.keyCode == 13){
-              return false;
-                event.preventDefault();
+             // return false;
+            //    event.preventDefault();
                 $('#btn_addRoom').click();
               }
             });    
