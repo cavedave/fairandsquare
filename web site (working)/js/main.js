@@ -310,31 +310,27 @@ var lp = glp_create_prob();
        glp_intopt(lp);
      if(lp) {
         glp_mpl_postsolve(tran,lp,GLP_MIP);
-        $('#outputresults').text("Minimum satisfaction is: "); console.log("testing 123");
+        $('#outputresults').text("Minimum satisfaction is: "); 
         $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
- // Create text with jQuery
         $('#outputresults').append("<p></p>")
         $('#outputresults').append("The FairAndSquare allocation is: ");
         $('#outputresults').append("<p></p>");
-           for (var i = 2; i <= glp_get_num_cols(lp); i++) {
-              if(glp_mip_col_val(lp,i)>0){
-              var colname= glp_get_col_name(lp,i);  
-                if(colname.charAt(0)=='x'){
-                  if(glp_mip_col_val(lp,i)<1){
-                    $('#outputresults').append(" ");
-
-                    $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2)+" of ").toString();
-                  }
-
-                  $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
-                }
-                if(colname.charAt(0)=='y'){
-                  $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
+        for (var i = 2; i <= glp_get_num_cols(lp); i++) {
+          if(glp_mip_col_val(lp,i).toFixed(2)>0.001){
+            var colname= glp_get_col_name(lp,i);  
+            if(colname.charAt(0)=='x'){
+              if(glp_mip_col_val(lp,i).toFixed(2)<1 ){
+                $('#outputresults').append(" ");
+                $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2) +" of ").toString();
+              }
+              $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
             }
-
-                  $('#outputresults').append(" goes to ");
-                  $('#outputresults').append(people[colname.charAt(2).toString()-1]);
-                  $('#outputresults').append("<p></p>");
+            if(colname.charAt(0)=='y'){
+              $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
+            }
+            $('#outputresults').append(" goes to ");
+            $('#outputresults').append(people[colname.charAt(2).toString()-1]);
+            $('#outputresults').append("<p></p>");
           } 
         }
      } else {
