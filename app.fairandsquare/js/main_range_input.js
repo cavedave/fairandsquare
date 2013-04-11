@@ -43,37 +43,36 @@
             
             $('#tabs').on("tabsbeforeactivate", function( event, ui) {
                var numItem = divisItem.length+indivItem.length;   
-              if (ui.newTab.text() == 3) {
-              if (people.length == 0 || divisItem.length+indivItem.length == 0) {
-                //should probably do something here.
+              if (ui.newTab.text() == 'Values ') {
+                if (people.length == 0 || divisItem.length+indivItem.length == 0) {
+                  //should probably do something here.
 
-              }
-              else{
-                if (personStage >= people.length) {
                 }
-                else {
-                  sum=0;
-                  $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>divide your 100 points between the "+numItem+" items listed below</p>");
-                  $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
-                  $('#allocationLabel').text ("Remaining allocation: ");
-                  $('#allocationLabel').append(allocation+"<br></br>");
-                  for (var i = 0; i<divisItem.length; i++ ) {
-                    var labelName = 'divisItem'+i;
-                    $('#tab-preferences .output').append(divisItem[i]+"</br><input type='range' min='0' max='100' step='5' id='preference' onkeyup='check(this)' onmouseup='updateSlider(this.value,"+labelName+")' name='itemnamedivis' value='0' class='alloc'>");
-                    $('#tab-preferences .output').append("<label id='"+labelName+"'>0</label></br>");
+                else{
+                  if (personStage >= people.length) {
                   }
-                  for (var i = 0; i<indivItem.length; i++ ) {
-                    var labelName = 'indivItem'+i;
-                    $('#tab-preferences .output').append(indivItem[i]+"</br><input type='range' min='0' max='100' step='5' id='preference' onkeyup='check(this)' onmouseup='updateSlider(this.value,"+labelName+")' name='itemnameindiv' value='0' class='alloc'>");
-                    $('#tab-preferences .output').append("<label id='"+labelName+"'>0</label></br>");
-                  }
-                  if (++personStage >= people.length) {
+                  else {
+                    sum=0;
+                    $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>divide your 100 points between the "+numItem+" items listed below</p>");
+                    $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
+                    $('#allocationLabel').text ("Remaining allocation: ");
+                    $('#allocationLabel').append(allocation+"<br></br>");
+                    for (var i = 0; i<divisItem.length; i++ ) {
+                      var labelName = 'divisItem'+i;
+                      $('#tab-preferences .output').append(divisItem[i]+"</br><input type='range' min='0' max='100' step='5' id='preference' onkeyup='check(this)' onmouseup='updateSlider(this.value,"+labelName+")' name='itemnamedivis' value='0' class='alloc'>");
+                      $('#tab-preferences .output').append("<label id='"+labelName+"'>0</label></br>");
+                    }
+                    for (var i = 0; i<indivItem.length; i++ ) {
+                      var labelName = 'indivItem'+i;
+                      $('#tab-preferences .output').append(indivItem[i]+"</br><input type='range' min='0' max='100' step='5' id='preference' onkeyup='check(this)' onmouseup='updateSlider(this.value,"+labelName+")' name='itemnameindiv' value='0' class='alloc'>");
+                      $('#tab-preferences .output').append("<label id='"+labelName+"'>0</label></br>");
+                    }
+                    if (++personStage >= people.length) {
+                    }
                   }
                 }
-              }
-
-              }
-              } );
+              }  
+            } );
       
            
             $('.next-page-button').click(function(){
