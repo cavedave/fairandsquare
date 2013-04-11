@@ -208,9 +208,10 @@ s.t. two{j in J}: sum{i in I} y[i,j] = 1;
 /* job j must be assigned exactly to one agent */
 /*s.t. lim{i in I}: ((sum{j in J} c[i,j] * x[i,j])+(sum{k in K} d[i,k] * y[i,k]) )<= b[i];*/
 /*add check person does not get more then 100%. Want to make sure they do not ask for more then 100% */
-//s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
-//s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
-//maximize obj: worst;
+s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
+s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
+maximize obj: worst;
+
 </div> 
 
 </div>
