@@ -331,27 +331,28 @@ var lp = glp_create_prob();
        glp_intopt(lp);
      if(lp) {
         glp_mpl_postsolve(tran,lp,GLP_MIP);
-        $('#outputresults').text("Minimum satisfaction is: "); 
-        $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
+        $('#outputresults').text(""); 
+        $('#outputresults').append("<h1>Minimum Client Satisfaction is:</h1> ");
+        $('#outputresults').append("<h1>"+glp_mip_obj_val(lp).toFixed(2).toString()+"%</h1>");
         $('#outputresults').append("<p></p>")
-        $('#outputresults').append("The FairAndSquare allocation is: ");
+        $('#outputresults').append("<h2>The FairAndSquare allocation is:</h2> ");
         $('#outputresults').append("<p></p>");
         for (var i = 2; i <= glp_get_num_cols(lp); i++) {
           if(glp_mip_col_val(lp,i).toFixed(2)>0.001){
             var colname= glp_get_col_name(lp,i);  
             if(colname.charAt(0)=='x'){
               if(glp_mip_col_val(lp,i).toFixed(2)<1 ){
-                $('#outputresults').append(" ");
-                $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2) +" of ").toString();
+                $('#output-text').append(" ");
+                $('#output-text').append("<span>"+glp_mip_col_val(lp,i).toFixed(2)+" of </span>").toString();
               }
-              $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
+              $('#output-text').append("<span>"+divisItem[colname.charAt(4).toString()-1]+"</span>");
             }
             if(colname.charAt(0)=='y'){
-              $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
+              $('#output-text').append("<span>"+indivItem[colname.charAt(4).toString()-1]+"</span>");
             }
-            $('#outputresults').append(" goes to ");
-            $('#outputresults').append(people[colname.charAt(2).toString()-1]);
-            $('#outputresults').append("<p></p>");
+            $('#output-text').append("<span> goes to </span>");
+            $('#output-text').append("<span>"+people[colname.charAt(2).toString()-1]+"</span>");
+            $('#output-text').append("<p></p>");
           } 
         }
      } else {
