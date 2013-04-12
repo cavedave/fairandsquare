@@ -22,22 +22,6 @@
         <script src='js/glpk.js'></script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
-        $(function() {
-          $( "#accordion" ).accordion();
-        });
-        </script>
-              <script>
-                  $(function() {
-                    $( document ).tooltip();
-            });
-            </script>
-            <style>
-            label {
-              display: inline-block;
-              width: 5em; 
-            }
-        </style>
-        <script>
             $(function() {
               $( "#tabs" ).tabs({disabled: [1, 2, 3, 4]})
             });
@@ -109,8 +93,9 @@
               <!--Begin People Screen-->
               <div id="tab-poeple" class="wrapper">
                   <section>
-                    <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="Enter a name for each party entering into the asset division process" />
                       <h2>Enter Names</h2>
+
+                      <h3>Enter a name for each person below</h3>
                       <br>
                       <div class="inputcolumn">
                       <input type="text" id="input_tennant" name="firstname">
@@ -131,7 +116,6 @@
               <!--Begin Items Screen-->
               <div id="tab-rooms" class="wrapper">
                   <section>
-                     <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="Enter each asset that is to be allocated. A divisable item is something that can be apportioned to both parties i.e. cash or gold." />
                     <h2>Enter Assets</h2>
                     <h3>Select whether asset is divisable or not and enter a description</h3>
                     <div class="inputcolumn">
@@ -158,8 +142,6 @@
               <!--Begin Preferences Screen-->
                <div id="tab-preferences" class="wrapper">
                   <section>
-                       <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="You have a total of 100 points to distribute between the items listed below. Allocate points to each item based on the items value to you (Not specifically monetary value, take into account other things such as sentimental value" />
-                                         
                   <div class="output center">
                   <ul></ul>
                   </div>
@@ -174,80 +156,21 @@
               <!--Begin Help Screen-->
               <div id="tab-help" class="wrapper">
                   <section>
-                  <h2>FAQ</h2>
-                    <div id="accordion">
-                    <h3>What does the fair and square process aim to do?</h3>
-                    <div>
-                      <p>
-                     At fairandsquare.ie we make Computer Aided Negotiation systems that allow people to follow a process to divide collections of items between them. Our first fair division system is for a separating couple to divide shared personal items.
-                     The division of assets process the tool facilitates must be seen to be fair, transparent and quick by all the participants to reduce acrimony and speed up these negotiations.
-                      </p>
-                    </div>
-                    <h3>How do you decide who should get each item?</h3>
-                    <div>
-                      <p>
-                      The allocation is done in a way that maximizes the person who gets the minimum. This acts like a tide that raises the level of all boats. Any other way of allocating will mean that someone is worse off than the worst off person in current the allocation.
-                      Deciding allocations in this way comes from John Rawls’ Theory of Justice which says inequalities should be arranged so that “they are to be of the greatest benefit to the least-advantaged members of society” In the two-person case both people tend to end up with the same level of satisfaction. In the tools calculation the worst off person gets items until they meet the satisfaction level of the best off person.
-                      </p>
-                    </div>
-                    <h3>What do you mean by fair</h3>
-                    <div>
-                      <p>
-                      With two people each aims to get at least 50% of any collection to be divided. This 50% is a fair share. Any more than this they get is an improvement the tool has found that increases peoples level of satisfaction.
-                      </p>
-                    </div>
-                     <h3>Why do you use points rather than monetary values?</h3>
-                    <div>
-                      <p>
-                      Some things are really valuable but have little monetary value. We measure how much a person wants something but we do not ask whether it is for monetary, sentiment or some other reasons.
-                      </p>
-                    </div>
-                    <h3>Do I have to do what the tool says</h3>
-                    <div>
-                      <p>
-                      No, in any negotiation you have to be happy with the conclusion. Each person has to be happy that the steps of the process makes sense and that the outcome is reasonable. The people in the negotiation process have to decide what is agreeable.
-                      </p>
-                    </div>
-                    <h3>But she got more than me</h3>
-                    <div>
-                      <p>
-                      The tool tends to result in everyone having very similar levels of satisfaction. However there are cases where one person will end up more satisfied than others. If this happens and everyone has at least a fair share you could decide the division is still acceptable. If someone has much less than his or her fair share it will generally be because one item is of very high value.
-                      </p>
-                    </div>
-                    <h3>Why cant everyone be equal?</h3>
-                    <div>
-                      <p>
-                      Our tool produces divisions where each player is almost always within 2% of each other. Solutions where everyone is exactly equal on average have everyone getting about a third the satisfaction with the allocation.
-                      We think a small inequality in the satisfaction level is worth a large amount more satisfaction.
-                      </p>
-                    </div>
-                    <h3>What is a divisable good?</h3>
-                    <div>
-                      <p>
-                      A divisible good is something like cash, cutlery or shares that can be divided up into many different parts. An indivisible good is something like a table, chair or television that must be kept in one piece.
-                      Divisions with divisible goods tend to have much better outcomes. Because of this it is worth carefully considering if an item can be considered divisible. If something is in a set of many similar items this can be classed as a divisible item. This cold be a box of wine or set of chairs. There will be a trade off here between the harm of splitting up a set and the increased equality dividing the set allows.
-                      </p>
-                    </div>
-                    <h3>How many items can be entered?</h3>
-                    <div>
-                      <p>
-                      As many items as you want. But for a large number the system will become time consuming. The first ten most important things are probably the ones people care about most. If each person lists their ten most important items and these lists are combined this should cover most of the value to be divided and allow a quick division. For other items not on the combined list to be divided at the point where each item is not very valuable to either person picking one item each in order is fast. If each item is nearly equally valuable at this point little inefficiency will result.
-                      </p>
-                    </div>
-                    <h3>What if one item is really valuable?</h3>
-                    <div>
-                      <p>
-                      Sometimes one item is worth the majority of the value to each person. It is possible no one can get a fair share because of this. For example is a house and some clothes had to be divided the house would be the vast majority of peoples values.
-                      Using our process we can find out this impasse quickly. Solutions exist to this problem of one non-divisible item is worth so much to prevent everyone getting a fair share. One is for the item to be sold and the cash proceeds become a divisible item. One is for a time-share arrangement to take place.
-                      </p>
-                    </div>
+                  <h2>How it works</h2>
+                  <p class="left">        
+                        <p>The Fair and Square property division tool allows couples to discover who should get what in the event that they breakup.<br>
+                        First it takes in the peoples names<br>
+                        Second it takes in the items to be divided up.<br>
+                        Then it takes in how much they want each item from each person. Each person has 100 total points they can use to rate each item.<br>
+                        Finally it calculates an allocation of items that mean each person gets as much as possible</p>
+                  <br>
+                  <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
                   </section>
               </div>
               <!--End Help Screen-->
 
               <!-- Begin Results Screen-->
               <div id="tab-results" class="wrapper">
-                  <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="This is a suggested allocation only and should not be taken as legal advice" />
                   <div id="outputresults">
                   </div>
               </div>
@@ -285,9 +208,10 @@ s.t. two{j in J}: sum{i in I} y[i,j] = 1;
 /* job j must be assigned exactly to one agent */
 /*s.t. lim{i in I}: ((sum{j in J} c[i,j] * x[i,j])+(sum{k in K} d[i,k] * y[i,k]) )<= b[i];*/
 /*add check person does not get more then 100%. Want to make sure they do not ask for more then 100% */
-//s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
-//s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
-//maximize obj: worst;
+s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
+s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
+maximize obj: worst;
+
 </div> 
 
 </div>
@@ -311,17 +235,18 @@ var values=glpkTest(createData(divisMatrix,indivMatrix));
 
   <footer>
     <div class="container">
-    <h4>Contact Info</h4>
+    <p>Contact Info
+    <hr>
     Fair & Square, NDRC, Crane Lane, Dublin 8, Ireland<br>
-    <strong>Phone:</strong> +353 86 86299<br>
-    <strong>E-Mail:</strong> info@fairandsquare.ie<br>
-    <strong>Web:</strong> http://www.fairandsquare.ie</p>
+    Phone: +353 86 86299<br>
+    E-Mail: info@fairandsquare.ie<br>
+    Web: http://www.fairandsquare.ie</p>
   </div> <!--end container -->
   </footer>
 
   <div class="copyright">
     <div class="container">
-    <span class="copy">Copyright fairandsquare.ie 2013</span>
+    Copyright fairandsquare.ie 2013
     </div> <!--end container -->
   </div>
 
