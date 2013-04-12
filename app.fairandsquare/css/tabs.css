@@ -86,12 +86,34 @@
 	height: 100%;
 }
 .ui-accordion .ui-accordion-header {
-	display: block;
+	/*display: block;
 	cursor: pointer;
 	position: relative;
 	margin-top: 2px;
 	padding: .5em .5em .5em .7em;
 	min-height: 0; /* support: IE7 */
+	/*border: 1px solid #999999;
+	border-radius: 3px;
+    background-color: #f4f4f4;
+	color: #999999;*/
+
+border: 1px solid #ddd;
+display: block;
+background-image: linear-gradient(bottom, #F7F7F7 0%, #FFFFFF 100%);
+background-image: -o-linear-gradient(bottom, #F7F7F7 0%, #FFFFFF 100%);
+background-image: -moz-linear-gradient(bottom, #F7F7F7 0%, #FFFFFF 100%);
+background-image: -webkit-linear-gradient(bottom, #F7F7F7 0%, #FFFFFF 100%);
+background-image: -ms-linear-gradient(bottom, #F7F7F7 0%, #FFFFFF 100%);
+background-color: #F9F9F9;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+-moz-box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+padding: 5px;
+margin-bottom: 10px;
+}
 }
 .ui-accordion .ui-accordion-icons {
 	padding-left: 2.2em;
@@ -112,6 +134,7 @@
 	padding: 1em 2.2em;
 	border-top: 0;
 	overflow: auto;
+	color: #333333;
 }
 .ui-autocomplete {
 	position: absolute;
@@ -776,6 +799,7 @@ button.ui-button::-moz-focus-inner {
 	max-width: 300px;
 	-webkit-box-shadow: 0 0 5px #aaa;
 	box-shadow: 0 0 5px #aaa;
+	background-color: #ffffff;
 }
 body .ui-tooltip {
 	border-width: 2px;

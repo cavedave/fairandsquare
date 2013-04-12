@@ -5,13 +5,14 @@ html, body{
 h1{ font-size: 28px;
 text-align: center;
 margin-bottom: 30px;
-margin-top: 20px;}
+margin-top: 20px;
+}
 
 h2{
 	font-size: 23px;
 	color: #666666;
-	text-align: center;
 	margin-bottom: 20px;
+	text-align: center;
 }
 
 h3{
@@ -20,6 +21,20 @@ h3{
 	text-align: center;
 	margin-bottom: 10px;
 }
+
+h4{
+font-family: arial, Arial, Helvetica, sans-serif;
+font-size: 15px;
+font-weight: lighter !important;
+color: #ffffff !important;
+border-bottom: 1px solid #555555;
+margin-top: 45px;
+padding-bottom: 8px;
+margin-bottom: 22px;
+}
+
+
+strong{font-weight: bold;}
 
 hr.style-one{
 
@@ -51,20 +66,26 @@ header{
 	height: 120px;
 	background-color: #ffffff;
 	color: #333333;
-	border-bottom: 1px solid #f7f7f7 !important;
+	border-bottom: 1px solid #dddddd !important;
 	display: block;
 }
 
 footer{
-	height: 250px;
+	height: 268px;
 	background-color: #444444;
 	color: #999999;
+	font-family: "Arial", sans-serif !important;
+	font-weight: normal;
+	border-top: 10px solid #333333;
+	line-height: 29px;
+	font-weight: lighter;
 }
 
 .copyright{
-	height: 52px;
+	height: 32px;
 	background-color: #222222;
 	color: #777777;
+	padding-top: 20px;
 }
 
 .logo{
@@ -104,6 +125,8 @@ margin: 0 0 0px 15px;
 padding: 0px 5px;
 }
 
+
+
 /* APP */
 
 .wrapper{
@@ -116,8 +139,6 @@ section{
 }
 
 input[type="button"]{
-
-
 	border-radius: 3px;
 }
 
@@ -140,7 +161,7 @@ input[type="button"]{
 	border: 1px solid #cccccc;
 	padding: 5px;
 	float: left;
-	background-color: #cccccc;
+	background-color: #dddddd;
 	color: #888888;
 }
 
@@ -155,7 +176,7 @@ input[type="button"]{
 }
 
 .inputcolumn{
-	width:250px;
+	width:270px;
 	margin: auto;
 }
 
@@ -186,6 +207,9 @@ input#x{
 	float: right;
 	clear: left;
 	margin-bottom: 2px;
+	background-color: #f4f4f4;
+	color: #999999;
+	border: 1px solid #cccccc;
 }
 
 select{
@@ -224,8 +248,14 @@ input::-webkit-inner-spin-button {
 }
 
 input#btn_addTennant,
-input#btn_addRoom,
-{}
+input#btn_addRoom,{
+	background-color: #f4f4f4;
+	color: #999999;
+	border: 1px solid #cccccc;
+}
 
+.tooltip{
+	float: right;
+}
 
 
