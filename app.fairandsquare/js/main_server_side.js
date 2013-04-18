@@ -1,32 +1,40 @@
-function outputFunc(){
-  var namesArray = new Array();
-  namesArray[0]="Scully";
-  namesArray[1]="Curran";
-  var divisArray = new Array();
-  divisArray[0]="Cash";
-  divisArray[1]="Shares";
-  divisArray[2]="Pension";
-  var indivArray = new Array();
-  indivArray[0]="Cat";
-  indivArray[1]="Snake";
-  indivArray[2]="Pen";
-  var str="65|~ 2 x[1,1] 0.5 0 |~ 3 x[2,1] 0.5 0 |~ 4 x[1,2] 1 0 |~ 5 x[2,2] 0 0 |~ 6 x[1,3] 1 0 |~ 7 x[2,3] 0 0 |~ 8 y[1,1] * 0 0 1 |~ 9 y[2,1] * 1 0 1 |~ 10 y[1,2] * 0 0 1 |~ 11 y[2,2] * 1 0 1 |~ 12 y[1,3] * 1 0 1 |~ 13 y[2,3] * 0 0 1 |~";
+function calculate(i) {      
+    var request = $.ajax({
+        url: "js/linear.php",
+        type: "post",
+        data: {fname:i}
+    });
+   // console.log("request", request)
+                  // callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // log a message to the console. response here is the answer
+        return response;                  
+    });
+    // callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // log the error to the console
+        console.error("The following error occured: "+textStatus, errorThrown);
+        });       
+}
+
+function outputFunc(str){
+  //var str="65|~ 2 x[1,1] 0.5 0 |~ 3 x[2,1] 0.5 0 |~ 4 x[1,2] 1 0 |~ 5 x[2,2] 0 0 |~ 6 x[1,3] 1 0 |~ 7 x[2,3] 0 0 |~ 8 y[1,1] * 0 0 1 |~ 9 y[2,1] * 1 0 1 |~ 10 y[1,2] * 0 0 1 |~ 11 y[2,2] * 1 0 1 |~ 12 y[1,3] * 1 0 1 |~ 13 y[2,3] * 0 0 1 |~";
   var separ = str.split('|~');
   $('#outputresults').text("");
   $('#outputresults').append("minimum satisfaction is: "+separ[0]);
-  for (var j=1;j<=namesArray.length;j++){
+  for (var j=1;j<=people.length;j++){
     $('#outputresults').append("<table border='1'><tr>");
-    $('#outputresults').append("<BR><th>"+namesArray[j-1]+"</th></tr>");
+    $('#outputresults').append("<BR><th>"+people[j-1]+"</th></tr>");
     for (i=1;i<separ.length-1;i++){
       var n=separ[i].split('[');
       var n1=separ[i].split(']');
       var n2=n[1].split(']');
       var splitArray=n2[0].split(',');
       var props= n1[1].split(' ');
-      var name=namesArray[splitArray[0]-1];
+      var name=people[splitArray[0]-1];
       if(splitArray[0]==j){
         if (n[0].indexOf("x") !== -1){
-          var item=divisArray[splitArray[1]-1];
+          var item=divisItem[splitArray[1]-1];
           if(props[1]>0){
             if(props[1]<1){
               $('#outputresults').append("<tr><td>"+item+" "+props[1]+"</td></tr>");
@@ -37,7 +45,7 @@ function outputFunc(){
           }
         }
         else{
-          var item=indivArray[splitArray[1]-1];
+          var item=indivItem[splitArray[1]-1];
           if(props[2]>0){
             $('#outputresults').append("<tr><td>"+item+"</td></tr>");
           }
