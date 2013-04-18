@@ -15,6 +15,14 @@ h2{
 	text-align: center;
 }
 
+h2 a{
+	color: #999999;
+}
+
+h2 a:hover{
+	color: #cccccc;
+}
+
 h3{
 	font-size: 20px;
 	color: #666666;
