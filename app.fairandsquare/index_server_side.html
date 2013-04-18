@@ -225,13 +225,13 @@ function main(){
   if(indivItem.length>0){
     var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.length);
   }
-  if( $("html").hasClass("lt-ie9") ) { 
-    var values=createData(divisMatrix,indivMatrix); 
-    outputFunc();
-  }
-  else{
-    var values=glpkTest(createData(divisMatrix,indivMatrix));
-  }
+//  if( $("html").hasClass("lt-ie9") ) { 
+    var data=createData(divisMatrix,indivMatrix);  
+    outputFunc(calculate(data)); 
+//  }
+//  else{
+//    var values=glpkTest(createData(divisMatrix,indivMatrix));
+//  }
 }
       </script>
 </div> <!--end container -->
