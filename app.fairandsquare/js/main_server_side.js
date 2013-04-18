@@ -10,44 +10,41 @@ function outputFunc(){
   indivArray[0]="Cat";
   indivArray[1]="Snake";
   indivArray[2]="Pen";
-  var str="2 x[1,1] 0.5 0 |~ 3 x[2,1] 0.5 0 |~ 4 x[1,2] 1 0 |~ 5 x[2,2] 0 0 |~ 6 x[1,3] 1 0 |~ 7 x[2,3] 0 0 |~ 8 y[1,1] * 0 0 1 |~ 9 y[2,1] * 1 0 1 |~ 10 y[1,2] * 0 0 1 |~ 11 y[2,2] * 1 0 1 |~ 12 y[1,3] * 1 0 1 |~ 13 y[2,3] * 0 0 1 |~";
+  var str="65|~ 2 x[1,1] 0.5 0 |~ 3 x[2,1] 0.5 0 |~ 4 x[1,2] 1 0 |~ 5 x[2,2] 0 0 |~ 6 x[1,3] 1 0 |~ 7 x[2,3] 0 0 |~ 8 y[1,1] * 0 0 1 |~ 9 y[2,1] * 1 0 1 |~ 10 y[1,2] * 0 0 1 |~ 11 y[2,2] * 1 0 1 |~ 12 y[1,3] * 1 0 1 |~ 13 y[2,3] * 0 0 1 |~";
   var separ = str.split('|~');
   $('#outputresults').text("");
+  $('#outputresults').append("minimum satisfaction is: "+separ[0]);
   for (var j=1;j<=namesArray.length;j++){
-    $('#outputresults').append("<BR>");
-    var labName='name'+j;
-    console.log(labName);    
-    for (i=0;i<separ.length-1;i++){
-      console.log("split"+i+" "+separ[i]);
+    $('#outputresults').append("<table border='1'><tr>");
+    $('#outputresults').append("<BR><th>"+namesArray[j-1]+"</th></tr>");
+    for (i=1;i<separ.length-1;i++){
       var n=separ[i].split('[');
       var n1=separ[i].split(']');
       var n2=n[1].split(']');
       var splitArray=n2[0].split(',');
       var props= n1[1].split(' ');
       var name=namesArray[splitArray[0]-1];
-      var divis;
       if(splitArray[0]==j){
         if (n[0].indexOf("x") !== -1){
-          divis = "Divisible";
           var item=divisArray[splitArray[1]-1];
           if(props[1]>0){
             if(props[1]<1){
-              $('#outputresults').append("<BR>"+name+" "+item+" "+props[1]);
+              $('#outputresults').append("<tr><td>"+item+" "+props[1]+"</td></tr>");
             }
             else{
-              $('#outputresults').append("<BR>"+name+" "+item);
+              $('#outputresults').append("<tr><td>"+item+"</td></tr>");
             }
           }
         }
         else{
-          divis = "Indivisible";
           var item=indivArray[splitArray[1]-1];
           if(props[2]>0){
-            $('#outputresults').append("<BR>"+name+" "+item);
+            $('#outputresults').append("<tr><td>"+item+"</td></tr>");
           }
         }
       }
     }
+    $('#outputresults').append("</table>");
   }
 }
               
@@ -235,7 +232,7 @@ function outputFunc(){
                 }
                 $('#input_roomname').val("");
               }
-            });
+            });-
 
             $("#tab-preferences").on("focus", ".alloc", function () {
               if($(this).val()==0){
