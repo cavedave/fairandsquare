@@ -1,20 +1,25 @@
 function calculate(i) {      
     var request = $.ajax({
         url: "js/linear.php",
+        async: false,
         type: "post",
         data: {fname:i}
     });
-   // console.log("request", request)
+    
+    //setTimeout(1000); 
+    //console.log("request", request)
                   // callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR){
         // log a message to the console. response here is the answer
-        return response;                  
+       // console.log("ajax got back", response);
+                    output= response;    
     });
     // callback handler that will be called on failure
     request.fail(function (jqXHR, textStatus, errorThrown){
         // log the error to the console
         console.error("The following error occured: "+textStatus, errorThrown);
         });       
+ return output; 
 }
 
 function outputFunc(str){
