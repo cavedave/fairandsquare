@@ -1,61 +1,3 @@
-function calculate(i) {      
-    var request = $.ajax({
-        url: "js/linear.php",
-        type: "post",
-        data: {fname:i}
-    });
-   // console.log("request", request)
-                  // callback handler that will be called on success
-    request.done(function (response, textStatus, jqXHR){
-        // log a message to the console. response here is the answer
-        return response;                  
-    });
-    // callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        // log the error to the console
-        console.error("The following error occured: "+textStatus, errorThrown);
-        });       
-}
-
-function outputFunc(str){
-  //var str="65|~ 2 x[1,1] 0.5 0 |~ 3 x[2,1] 0.5 0 |~ 4 x[1,2] 1 0 |~ 5 x[2,2] 0 0 |~ 6 x[1,3] 1 0 |~ 7 x[2,3] 0 0 |~ 8 y[1,1] * 0 0 1 |~ 9 y[2,1] * 1 0 1 |~ 10 y[1,2] * 0 0 1 |~ 11 y[2,2] * 1 0 1 |~ 12 y[1,3] * 1 0 1 |~ 13 y[2,3] * 0 0 1 |~";
-  var separ = str.split('|~');
-  $('#outputresults').text("");
-  $('#outputresults').append("minimum satisfaction is: "+separ[0]);
-  for (var j=1;j<=people.length;j++){
-    $('#outputresults').append("<table border='1'><tr>");
-    $('#outputresults').append("<BR><th>"+people[j-1]+"</th></tr>");
-    for (i=1;i<separ.length-1;i++){
-      var n=separ[i].split('[');
-      var n1=separ[i].split(']');
-      var n2=n[1].split(']');
-      var splitArray=n2[0].split(',');
-      var props= n1[1].split(' ');
-      var name=people[splitArray[0]-1];
-      if(splitArray[0]==j){
-        if (n[0].indexOf("x") !== -1){
-          var item=divisItem[splitArray[1]-1];
-          if(props[1]>0){
-            if(props[1]<1){
-              $('#outputresults').append("<tr><td>"+item+" "+props[1]+"</td></tr>");
-            }
-            else{
-              $('#outputresults').append("<tr><td>"+item+"</td></tr>");
-            }
-          }
-        }
-        else{
-          var item=indivItem[splitArray[1]-1];
-          if(props[2]>0){
-            $('#outputresults').append("<tr><td>"+item+"</td></tr>");
-          }
-        }
-      }
-    }
-    $('#outputresults').append("</table>");
-  }
-}
-              
               function People(stage) {
               if (people.length == 0 || indivItem.length+divisItem.length == 0) {
                 //should probably do something here.
@@ -204,6 +146,9 @@ function outputFunc(str){
               if ($('#input_tennant').val()=='' || people.length==2){ //add here that only 2 names can be entered
               }
               else{
+              
+                  sendData("\nnames "+$('#input_tennant').val()); //dc log data 
+              
                   people.push($('#input_tennant').val());
                   var a=people.length-1;
                   $('#tab-poeple .output ul').append("<li>"+$('#input_tennant').val()+ "<input type='button' id='x' value='x' onclick='removeA("+a+",people)'>"+"</li>");
@@ -232,15 +177,18 @@ function outputFunc(str){
                   divisItem.push($('#input_roomname').val());
                   var a=divisItem.length-1;
                 $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+"   (Divisible)"+ "<input type='button' id='x' value='x' onclick='removeA("+a+",divisItem)'>"+"</li>");
+                sendData("\nitem divisible "+$('#input_roomname').val()); //dc log data 
                 }
                 else {
                   indivItem.push($('#input_roomname').val());
                   var a=indivItem.length-1;
                 $('#tab-rooms .output ul').append("<li>"+$('#input_roomname').val()+""+ "<input type='button' id='x' value='x' onclick='removeA("+a+",indivItem)'>"+"</li>");
-                }
+               sendData("\nitem indiv "+$('#input_roomname').val()); //dc log data 
+               
+               }
                 $('#input_roomname').val("");
               }
-            });-
+            });
 
             $("#tab-preferences").on("focus", ".alloc", function () {
               if($(this).val()==0){
@@ -297,6 +245,31 @@ var v = 0;
   return v;
 }
 
+//dc added a logger
+function sendData(i) {      
+
+	//console.log(i);//
+    // fire off the request to /form.php
+    var request = $.ajax({
+        url: "http://www.fairandsquare.ie/app/js/logger.php",
+        type: "post",
+        data: {fname:i}
+    });
+                  // callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // log a message to the console
+      console.log("Hooray, it worked!",response);
+    });
+
+    // callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // log the error to the console
+        console.error(
+            "The following error occured: "+
+            textStatus, errorThrown
+        );
+        });
+}
 
 function removeA(pos,arr) {
 arr.splice(pos, 1)    
@@ -364,6 +337,7 @@ data = data + "param divItems :";
     }
   }
   data = data +";\nend\n;";
+  sendData("\ndata is "+data); //dc log data 
   return data;
   }
 
@@ -389,27 +363,30 @@ var lp = glp_create_prob();
        glp_intopt(lp);
      if(lp) {
         glp_mpl_postsolve(tran,lp,GLP_MIP);
-        $('#outputresults').text("Minimum satisfaction is: "); 
-        $('#outputresults').append(glp_mip_obj_val(lp).toFixed(2).toString());
+        $('#outputresults').text(""); 
+        $('#outputresults').append("<h1>Minimum Client Satisfaction is:</h1> ");
+        $('#outputresults').append("<h1>"+glp_mip_obj_val(lp).toFixed(2).toString()+"%</h1>");
         $('#outputresults').append("<p></p>")
-        $('#outputresults').append("The FairAndSquare allocation is: ");
+        $('#outputresults').append("<h2>The Fair and Square allocation is:</h2> ");
         $('#outputresults').append("<p></p>");
         for (var i = 2; i <= glp_get_num_cols(lp); i++) {
           if(glp_mip_col_val(lp,i).toFixed(2)>0.001){
             var colname= glp_get_col_name(lp,i);  
             if(colname.charAt(0)=='x'){
               if(glp_mip_col_val(lp,i).toFixed(2)<1 ){
-                $('#outputresults').append(" ");
-                $('#outputresults').append(glp_mip_col_val(lp,i).toFixed(2) +" of ").toString();
+                $('#output-text').append(" ");
+                $('#output-text').append("<span>"+glp_mip_col_val(lp,i).toFixed(2)+" of </span>").toString();
               }
-              $('#outputresults').append(divisItem[colname.charAt(4).toString()-1]);
+              $('#output-text').append("<span>"+divisItem[colname.charAt(4).toString()-1]+"</span>");
             }
             if(colname.charAt(0)=='y'){
-              $('#outputresults').append(indivItem[colname.charAt(4).toString()-1]);
+              $('#output-text').append("<span>"+indivItem[colname.charAt(4).toString()-1]+"</span>");
             }
-            $('#outputresults').append(" goes to ");
-            $('#outputresults').append(people[colname.charAt(2).toString()-1]);
-            $('#outputresults').append("<p></p>");
+            $('#output-text').append("<span> goes to </span>");
+            $('#output-text').append("<span>"+people[colname.charAt(2).toString()-1]+"</span>");
+            $('#output-text').append("<p></p>");
+            
+            sendData("\noutput "+glp_mip_obj_val(lp).toFixed(2).toString()); //dc log data 
           } 
         }
      } else {
