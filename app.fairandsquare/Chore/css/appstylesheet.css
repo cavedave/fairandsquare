@@ -1,0 +1,301 @@
+html, body{
+	font-family: 'verdana', sans-serif;
+}
+
+h1{ font-size: 28px;
+text-align: center;
+margin-bottom: 30px;
+margin-top: 20px;
+}
+
+h2{
+	font-size: 23px;
+	color: #666666;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+h2 a{
+	color: #999999;
+}
+
+h2 a:hover{
+	color: #cccccc;
+}
+
+h3{
+	font-size: 20px;
+	color: #666666;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+h4{
+font-family: arial, Arial, Helvetica, sans-serif;
+font-size: 15px;
+font-weight: lighter !important;
+color: #ffffff !important;
+border-bottom: 1px solid #555555;
+margin-top: 45px;
+padding-bottom: 8px;
+margin-bottom: 22px;
+}
+
+p{
+	line-height: 25px;
+	font-size: 1.2em;
+	text-align: center;
+}
+strong{font-weight: bold;}
+
+hr.style-one{
+
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(175,175,175,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(175,175,175,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(175,175,175,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(175,175,175,0.75), rgba(0,0,0,0)); 
+
+}
+
+hr.style-two {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 30px;
+}
+
+.container{
+	width: 960px;
+	margin: auto;
+	position: relative;
+}
+
+
+header{
+	height: 120px;
+	background-color: #ffffff;
+	color: #333333;
+	border-bottom: 1px solid #dddddd !important;
+	display: block;
+}
+
+footer{
+	height: 268px;
+	background-color: #444444;
+	color: #999999;
+	font-family: "Arial", sans-serif !important;
+	font-weight: normal;
+	border-top: 10px solid #333333;
+	line-height: 29px;
+	font-weight: lighter;
+}
+
+.copyright{
+	height: 32px;
+	background-color: #222222;
+	color: #777777;
+	padding-top: 20px;
+}
+
+.logo{
+	width: 220px;
+	height: 48px;
+	margin-top: 34px;
+	display: inline;
+}
+
+nav{float: right;}
+
+nav ul{
+	float: right;
+}
+
+nav ul li{
+	display: block;
+	height: 120px;
+}
+
+header
+nav ul li{
+	display: block;
+	float: left;
+	position: relative;
+}
+
+header 
+nav ul li a{
+font-family: arial, Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-weight: normal;
+color: #666666;
+height: 117px;
+line-height: 117px;
+margin: 0 0 0px 15px;
+padding: 0px 5px;
+}
+
+
+
+/* APP */
+
+.wrapper{
+	width:70%;
+	margin: auto;
+}
+
+section{
+	min-height: 300px;
+}
+
+input[type="button"]{
+	border-radius: 3px;
+}
+
+.applogo{
+	margin-bottom: 30px;
+	margin-top: 40px;r
+}
+
+.appnav{
+	margin: auto;
+	width: 70%;
+	height: 50px;
+	margin-bottom: 100px;
+
+}
+
+.left-appnav{
+	width: 150px;
+	font-size: 24px;
+	border: 1px solid #cccccc;
+	padding: 5px;
+	float: left;
+	background-color: #dddddd;
+	color: #888888;
+}
+
+.right-appnav{
+	width: 150px;
+	font-size: 24px;
+	border: 1px solid #cccccc;
+	padding: 5px;
+	float: right;
+	background-color: #f4f4f4;
+	color: #999999;
+}
+
+.inputcolumn{
+	width:270px;
+	margin: auto;
+}
+
+.center{
+	text-align: center;
+	width: 100%;
+}
+
+input[type="text"]{
+	border-radius: 3px;
+	width: 200px;
+	height: 25px;
+	font-size: 1em;
+	color: #333333;
+
+}
+
+.output li{
+	margin: 15px 0px 15px 0px;
+	background-color: #f7f7f7;
+	border-radius: 3px;
+	padding: 6px;
+	color: #555555;
+	text-align: left;
+}
+
+input#x{
+	float: right;
+	clear: left;
+	margin-bottom: 2px;
+	background-color: #f4f4f4;
+	color: #999999;
+	border: 1px solid #cccccc;
+}
+
+select{
+	font-size: .8em;
+	color: #333333;
+	margin: 10px 0px 10px 5px;
+	float: left;
+}
+
+input#preference{
+	height: 25px;
+	width: 450px;
+	border-radius: 3px;
+	color: #333333;
+	font-size: 1em;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.outputresults{
+	margin: auto;
+	width: 80%;
+	min-height: 300px;
+	color: #333333;
+	text-align: center;
+}
+
+#output-text{
+	margin: auto;
+	width: 50%;
+	min-height: 200px;
+	color: #333333;
+	text-align: center;
+	line-height: 25px;
+	font-size: 1.2em;
+}
+
+span{
+	line-height: 35px;
+	font-size: 1em;
+	color: #333333;
+}
+
+
+table{
+	width: 80%;
+	border: 1px solid black;
+}
+
+#tabs{
+	margin-top: 40px;
+}
+
+input#btn_addTennant,
+input#btn_addRoom,{
+	background-color: #f4f4f4;
+	color: #999999;
+	border: 1px solid #cccccc;
+}
+
+.tooltip{
+	float: right;
+}
+
+label#allocationLabel{
+	width: 100%;
+}
+
+
+

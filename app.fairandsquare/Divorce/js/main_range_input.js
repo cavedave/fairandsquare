@@ -14,7 +14,7 @@
                       interPreferences.push(arr);
                   } 
                   var numItem = divisItem.length+indivItem.length;                   
-                  $('#tab-preferences .output').html("          <h2>"+people[stage]+"</h2>\n          <p>divide your 100 points between the "+numItem+" items listed below</p>");
+                  $('#tab-preferences .output').html("          <h1>"+people[stage]+"</h1>\n          <h2>divide your 100 points between the "+numItem+" items below</h2><img src='../divorce/images/info.jpg' width='24' alt='tooltip' class='tooltip' title='You have a total of 100 points to distribute between the items listed below. Allocate points to each item based on the items value to you (Not specifically monetary value, take into account other things such as sentimental value)'>");
                   sum=0;
                   allocation=100;
                   $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
@@ -53,7 +53,7 @@
                   }
                   else {
                     sum=0;
-                    $('#tab-preferences .output').html("          <h2>"+people[personStage]+"</h2>\n          <p>divide your 100 points between the "+numItem+" items listed below</p>");
+                    $('#tab-preferences .output').html("          <h1>"+people[personStage]+"</h1>\n          <h2>divide your 100 points between the "+numItem+" items below</h2><img src='../divorce/images/info.jpg' width='24' alt='tooltip' class='tooltip' title='You have a total of 100 points to distribute between the items listed below. Allocate points to each item based on the items value to you (Not specifically monetary value, take into account other things such as sentimental value)'>");
                     $('#tab-preferences .output').append("<label id='allocationLabel'></label>");
                     $('#allocationLabel').text ("Remaining allocation: ");
                     $('#allocationLabel').append(allocation+"<br></br>");
@@ -367,7 +367,7 @@ var lp = glp_create_prob();
         $('#outputresults').append("<h1>Minimum Client Satisfaction is:</h1> ");
         $('#outputresults').append("<h1>"+glp_mip_obj_val(lp).toFixed(2).toString()+"%</h1>");
         $('#outputresults').append("<p></p>")
-        $('#outputresults').append("<h2>The Fair and Square allocation is:</h2> ");
+        $('#outputresults').append("<h2 class='block'>The Fair and Square allocation is:<h2> ");
         $('#outputresults').append("<p></p>");
         for (var i = 2; i <= glp_get_num_cols(lp); i++) {
           if(glp_mip_col_val(lp,i).toFixed(2)>0.001){

@@ -13,6 +13,7 @@ h2{
 	color: #666666;
 	margin-bottom: 20px;
 	text-align: center;
+	display: inline-block;
 }
 
 h2 a{
@@ -22,6 +23,7 @@ h2 a{
 h2 a:hover{
 	color: #cccccc;
 }
+
 
 h3{
 	font-size: 20px;
@@ -290,12 +292,20 @@ input#btn_addRoom,{
 }
 
 .tooltip{
-	float: right;
+	padding-left: 10px;
+    width: 20px;
+	
+}
+
+.allign-center{
+	text-align: center;
 }
 
 label#allocationLabel{
 	width: 100%;
 }
 
-
+.block{
+	display: block;
+}
 
