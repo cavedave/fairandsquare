@@ -62,11 +62,11 @@
 
           <nav>
             <ul>
-              <li><a href="../index.php">Home</a></li>
-              <li><a href="index.php">Demo</a></li>
-              <li><a href="../?page_id=109">About</a></li>
-              <li><a href="../?page_id=114">Contact</a></li>
-              <li><a href="../?page_id=226">Blog</a></li>
+              <li><a href="../../index.php">Home</a></li>
+              <li><a href="../index.php">Demo</a></li>
+              <li><a href="../../?page_id=109">About</a></li>
+              <li><a href="../../?page_id=114">Contact</a></li>
+              <li><a href="../../?page_id=226">Blog</a></li>
             </ul>
           </nav>
            </div><!--end wrapper-->
@@ -101,7 +101,7 @@
                   <div class="appnav">
                       <hr class="style-two">
                   <input type="button" class="next-page-button right-appnav" value="Launch">
-                  <a href="#"><input type="button" class="left-appnav" value="Exit"></a>
+                  <a href="http://www.fairandsquare.ie"><input type="button" class="left-appnav" value="Exit"></a>
                 </div>
               </div> <!--end wrapper-->
               <!--End intro screen-->
@@ -109,10 +109,10 @@
               <!--Begin People Screen-->
               <div id="tab-poeple" class="wrapper">
                   <section>
-                    <div class="inputcolumn">
+                    <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="Enter a name for each party entering into the task division process" />
                       <h2>Enter Names</h2>
-                      <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="Enter a name for each person entering into the task division process" />
                       <br>
+                      <div class="inputcolumn">
                       <input type="text" id="input_tennant" name="firstname">
                       <input type="button" id="btn_addTennant" value="+"> 
                       <div class="output">
@@ -131,10 +131,8 @@
               <!--Begin Items Screen-->
               <div id="tab-rooms" class="wrapper">
                   <section>
-                    <div class="allign-center">
+                     <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="Enter each task that is to be allocated." />
                     <h2>Enter Tasks</h2>
-                    <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="Enter a description of each task." />
-                    </div>
                     <div class="inputcolumn">
                         <select id="select1" style="visibility:hidden;">
                             <option value="divisible">divisible</option>
@@ -158,7 +156,7 @@
               <!--Begin Preferences Screen-->
                <div id="tab-preferences" class="wrapper">
                   <section>
-                       <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="You have a total of 100 points to distribute between the tasks listed below. Allocate points based on your willingness to undertake each task." />
+                       <img src="images/info.jpg" width="24" alt="tooltip" class="tooltip" title="You have a total of 100 points to distribute between the items listed below. Allocate points to each item based on the items value to you (Not specifically monetary value, take into account other things such as sentimental value" />
                                          
                   <div class="output center">
                   <ul></ul>
@@ -179,50 +177,66 @@
                     <h3>What does the fair and square process aim to do?</h3>
                     <div>
                       <p>
-                      The Fair and Square task division process allows a group of people to divide a number of tasks between them.
-                      The division of tasks process is fair, transparent and quick which reduces the amount of work that people must do.
+                     At fairandsquare.ie we make Computer Aided Negotiation systems that allow people to follow a process to divide collections of items between them. Our first fair division system is for a separating couple to divide shared personal items.
+                     The division of assets process the tool facilitates must be seen to be fair, transparent and quick by all the participants to reduce acrimony and speed up these negotiations.
                       </p>
                     </div>
-                    <h3>How do you decide who should get each task?</h3>
+                    <h3>How do you decide who should get each item?</h3>
                     <div>
                       <p>
-                      The allocation is done in a way that gives everyone the same amount of perceived work and minimises that amount. Any other way of allocating taks will mean that someone has to work more than everyone does currently
+                      The allocation is done in a way that maximizes the person who gets the minimum. This acts like a tide that raises the level of all boats. Any other way of allocating will mean that someone is worse off than the worst off person in current the allocation.
+                      Deciding allocations in this way comes from John Rawls’ Theory of Justice which says inequalities should be arranged so that “they are to be of the greatest benefit to the least-advantaged members of society” In the two-person case both people tend to end up with the same level of satisfaction. In the tools calculation the worst off person gets items until they meet the satisfaction level of the best off person.
                       </p>
                     </div>
                     <h3>What do you mean by fair</h3>
                     <div>
                       <p>
-                      With two people each aims expects to have to work at most 50% of what they think all the tasks involve. This 50% is a fair share. Any less than this they get is an improvement the tool has found that reduces peoples perceived workload. 
+                      With two people each aims to get at least 50% of any collection to be divided. This 50% is a fair share. Any more than this they get is an improvement the tool has found that increases peoples level of satisfaction.
                       </p>
                     </div>
-                     <h3>Why do you use points rather than time based values?</h3>
+                     <h3>Why do you use points rather than monetary values?</h3>
                     <div>
                       <p>
-                      Some things are unpleasant but quick. We measure perceived effort and unpleasantness in one metric: how the task weighs up in comparison to the others.
+                      Some things are really valuable but have little monetary value. We measure how much a person wants something but we do not ask whether it is for monetary, sentiment or some other reasons.
                       </p>
                     </div>
-                    <h3>Do I have to do what the system says</h3>
+                    <h3>Do I have to do what the tool says</h3>
                     <div>
                       <p>
-                       No, the suggested allocation can be thought of as an initial start point for decisions. By using an independant algorithm everyone can see their opinion being taken into account and that the process was impartial.
+                      No, in any negotiation you have to be happy with the conclusion. Each person has to be happy that the steps of the process makes sense and that the outcome is reasonable. The people in the negotiation process have to decide what is agreeable.
                       </p>
                     </div>
-                    <h3>How many tasks can be entered?</h3>
+                    <h3>But she got more than me</h3>
                     <div>
                       <p>
-                      As many tasks as you want. But for a large number the system will become time consuming. The ten worst tasks are probably the ones people care about most. You probably know what taks people hate so treat them as the main issues which need to be addressed first. After these are equitably divided a simple pick a task in turn rule should be seen to be fair.
+                      The tool tends to result in everyone having very similar levels of satisfaction. However there are cases where one person will end up more satisfied than others. If this happens and everyone has at least a fair share you could decide the division is still acceptable. If someone has much less than his or her fair share it will generally be because one item is of very high value.
                       </p>
                     </div>
-                    <h3>What if one task is really valuable?</h3>
+                    <h3>Why cant everyone be equal?</h3>
                     <div>
                       <p>
-                      Sometimes one task is almost all the work. Using our process we can find this out quickly. This one task can then be divided out amongst many people. This removes the problem of one person having to do the big unpleasant task and others not appreciating exactly how much work this involves.
+                      Our tool produces divisions where each player is almost always within 2% of each other. Solutions where everyone is exactly equal on average have everyone getting about a third the satisfaction with the allocation.
+                      We think a small inequality in the satisfaction level is worth a large amount more satisfaction.
                       </p>
                     </div>
-                    <h3>What if a task cannot be divided out?</h3>
+                    <h3>What is a divisable good?</h3>
                     <div>
                       <p>
-                      Maybe a task takes so much preparation that it is only practical for one person to do it. If you have this problem email us at info@fairandsquare.ie. We are trialling a system to help with this more complicated problem.
+                      A divisible good is something like cash, cutlery or shares that can be divided up into many different parts. An indivisible good is something like a table, chair or television that must be kept in one piece.
+                      Divisions with divisible goods tend to have much better outcomes. Because of this it is worth carefully considering if an item can be considered divisible. If something is in a set of many similar items this can be classed as a divisible item. This cold be a box of wine or set of chairs. There will be a trade off here between the harm of splitting up a set and the increased equality dividing the set allows.
+                      </p>
+                    </div>
+                    <h3>How many items can be entered?</h3>
+                    <div>
+                      <p>
+                      As many items as you want. But for a large number the system will become time consuming. The first ten most important things are probably the ones people care about most. If each person lists their ten most important items and these lists are combined this should cover most of the value to be divided and allow a quick division. For other items not on the combined list to be divided at the point where each item is not very valuable to either person picking one item each in order is fast. If each item is nearly equally valuable at this point little inefficiency will result.
+                      </p>
+                    </div>
+                    <h3>What if one item is really valuable?</h3>
+                    <div>
+                      <p>
+                      Sometimes one item is worth the majority of the value to each person. It is possible no one can get a fair share because of this. For example is a house and some clothes had to be divided the house would be the vast majority of peoples values.
+                      Using our process we can find out this impasse quickly. Solutions exist to this problem of one non-divisible item is worth so much to prevent everyone getting a fair share. One is for the item to be sold and the cash proceeds become a divisible item. One is for a time-share arrangement to take place.
                       </p>
                     </div>
                   </section>
