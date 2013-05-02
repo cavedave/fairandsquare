@@ -13,6 +13,7 @@ function calculate(i) {
         // log a message to the console. response here is the answer
        // console.log("ajax got back", response);
                     output= response;    
+                    console.log("response "+response);
     });
     // callback handler that will be called on failure
     request.fail(function (jqXHR, textStatus, errorThrown){
@@ -23,9 +24,11 @@ function calculate(i) {
 }
 
 function outputFunc(str){
+console.log("str "+str);
   //var str="65|~ 2 x[1,1] 0.5 0 |~ 3 x[2,1] 0.5 0 |~ 4 x[1,2] 1 0 |~ 5 x[2,2] 0 0 |~ 6 x[1,3] 1 0 |~ 7 x[2,3] 0 0 |~ 8 y[1,1] * 0 0 1 |~ 9 y[2,1] * 1 0 1 |~ 10 y[1,2] * 0 0 1 |~ 11 y[2,2] * 1 0 1 |~ 12 y[1,3] * 1 0 1 |~ 13 y[2,3] * 0 0 1 |~";
   var separ = str.split('|~');
   $('#outputresults').text("");
+  console.log(separ[0]);
   $('#outputresults').append("minimum satisfaction is: "+separ[0]);
   for (var j=1;j<=people.length;j++){
     $('#outputresults').append("<table border='1'><tr>");
