@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/reset.css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="Author" content="Fair & Square Fair Division Tool">
+        <meta name="viewport" content="width=device-width">
+        <title>Fair Division Tool</title>
+        <link rel="stylesheet" href="css/appstylesheet.css" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="css/tabs.css" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Questrial|Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/typedarray.js"> $.typedarray</script>
+        <script src="js/sylvester-0-1-3/sylvester.js"></script>
+        <script src='js/glpk.js'></script>
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="js/html5slider.js"></script>
+
+
+        <script>
+            $(function() {
+              $( "#tabs" ).tabs({disabled: [1, 2, 3, 4]})
+            });
+            var sum=0;
+            var allocation = 100;
+            var personStage = 0;
+            var tabsStage=0;
+            var people = new Array();
+            var indivItem = new Array();
+            var divisItem = new Array();
+            var interPreferences = new Array();
+            var divisPreferences = new Array();
+            var indivPreferences = new Array();
+        </script> 
+    </head>
+
+    <body>
+        
+        <header>
+          <div class="container">
+          <img class="logo" src="images/logo.png" alt="fair and square logo" />
+
+          <nav>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Demo</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </nav>
+           </div><!--end wrapper-->
+        </header>
+
+        <div class="main container">
+              <div id="tabs">
+                <hr class="style-one">
+                  <ul>
+                      <li><a href="#tab-start">Welcome</a></li>
+                      <li><a href="#tab-poeple" value="people">Names</a></li>
+                      <li><a href="#tab-rooms">Assets</a></li>
+                      <li><a href="#tab-preferences">Values </a></li>
+                      <li><a href="#tab-results">Outcome </a></li>
+                      <li><a href="#tab-help">Help</a></li>
+                  </ul>
+                  <hr class="style-one">
+            <div class="app-wrapper">
+             <!--Begin Intro Screen-->
+              <div id="tab-start" class="wrapper">
+                  <section>
+                      <h1>Fair and Square</h1>
+                      <h2>Welcome to the Fair and Square asset division process</h2>
+                      <div class="center">
+                        <img src="images/logo.png" alt="fair and square logo" class="applogo" />
+                      </div>
+                  </section>
+                  <div class="appnav">
+                      <hr class="style-two">
+                  <input type="button" class="next-page-button right-appnav" value="Launch">
+                  <a href="#"><input type="button" class="left-appnav" value="Exit"></a>
+                </div>
+              </div> <!--end wrapper-->
+              <!--End intro screen-->
+     
+              <!--Begin People Screen-->
+              <div id="tab-poeple" class="wrapper">
+                  <section>
+                      <h2>Enter Names</h2>
+
+                      <h3>Enter a name for each person below</h3>
+                      <br>
+                      <div class="inputcolumn">
+                      <input type="text" id="input_tennant" name="firstname">
+                      <input type="button" id="btn_addTennant" value="+"> 
+                      <div class="output">
+                        <ul>
+                        </ul>
+                      </div> <!-- displays input text -->
+                    </div>
+                  </section>
+                  <div class="appnav">
+                    <hr class="style-two">
+                  <input type="button" class="next-page-button right-appnav" value="Proceed">
+                  </div>
+              </div> 
+              <!-- End People Screen-->
+
+              <!--Begin Items Screen-->
+              <div id="tab-rooms" class="wrapper">
+                  <section>
+                    <h2>Enter Assets</h2>
+                    <h3>Select whether asset is divisable or not and enter a description</h3>
+                    <div class="inputcolumn">
+                        <select id="select1">
+                            <option value="non_divisible">non-divisible</option>
+                            <option value="divisible">divisible</option>
+                        </select><br>
+                    <input type="text" id="input_roomname" name="roomname"> 
+                    <input type="button" id="btn_addRoom" value="+">
+                    <div class="output">
+                        <ul>
+                        </ul>
+                    </div> <!-- displays input text -->
+                  </div>
+                  </section>
+                  <div class="appnav">
+                    <hr class="style-two">
+                  <input type="button" class="next-page-button right-appnav" value="Proceed">
+                  <input type="button" class="last-page-button left-appnav" value="Back">
+                </div>
+              </div>
+              <!--End Items Screen-->
+
+              <!--Begin Preferences Screen-->
+               <div id="tab-preferences" class="wrapper">
+                  <section>
+                  <div class="output center">
+                  <ul></ul>
+                  </div>
+                  </section>
+                   <div class="appnav">
+                    <hr class="style-two">
+                  <input type="button" class="next-page-button right-appnav" id="btn_nextPerson" value="Proceed">
+                </div>
+              </div>
+              <!--End Preferences Screen-->
+
+              <!--Begin Help Screen-->
+              <div id="tab-help" class="wrapper">
+                  <section>
+                  <h2>How it works</h2>
+                  <p class="left">        
+                        <p>The Fair and Square property division tool allows couples to discover who should get what in the event that they breakup.<br>
+                        First it takes in the peoples names<br>
+                        Second it takes in the items to be divided up.<br>
+                        Then it takes in how much they want each item from each person. Each person has 100 total points they can use to rate each item.<br>
+                        Finally it calculates an allocation of items that mean each person gets as much as possible</p>
+                  <br>
+                  <a class="link" href="http://www.fairandsquare.ie">www.fairandsquare.ie</a>
+                  </section>
+              </div>
+              <!--End Help Screen-->
+
+              <!-- Begin Results Screen-->
+              <div id="tab-results" class="wrapper">
+                  <div id="outputresults">
+                  </div>
+              </div>
+              <!-- End Results Screen -->
+
+<div style='display:none' id='fair2.mod' class='mathprog'>
+/* Fair Division Program
+ This is a program for dividing up items between people people.
+So the minimum satisfaction of any of them is maximised. */
+param people, integer,> 0;
+/* number of people dividing stuff */
+param divi, integer, >= 0;
+param indiv, integer, >= 0;
+/* number of items to be divided. divi divisible. indiv non divisible */
+set I:= 1..people;
+/* set of people */
+set J := 1..indiv;
+/* set of nondivisible items */
+set K := 1..divi;
+/* set of divisible items */
+param indivItems{i in I, j in J}, >= 0;
+/*indivisible  amount recieved if item j is given to agent i */
+param divItems{i in I, k in K}, >= 0;
+/*divisible amount recieved if item k is given to agent i */
+var worst;
+/*how is the worst person doing?*/
+var x{i in I, k in K},>=0;
+var y{i in I, j in J}, binary;
+/*
+here ,>=0; means that the items are divisible.
+here , binary; means that items are not divisable.
+x[i,j] = 1 means item j is assigned to agent i */
+s.t. one{k in K}: sum{i in I} x[i,k] = 1;
+s.t. two{j in J}: sum{i in I} y[i,j] = 1;
+/* job j must be assigned exactly to one agent */
+/*s.t. lim{i in I}: ((sum{j in J} c[i,j] * x[i,j])+(sum{k in K} d[i,k] * y[i,k]) )<= b[i];*/
+/*add check person does not get more then 100%. Want to make sure they do not ask for more then 100% */
+s.t. wor{i in I}: ((sum{k in K} divItems[1,k] * x[1,k])+(sum{j in J} indivItems[1,j] * y[1,j])) >= worst;
+s.t. wor2{i in I}: ((sum{k in K} divItems[2,k] * x[2,k])+(sum{j in J} indivItems[2,j] * y[2,j])) >= worst;
+maximize obj: worst;
+
+</div> 
+
+</div>
+
+      </div>
+      <script>
+
+
+function main(){
+  var interMatrix= $M(interPreferences);
+  if(divisItem.length>0){
+    var divisMatrix= interMatrix.minor(1,1,people.length,divisItem.length);
+  }
+  if(indivItem.length>0){
+    var indivMatrix= interMatrix.minor(1,divisItem.length+1,people.length,indivItem.length);
+  }
+//  if( $("html").hasClass("lt-ie9") ) { 
+    var data=createData(divisMatrix,indivMatrix);  
+    console.log("data "+data);
+    outputFunc(calculate(data)); 
+//  }
+//  else{
+//    var values=glpkTest(createData(divisMatrix,indivMatrix));
+//  }
+}
+      </script>
+</div> <!--end container -->
+
+  <footer>
+    <div class="container">
+    <h4>Contact Info</h4>
+    Fair & Square, NDRC, Crane Lane, Dublin 8, Ireland<br>
+    Phone: +353 86 86299<br>
+    E-Mail: info@fairandsquare.ie<br>
+    Web: http://www.fairandsquare.ie
+  </div> <!--end container -->
+  </footer>
+
+  <div class="copyright">
+    <div class="container">
+    Copyright fairandsquare.ie 2013
+    </div> <!--end container -->
+  </div>
+
+
+ 
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main_server_side.js"></script>
+            <script type="text/javascript">
+
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', 'UA-38593415-1']);
+              _gaq.push(['_trackPageview']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+
+            </script>
+  
+    </body>
+</html>
